@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className='${ubuntu.className} bg-gradient-to-tl from-slate-950 to-slate-800'>
-        <div className="flex h-screen flex-row md:overflow-hidden">
+        <div className="flex h-screen flex-row overflow-auto">
           {/* <div className="w-full flex-none">
             <TopNav />
           </div> */}
