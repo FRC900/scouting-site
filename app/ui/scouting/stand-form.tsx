@@ -27,9 +27,7 @@ export default function StandForm({ teams }: { teams: TeamField[] }) {
 						aria-describedby="slot-error"
 						className="p-2 border border-slate-950 rounded-md text-slate-950"
 					>
-						<option value="" disabled>
-							Select a slot
-						</option>
+						<option value="" disabled></option>
 						<option>Red 1</option>
 						<option>Red 2</option>
 						<option>Red 3</option>
@@ -66,58 +64,119 @@ export default function StandForm({ teams }: { teams: TeamField[] }) {
 					/>
 				</div>
 			</div>
-			<div className="flex flex-row gap-5">
+			<div className="flex flex-row gap-5 p-2 border-4 border-slate-200 rounded-xl">
 				<p className="w-12">
 					<strong>Auto</strong>
 				</p>
-				<div>
-					<label>Speaker</label>
-					<div>
-						<label>Scored</label>
-						<Incrementor name="auto-speaker-scored" />
+				<div className="flex flex-col gap-2">
+					<div className="flex flex-row gap-2">
+						<label>Left Starting Zone?</label>
+						<input
+							id="starting-zone"
+							name="starting-zone"
+							type="checkbox"
+							aria-describedby="starting-zone-error"
+							className="h-6 w-6 border border-slate-850 rounded"
+						/>
 					</div>
-					<div>
-						<label>Missed</label>
-						<Incrementor name="auto-speaker-missed" />
-					</div>
-				</div>
-				<div>
-					<label>Amp</label>
-					<div>
-						<label>Scored</label>
-						<Incrementor name="auto-amp-scored" />
-					</div>
-					<div>
-						<label>Missed</label>
-						<Incrementor name="auto-amp-missed" />
+					<div className="flex flex-row gap-10">
+						<div>
+							<label className="mx-auto w-max">Speaker</label>
+							<div>
+								<label>Scored</label>
+								<Incrementor name="auto-speaker-scored" />
+							</div>
+							<div>
+								<label>Missed</label>
+								<Incrementor name="auto-speaker-missed" />
+							</div>
+						</div>
+						<div>
+							<label>Amp</label>
+							<div>
+								<label>Scored</label>
+								<Incrementor name="auto-amp-scored" />
+							</div>
+							<div>
+								<label>Missed</label>
+								<Incrementor name="auto-amp-missed" />
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-			<div className="flex flex-row gap-5">
+			<div className="flex flex-row gap-5 p-2 border-4 border-slate-200 rounded-xl">
 				<p className="w-12">
 					<strong>Teleop</strong>
 				</p>
-				<div>
-					<label>Speaker</label>
-					<div>
-						<label>Scored</label>
-						<Incrementor name="teleop-speaker-scored" />
+				<div className="flex flex-col gap-2">
+					<div className="flex flex-row gap-2">
+						<label>Did they play any defence?</label>
+						<input
+							id="defence"
+							name="defence"
+							type="checkbox"
+							aria-describedby="defence-error"
+							className="h-6 w-6 border border-slate-850 rounded"
+						/>
 					</div>
-					<div>
-						<label>Missed</label>
-						<Incrementor name="teleop-speaker-missed" />
+					<div className="flex flex-row gap-10">
+						<div>
+							<label>Speaker</label>
+							<div>
+								<label>Scored</label>
+								<Incrementor name="teleop-speaker-scored" />
+							</div>
+							<div>
+								<label>Missed</label>
+								<Incrementor name="teleop-speaker-missed" />
+							</div>
+						</div>
+						<div>
+							<label>Amp</label>
+							<div>
+								<label>Scored</label>
+								<Incrementor name="teleop-amp-scored" />
+							</div>
+							<div>
+								<label>Missed</label>
+								<Incrementor name="teleop-amp-missed" />
+							</div>
+						</div>
+						<div>
+							<label>Trap</label>
+							<div>
+								<label>Scored</label>
+								<Incrementor name="teleop-trap-scored" />
+							</div>
+							<div>
+								<label>Missed</label>
+								<Incrementor name="teleop-trap-missed" />
+							</div>
+						</div>
+					</div>
+					<div className="flex flex-row gap-4">
+						<label className="my-auto">Endgame Status:</label>
+						<select
+							id="endgame"
+							name="endgame"
+							defaultValue=""
+							aria-describedby="endgame-error"
+							className="p-2 border border-slate-950 rounded-md text-slate-950"
+						>
+							<option value="" disabled></option>
+							<option>Parked</option>
+							<option>Failed Climb</option>
+							<option>Climbed</option>
+							<option>Harmony</option>
+						</select>
 					</div>
 				</div>
-				<div>
-					<label>Amp</label>
-					<div>
-						<label>Scored</label>
-						<Incrementor name="teleop-amp-scored" />
-					</div>
-					<div>
-						<label>Missed</label>
-						<Incrementor name="teleop-amp-missed" />
-					</div>
+			</div>
+			<div className="flex flex-row gap-5 p-2 border-4 border-slate-200 rounded-xl">
+				<label>Misc</label>
+				<div className="flex flex-col gap-2">
+					
 				</div>
 			</div>
 		</form>
