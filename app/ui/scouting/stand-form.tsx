@@ -111,7 +111,7 @@ export default function StandForm({ teams }: { teams: TeamField[] }) {
 				</p>
 				<div className="flex flex-col gap-2">
 					<div className="flex flex-row gap-2">
-						<label>Did they play defence?</label>
+						<label>Did they play any defence?</label>
 						<input
 							id="defence"
 							name="defence"
@@ -155,8 +155,8 @@ export default function StandForm({ teams }: { teams: TeamField[] }) {
 							</div>
 						</div>
 					</div>
-					<div className="flex flex-row gap-2">
-						<label>Endgame Status</label>
+					<div className="flex flex-row gap-4">
+						<label className="my-auto">Endgame Status:</label>
 						<select
 							id="endgame"
 							name="endgame"
@@ -175,6 +175,9 @@ export default function StandForm({ teams }: { teams: TeamField[] }) {
 			</div>
 			<div className="flex flex-row gap-5 p-2 border-4 border-slate-200 rounded-xl">
 				<label>Misc</label>
+				<div className="flex flex-col gap-2">
+					
+				</div>
 			</div>
 		</form>
 	);
