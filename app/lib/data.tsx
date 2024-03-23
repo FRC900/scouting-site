@@ -7,7 +7,7 @@ export async function fetchTeams() {
     // fetch teams from sql database
 
     
-    return teams; 
+    //  return teams;
   } catch (err) {
     // catchy catchy cachy
   }

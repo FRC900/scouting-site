@@ -3,7 +3,7 @@ import Incrementor from "@/app/ui/scouting/incrementor";
 import { INSPECT_MAX_BYTES } from "buffer";
 import RangeSelector from "./range-selector";
 
-export default function StandForm({ teams }: { teams: TeamField[] }) {
+export default function StandForm() {
 	const defenceRatings: string[] = ["1 - Penalties Galore", "2 - Some Penalties", "3 - Ineffective", "4 - Good Defence", "5 - Strong."];
 
 	return (
