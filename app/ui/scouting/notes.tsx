@@ -15,8 +15,8 @@ export default function NotesBox({ name }: { name: string }) {
             <textarea
                 id={full_name}
                 name={full_name}
-                rows="5"
-                cols="33"
+                rows={5}
+                cols={33}
                 aria-describedby={aria}
                 className="p-2 border border-slate-950 rounded-md text-slate-950"
             >
