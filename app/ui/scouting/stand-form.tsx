@@ -1,8 +1,11 @@
 import { TeamField } from "@/app/lib/definitions";
 import Incrementor from "@/app/ui/scouting/incrementor";
 import { INSPECT_MAX_BYTES } from "buffer";
+import RangeSelector from "./range-selector";
 
 export default function StandForm({ teams }: { teams: TeamField[] }) {
+	const defenceRatings: string[] = ["1 - Penalties Galore", "2 - Some Penalties", "3 - Ineffective", "4 - Good Defence", "5 - Strong."];
+
 	return (
 		<form className="text-slate-200 flex flex-col gap-2">
 			<div className="flex flex-row gap-4 text-xl rounded-3xl p-5 w-max">
@@ -174,9 +177,9 @@ export default function StandForm({ teams }: { teams: TeamField[] }) {
 				</div>
 			</div>
 			<div className="flex flex-row gap-5 p-2 border-4 border-slate-200 rounded-xl">
-				<label>Misc</label>
-				<div className="flex flex-col gap-2">
-					
+				<label><strong>Misc</strong></label>
+				<div className="flex flex-col gap-2 flex-shrink-0 flex-flow:column wrap">
+					<RangeSelector name="defence" ratings={defenceRatings} />
 				</div>
 			</div>
 		</form>
