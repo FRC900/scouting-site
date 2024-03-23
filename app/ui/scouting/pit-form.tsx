@@ -4,6 +4,9 @@ import RangeSelector from "@/app/ui/scouting/range-selector";
 import NotesBox from "@/app/ui/scouting/notes";
 
 export default function PitForm({ teams }: { teams: TeamField[] }) {
+	const electricalRatings: string[] = ["1 - Incomplete", "2 - Hazardous", "3 - Messy", "4 - Acceptable", "5 - Star Struck"];
+	const bumperRatings: string[] = ["1 - Poor", "2 - Good", "3 - Meg Approved"]
+
 	return (
 		<form>
 			<div className="flex flex-col gap-4 text-slate-200 text-xl rounded-3xl p-5 w-max">
@@ -33,10 +36,11 @@ export default function PitForm({ teams }: { teams: TeamField[] }) {
 						</option>
 						<option>Tank</option>
 						<option>Swerve</option>
+						<option>Mecanum</option>
 					</select>
 				</div>
 				<div className="flex flex-col gap-4">
-					<label className="p-2">Weight (without bumpers or battery):</label>
+					<label className="p-2">Weight (without bumpers and battery):</label>
 					<input
 						id="weight"
 						name="weight"
@@ -47,11 +51,11 @@ export default function PitForm({ teams }: { teams: TeamField[] }) {
 						className="p-2 border border-slate-950 rounded-md text-slate-950"
 					/>
 				</div>
-                <RangeSelector name="electrical"/>
-				<NotesBox name="electrical"/>
-				<RangeSelector name="bumpers"/>
-				<NotesBox name="bumpers"/>
-				<NotesBox name=""/>
+				<RangeSelector name="electrical" ratings={electricalRatings} />
+				<NotesBox name="electrical" />
+				<RangeSelector name="bumpers" ratings={bumperRatings} />
+				<NotesBox name="bumpers" />
+				<NotesBox name="" />
 			</div>
 		</form>
 	);

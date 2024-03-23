@@ -20,7 +20,7 @@ export default function RootLayout({
           {/* <div className="w-full flex-none">
             <TopNav />
           </div> */}
-          <div className="p-12 w-max mx-auto">{children}</div>
+          <div className="p-12 w-max mx-auto text-lg">{children}</div>
         </div>
       </body>
     </html>
