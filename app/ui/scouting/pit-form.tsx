@@ -3,7 +3,7 @@ import { TeamField } from "@/app/lib/definitions";
 import RangeSelector from "@/app/ui/scouting/range-selector";
 import NotesBox from "@/app/ui/scouting/notes";
 
-export default function PitForm({ teams }: { teams: TeamField[] }) {
+export default function PitForm() {
 	const electricalRatings: string[] = ["1 - Incomplete", "2 - Hazardous", "3 - Messy", "4 - Acceptable", "5 - Star Struck"];
 	const bumperRatings: string[] = ["1 - Poor", "2 - Good", "3 - Meg Approved"]
 
