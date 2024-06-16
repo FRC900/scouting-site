@@ -38,7 +38,7 @@ export default function Incrementor({ name }: { name: string }) {
 			/>
 			<button
 				onClick={increment}
-				className="px-5 py-2 bg-slate-700 rounded border-2 border-slate-950"
+				className="px-5 py-2 bg-purple rounded border-2 border-slate-950"
 			>
 				<p className="text-3xl text-slate-950">+</p>
 			</button>

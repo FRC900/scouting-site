@@ -1,5 +1,7 @@
-export default function Page() {
+import { sql } from "@vercel/postgres"
+
+export default async function Page() {
   return (
-    <p>analysis page</p>
+      <p>data table here</p>
   )
 }

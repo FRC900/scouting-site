@@ -1,10 +1,22 @@
-import { TeamField } from "@/app/lib/definitions";
+'use client';
+
 import Incrementor from "@/app/ui/scouting/incrementor";
-import { INSPECT_MAX_BYTES } from "buffer";
 import RangeSelector from "./range-selector";
+import NotesBox from "./notes";
+import { createStandForm } from "@/app/lib/actions";
+import { TBATeamSimple } from "@/app/lib/definitions";
+import { getTeams } from "@/app/lib/fetch";
+import useSWR from "swr";
+import fetcher from "@/app/lib/fetcher";
+import { tbaEventKey } from "@/app/lib/constants";
 
 export default function StandForm() {
+
+	const { data: teams } = useSWR<TBATeamSimple[]>(`https://www.thebluealliance.com/api/v3/event/${tbaEventKey}/teams/simple`, fetcher)
+	if (!teams) return null;
+
 	const defenceRatings: string[] = [
+		"0 - No Defence",
 		"1 - Penalties Galore",
 		"2 - Some Penalties",
 		"3 - Ineffective",
@@ -12,16 +24,16 @@ export default function StandForm() {
 		"5 - Strong.",
 	];
 	const statusRatings: string[] = [
-		"1 - No-Show",
-		"2 - Didn't Move",
-		"3 - Broke In Match",
-		"4 - Disconnections",
-		"5 - No Issues (Solid)",
-		"6 - Pro Preformance",
+		"0 - No-Show",
+		"1 - Didn't Move",
+		"2 - Broke In Match",
+		"3 - Disconnections",
+		"4 - No Issues (Solid)",
+		"5 - Pro Preformance",
 	];
 
 	return (
-		<form className="text-slate-200 flex flex-col gap-2">
+		<form action={createStandForm} className="text-slate-200 flex flex-col gap-2">
 			<div className="flex flex-row gap-4 text-xl rounded-3xl p-5 w-max">
 				<div className="flex flex-col gap-4">
 					<label className="p-2">Match Number:</label>
@@ -62,11 +74,12 @@ export default function StandForm() {
 						aria-describedby="team-error"
 						className="p-2 border border-slate-950 rounded-md text-slate-950"
 					>
-						{/* {teams.map((team) => (
-            <option key={team.id} value={team.id}>
-              {team.number}
-            </option>
-          ))} */}
+						<option value="" disabled></option>
+						{teams.map((team) => (
+								<option key={team.team_number} value={team.team_number}>
+									{team.team_number}
+								</option>
+						))}
 					</select>
 				</div>
 				<div className="flex flex-col gap-4">
@@ -89,8 +102,8 @@ export default function StandForm() {
 					<div className="flex flex-row gap-2">
 						<label>Left Starting Zone?</label>
 						<input
-							id="starting-zone"
-							name="starting-zone"
+							id="startingZone"
+							name="startingZone"
 							type="checkbox"
 							aria-describedby="starting-zone-error"
 							className="h-6 w-6 border border-slate-850 rounded"
@@ -101,22 +114,22 @@ export default function StandForm() {
 							<label className="mx-auto w-max">Speaker</label>
 							<div>
 								<label>Scored</label>
-								<Incrementor name="auto-speaker-scored" />
+								<Incrementor name="autoSpeakerScored" />
 							</div>
 							<div>
 								<label>Missed</label>
-								<Incrementor name="auto-speaker-missed" />
+								<Incrementor name="autoSpeakerMissed" />
 							</div>
 						</div>
 						<div>
 							<label>Amp</label>
 							<div>
 								<label>Scored</label>
-								<Incrementor name="auto-amp-scored" />
+								<Incrementor name="autoAmpScored" />
 							</div>
 							<div>
 								<label>Missed</label>
-								<Incrementor name="auto-amp-missed" />
+								<Incrementor name="autoAmpMissed" />
 							</div>
 						</div>
 					</div>
@@ -127,48 +140,38 @@ export default function StandForm() {
 					<strong>Teleop</strong>
 				</p>
 				<div className="flex flex-col gap-2">
-					<div className="flex flex-row gap-2">
-						<label>Did they play any defence?</label>
-						<input
-							id="defence"
-							name="defence"
-							type="checkbox"
-							aria-describedby="defence-error"
-							className="h-6 w-6 border border-slate-850 rounded"
-						/>
-					</div>
 					<div className="flex flex-row gap-10">
 						<div>
 							<label>Speaker</label>
 							<div>
 								<label>Scored</label>
-								<Incrementor name="teleop-speaker-scored" />
+								<Incrementor name="teleopSpeakerScored" />
 							</div>
 							<div>
 								<label>Missed</label>
-								<Incrementor name="teleop-speaker-missed" />
+								<Incrementor name="teleopSpeakerMissed" />
 							</div>
 						</div>
 						<div>
 							<label>Amp</label>
 							<div>
 								<label>Scored</label>
-								<Incrementor name="teleop-amp-scored" />
+								<Incrementor name="teleopAmpScored" />
 							</div>
 							<div>
 								<label>Missed</label>
-								<Incrementor name="teleop-amp-missed" />
+								<Incrementor name="teleopAmpMissed" />
 							</div>
 						</div>
 						<div>
 							<label>Trap</label>
 							<div>
 								<label>Scored</label>
-								<Incrementor name="teleop-trap-scored" />
+								<Incrementor name="teleopTrapScored" />
 							</div>
 							<div>
 								<label>Missed</label>
-								<Incrementor name="teleop-trap-missed" />
+								<Incrementor name="teleopTrapMissed" />
 							</div>
 						</div>
 					</div>
@@ -182,6 +185,7 @@ export default function StandForm() {
 							className="p-2 border border-slate-950 rounded-md text-slate-950"
 						>
 							<option value="" disabled></option>
+							<option>Nothing</option>
 							<option>Parked</option>
 							<option>Failed Climb</option>
 							<option>Climbed</option>
@@ -202,6 +206,22 @@ export default function StandForm() {
 						<RangeSelector name="status" ratings={statusRatings} />
 					</div>
 				</div>
+				<div>
+					<div>
+						<label>Fouls</label>
+						<Incrementor name="fouls" />
+					</div>
+					<div>
+						<label>Tech Fouls</label>
+						<Incrementor name="techfouls" />
+					</div>
+				</div>
+				<div className="flex flex-col gap-4">
+					<NotesBox name="" />
+				</div>
+			</div>
+			<div>
+				<input type="submit" value="Submit" className="flex items-center gap-5 self-start rounded-lg px-6 py-3 text-sm font-medium transition-colors text-slate-950 bg-slate-200 hover:bg-zinc-900 hover:text-slate-200 hover:outline md:text-base"/>
 			</div>
 		</form>
 	);

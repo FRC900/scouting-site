@@ -57,6 +57,7 @@ export default function PitForm() {
 				<NotesBox name="bumpers" />
 				<NotesBox name="" />
 			</div>
+			<input type="submit" value="Submit" className="flex items-center gap-5 self-start rounded-lg px-6 py-3 text-sm font-medium transition-colors text-slate-950 bg-slate-200 hover:bg-slate-900 hover:text-slate-200 hover:outline md:text-base"/>
 		</form>
 	);
 }
