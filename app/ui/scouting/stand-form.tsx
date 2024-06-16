@@ -4,7 +4,21 @@ import { INSPECT_MAX_BYTES } from "buffer";
 import RangeSelector from "./range-selector";
 
 export default function StandForm() {
-	const defenceRatings: string[] = ["1 - Penalties Galore", "2 - Some Penalties", "3 - Ineffective", "4 - Good Defence", "5 - Strong."];
+	const defenceRatings: string[] = [
+		"1 - Penalties Galore",
+		"2 - Some Penalties",
+		"3 - Ineffective",
+		"4 - Good Defence",
+		"5 - Strong.",
+	];
+	const statusRatings: string[] = [
+		"1 - No-Show",
+		"2 - Didn't Move",
+		"3 - Broke In Match",
+		"4 - Disconnections",
+		"5 - No Issues (Solid)",
+		"6 - Pro Preformance",
+	];
 
 	return (
 		<form className="text-slate-200 flex flex-col gap-2">
@@ -56,7 +70,7 @@ export default function StandForm() {
 					</select>
 				</div>
 				<div className="flex flex-col gap-4">
-					<label className="p-2">First Name:</label>
+					<label className="p-2">Scouter:</label>
 					<input
 						id="name"
 						name="name"
@@ -177,9 +191,16 @@ export default function StandForm() {
 				</div>
 			</div>
 			<div className="flex flex-row gap-5 p-2 border-4 border-slate-200 rounded-xl">
-				<label><strong>Misc</strong></label>
-				<div className="flex flex-col gap-2 flex-shrink-0 flex-flow:column wrap">
-					<RangeSelector name="defence" ratings={defenceRatings} />
+				<label>
+					<strong>Misc</strong>
+				</label>
+				<div>
+					<div className="flex flex-col gap-2 flex-shrink-0 flex-flow:column wrap">
+						<RangeSelector name="defence" ratings={defenceRatings} />
+					</div>
+					<div className="flex flex-col gap-2 flex-shrink-0 flex-flow:column wrap">
+						<RangeSelector name="status" ratings={statusRatings} />
+					</div>
 				</div>
 			</div>
 		</form>
