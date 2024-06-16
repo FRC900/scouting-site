@@ -1,30 +1,27 @@
-import type { Metadata } from "next";
-import { ubuntu } from "./ui/fonts";
-import  "@/app/ui/globals.css";
-import TopNav from "./ui/topnav";
+import '@mantine/core/styles.css';
+import React from 'react';
+import { MantineProvider, ColorSchemeScript } from '@mantine/core';
+import { theme } from '../theme';
 
-export const metadata: Metadata = {
-  title: "Scouting",
-  description: "The Zebracorn's scouting system for First Robotics Competitions.",
+export const metadata = {
+  title: 'Mantine Next.js template',
+  description: 'I am using Mantine with Next.js!',
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: any }) {
   return (
     <html lang="en">
-      <body className='${ubuntu.className} bg-zinc-900'>
-        <div className="flex h-screen flex-row overflow-auto">
-          {/* <div className="w-full flex-none">
-            <TopNav />
-          </div> */}
-          <div className="p-12 w-max mx-auto text-lg">{children}</div>
-        </div>
+      <head>
+        <ColorSchemeScript />
+        <link rel="shortcut icon" href="/favicon.svg" />
+        <meta
+          name="viewport"
+          content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
+        />
+      </head>
+      <body>
+        <MantineProvider theme={theme}>{children}</MantineProvider>
       </body>
     </html>
   );
 }
-
-// bg-gradient-to-tl from-slate-950 to-slate-800
