@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { ubuntu } from "./ui/fonts";
+import { ubuntu } from "../cp/fonts";
 import  "@/app/ui/globals.css";
-import TopNav from "./ui/topnav";
+import TopNav from "../cp/topnav";
 
 export const metadata: Metadata = {
   title: "Scouting",

@@ -1,4 +1,4 @@
-import PitForm from "@/app/ui/scouting/pit-form";
+import PitForm from "@/cp/forms/pit"
 // import { fetchTeams } from "@/app/lib/data";
 
 

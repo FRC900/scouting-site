@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { TeamField } from "@/app/lib/definitions";
-import RangeSelector from "@/app/ui/scouting/range-selector";
-import NotesBox from "@/app/ui/scouting/notes";
+import { TeamField } from "@/lib/definitions";
+import RangeSelector from "./range-selector";
+import NotesBox from "./notes";
 
 export default function PitForm() {
 	const electricalRatings: string[] = ["1 - Incomplete", "2 - Hazardous", "3 - Messy", "4 - Acceptable", "5 - Star Struck"];

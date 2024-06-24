@@ -1,4 +1,4 @@
-import StandForm from "@/app/ui/scouting/stand-form";
+import StandForm from "@/cp/forms/stand-form"
 
 export default async function Page() {
 

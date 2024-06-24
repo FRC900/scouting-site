@@ -1,14 +1,14 @@
 'use client';
 
-import Incrementor from "@/app/ui/scouting/incrementor";
+import Incrementor from "./incrementor";
 import RangeSelector from "./range-selector";
 import NotesBox from "./notes";
-import { createStandForm } from "@/app/lib/actions";
-import { TBATeamSimple } from "@/app/lib/definitions";
-import { getTeams } from "@/app/lib/fetch";
+import { createStandForm } from "@/lib/actions";
+import { TBATeamSimple } from "@/lib/definitions";
+import { getTeams } from "@/lib/fetch";
 import useSWR from "swr";
-import fetcher from "@/app/lib/fetcher";
-import { tbaEventKey } from "@/app/lib/constants";
+import fetcher from "@/lib/fetcher";
+import { tbaEventKey } from "@/lib/constants";
 
 export default function StandForm() {
 
