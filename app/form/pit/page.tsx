@@ -1,4 +1,4 @@
-import PitForm from "@/cp/forms/pit"
+import PitForm from "@/components/forms/pit"
 // import { fetchTeams } from "@/app/lib/data";
 
 

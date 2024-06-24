@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { ubuntu } from "../cp/fonts";
-import  "@/app/ui/globals.css";
-import TopNav from "../cp/topnav";
+import { Ubuntu } from "next/font/google";
+import  "@/components/ui/globals.css";
+import TopNav from "../components/topnav";
 
 export const metadata: Metadata = {
   title: "Scouting",
@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className='${ubuntu.className} bg-zinc-900'>
+      <body className='${Ubuntu.className} bg-zinc-900'>
         <div className="flex h-screen flex-row overflow-auto">
           {/* <div className="w-full flex-none">
             <TopNav />
