@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Ubuntu } from "next/font/google";
 import  "@/components/ui/globals.css";
-import TopNav from "../components/topnav";
+import Header from "@/components/header/header";
 
 export const metadata: Metadata = {
   title: "Scouting",
@@ -15,12 +15,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className='${Ubuntu.className} bg-zinc-900'>
-        <div className="flex h-screen flex-row overflow-auto">
-          {/* <div className="w-full flex-none">
-            <TopNav />
-          </div> */}
-          <div className="p-12 w-max mx-auto text-lg">{children}</div>
+      <body className='${Ubuntu.className} bg-zinc-900 p-6 text-lg'>
+        <div className="flex flex-col h-screen overflow-auto">
+          <div className="w-full flex-none">
+            <Header />
+          </div>
+          <div className="w-max mx-auto">{children}</div>
         </div>
       </body>
     </html>
