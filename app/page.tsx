@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
+import Head from "next/head";
 
 export default function Home() {
 	return (
@@ -7,7 +8,7 @@ export default function Home() {
 			<div className="m-10 flex flex-col gap-4 md:flex-col p-8 pl-12 w-max bg-zinc-800 rounded-3xl shadow-2xl">
 				<p className="text-x text-slate-200 md:text-3xl md:leading-normal">
 					<em>If you are a team member,</em>
-					<br />  
+					<br />
 					<em>Log in or Sign up to continue.</em>
 				</p>
 				<div className="flex flex-row gap-4">

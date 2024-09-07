@@ -5,12 +5,14 @@ import RangeSelector from "./range-selector";
 import NotesBox from "./notes";
 import { createStandForm } from "@/lib/actions";
 import { TBATeamSimple } from "@/lib/definitions";
-import { getTeams } from "@/lib/fetch";
 import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
 import { tbaEventKey } from "@/lib/constants";
 
 export default function StandForm() {
+
+	// const initialState = { message: null, errors: {} };
+	// const [state, dispatch] = useFormState(createStandForm, initialState);
 
 	const { data: teams } = useSWR<TBATeamSimple[]>(`https://www.thebluealliance.com/api/v3/event/${tbaEventKey}/teams/simple`, fetcher)
 	if (!teams) return null;

@@ -9,6 +9,8 @@ export const metadata: Metadata = {
 		"The Zebracorn's scouting system for First Robotics Competitions.",
 };
 
+export const roboto = Roboto({ weight: ['300'], subsets: ['latin'] });
+
 export default function RootLayout({
 	children,
 }: Readonly<{
@@ -16,11 +18,11 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-    <body className={`flex flex-col h-screen overflow-auto ${Roboto} bg-zinc-900 p-6 text-lg`}>
+    <body className={`${roboto.className} antialiased flex flex-col h-screen overflow-auto bg-zinc-900 p-6 text-md`}>
 				<div className="w-full flex-none">
 					<Header />
 				</div>
-				<div className="flex-grow w-max mx-auto">{children}</div>
+				<div className="flex-grow w-max mx-auto mt-10">{children}</div>
 			</body>
 		</html>
 	);
