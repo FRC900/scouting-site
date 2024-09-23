@@ -1,47 +1,62 @@
 'use client';
 
 import { useState } from "react";
+import { useController, Control, FieldValues, Path, UseControllerProps, Field } from "react-hook-form";
+import { StandForm } from "@/lib/definitions";
 
-export default function Incrementor({ name }: { name: string }) {
-	const [count, setCount] = useState(0);
+type Props<T extends FieldValues> = {
+	control: Control<T>;
+	name: Path<T>;
+	rules?: UseControllerProps<T>['rules'];
+}
 
-	function decrement(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-		e.preventDefault()
-		if (count === 0) {
-			return;
-		} else {
-			setCount(count - 1);
-		}
-	}
+export const Incrementor = <T extends FieldValues>({
+	control,
+	name,
+	rules,
+}: Props<T>) => {
 
-	function increment(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-		e.preventDefault()
-		setCount(count + 1);
-	}
+	const { field, fieldState } = useController({
+		control,
+		name,
+		rules,
+	});
+
+	const change = (v: number) => {
+		if (v < 0) return;
+		field.onChange(v);
+	};
 
 	return (
 		<div className="flex flex-row gap-1">
 			<button
-				onClick={decrement}
-				className="px-5 py-2 bg-white rounded border-2 border-slate-950"
-			>	
-				<p className="text-3xl text-slate-950">-</p>
+				onClick={() =>
+					change(typeof field.value !== "number" ? -1 : field.value - 1)
+				}
+				className="px-5 py-2 bg-rose rounded border-2 border-ink"
+			>
+				<p className="text-3xl text-ink">-</p>
 			</button>
-			<input	
-				id={name}
-				type="number"
-				step="1"
-				value={count}
-				aria-describedby={name + "-error"}
-				className="p-2 border-2 border-slate-950 rounded-md text-slate-950 w-12"
-				readOnly
+			<input
+			  type="number"
+				onChange={(v) => field.onChange(v)}
+				onBlur={field.onBlur}
+				value={field.value}
+				name={field.name}
+				ref={field.ref}
+				className="p-2 border-2 border-ink rounded-md bg-anchor w-12 text-center text-snow"
+				disabled
 			/>
 			<button
-				onClick={increment}
-				className="px-5 py-2 bg-purple rounded border-2 border-slate-950"
+				onClick={() =>
+					change(typeof field.value !== "number" ? -1 : field.value + 1)
+				}
+				className="px-5 py-2 bg-amethyst rounded border-2 border-ink"
 			>
-				<p className="text-3xl text-slate-950">+</p>
+				<p className="text-3xl text-ink">+</p>
 			</button>
 		</div>
 	);
 }
+
+export default Incrementor;

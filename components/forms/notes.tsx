@@ -20,7 +20,7 @@ export default function NotesBox({ name }: { name: string }) {
                 rows={5}
                 cols={33}
                 aria-describedby={aria}
-                className="p-2 border border-slate-950 rounded-md text-slate-950"
+                className="p-2 border border-snow bg-anchor rounded-md text-snow"
             >
             </textarea>
         </div>

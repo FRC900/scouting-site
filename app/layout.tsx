@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-    <body className={`${roboto.className} antialiased flex flex-col h-screen overflow-auto bg-zinc-900 p-6 text-md`}>
+    <body className={`${roboto.className} antialiased flex flex-col h-screen overflow-auto bg-ink p-6 text-md`}>
 				<div className="w-full flex-none">
 					<Header />
 				</div>

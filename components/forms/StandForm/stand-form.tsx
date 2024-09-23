@@ -1,18 +1,29 @@
 'use client';
 
-import Incrementor from "./incrementor";
-import RangeSelector from "./range-selector";
-import NotesBox from "./notes";
+import Incrementor from "../incrementor";
+import RangeSelector from "../range-selector";
+import NotesBox from "../notes";
 import { createStandForm } from "@/lib/actions";
 import { TBATeamSimple } from "@/lib/definitions";
 import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
 import { tbaEventKey } from "@/lib/constants";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { type StandForm } from "@/lib/definitions";
 
 export default function StandForm() {
 
 	// const initialState = { message: null, errors: {} };
 	// const [state, dispatch] = useFormState(createStandForm, initialState);
+
+	const {
+		register,
+		handleSubmit,
+		control,
+		formState: { errors },
+	} = useForm<StandForm>();
+
+	const onSubmit: SubmitHandler<StandForm> = (data) => console.log(data);
 
 	const { data: teams } = useSWR<TBATeamSimple[]>(`https://www.thebluealliance.com/api/v3/event/${tbaEventKey}/teams/simple`, fetcher)
 	if (!teams) return null;
@@ -35,28 +46,24 @@ export default function StandForm() {
 	];
 
 	return (
-		<form action={createStandForm} className="text-slate-200 flex flex-col gap-2">
+		<form onSubmit={handleSubmit(onSubmit)} className="text-snow flex flex-col gap-2">
 			<div className="flex flex-row gap-4 text-xl rounded-3xl p-5 w-max">
 				<div className="flex flex-col gap-4">
 					<label className="p-2">Match Number:</label>
 					<input
-						id="match"
-						name="match"
 						type="number"
 						step="1"
 						placeholder="0"
-						aria-describedby="match-error"
-						className="p-2 border border-slate-950 rounded-md text-slate-950"
+						className="p-2 border border-ink rounded-md text-ink"
+						{...register("match", { required: true })}
 					/>
 				</div>
 				<div className="flex flex-col gap-4">
 					<label className="p-2">Slot:</label>
 					<select
-						id="slot"
-						name="slot"
 						defaultValue=""
-						aria-describedby="slot-error"
-						className="p-2 border border-slate-950 rounded-md text-slate-950"
+						className="p-2 border border-ink rounded-md text-ink"
+						{...register("slot", { required: true })}
 					>
 						<option value="" disabled></option>
 						<option>Red 1</option>
@@ -70,11 +77,9 @@ export default function StandForm() {
 				<div className="flex flex-col gap-4">
 					<label className="p-2">Team Number:</label>
 					<select
-						id="team"
-						name="team"
 						defaultValue=""
-						aria-describedby="team-error"
-						className="p-2 border border-slate-950 rounded-md text-slate-950"
+						className="p-2 border border-ink rounded-md text-ink"
+						{...register("team", { required: true })}
 					>
 						<option value="" disabled></option>
 						{teams.map((team) => (
@@ -87,16 +92,14 @@ export default function StandForm() {
 				<div className="flex flex-col gap-4">
 					<label className="p-2">Scouter:</label>
 					<input
-						id="name"
-						name="name"
 						type="string"
 						placeholder=""
-						aria-describedby="name-error"
-						className="p-2 border border-slate-950 rounded-md text-slate-950"
+						className="p-2 border border-ink rounded-md text-ink"
+						{...register("name", { required: true })}
 					/>
 				</div>
 			</div>
-			<div className="flex flex-row gap-5 p-2 border-4 border-slate-200 rounded-xl">
+			<div className="flex flex-row gap-5 p-2 border-4 border-snow rounded-xl">
 				<p className="w-12">
 					<strong>Auto</strong>
 				</p>
@@ -104,11 +107,9 @@ export default function StandForm() {
 					<div className="flex flex-row gap-2">
 						<label>Left Starting Zone?</label>
 						<input
-							id="startingZone"
-							name="startingZone"
 							type="checkbox"
-							aria-describedby="starting-zone-error"
-							className="h-6 w-6 border border-slate-850 rounded"
+							className="h-6 w-6 border border-gravy rounded"
+							{...register("leftstartzone")}
 						/>
 					</div>
 					<div className="flex flex-row gap-10">
@@ -116,28 +117,28 @@ export default function StandForm() {
 							<label className="mx-auto w-max">Speaker</label>
 							<div>
 								<label>Scored</label>
-								<Incrementor name="autoSpeakerScored" />
+								<Incrementor name="autospeakerscored" control={control} rules={{ required: true}} />
 							</div>
 							<div>
 								<label>Missed</label>
-								<Incrementor name="autoSpeakerMissed" />
+								<Incrementor name="autospeakermissed" control={control} rules={{ required: true}} />
 							</div>
 						</div>
 						<div>
 							<label>Amp</label>
 							<div>
 								<label>Scored</label>
-								<Incrementor name="autoAmpScored" />
+								<Incrementor name="autoampscored" control={control} rules={{ required: true}} />
 							</div>
 							<div>
 								<label>Missed</label>
-								<Incrementor name="autoAmpMissed" />
+								<Incrementor name="autoampmissed" control={control} rules={{ required: true}} />
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div className="flex flex-row gap-5 p-2 border-4 border-slate-200 rounded-xl">
+			<div className="flex flex-row gap-5 p-2 border-4 border-snow rounded-xl">
 				<p className="w-12">
 					<strong>Teleop</strong>
 				</p>
@@ -147,44 +148,42 @@ export default function StandForm() {
 							<label>Speaker</label>
 							<div>
 								<label>Scored</label>
-								<Incrementor name="teleopSpeakerScored" />
+								<Incrementor name="teleopspeakerscored" control={control} rules={{ required: true}} />
 							</div>
 							<div>
 								<label>Missed</label>
-								<Incrementor name="teleopSpeakerMissed" />
+								<Incrementor name="teleopspeakermissed" control={control} rules={{ required: true}} />
 							</div>
 						</div>
 						<div>
 							<label>Amp</label>
 							<div>
 								<label>Scored</label>
-								<Incrementor name="teleopAmpScored" />
+								<Incrementor name="teleopampscored" control={control} rules={{ required: true}} />
 							</div>
 							<div>
 								<label>Missed</label>
-								<Incrementor name="teleopAmpMissed" />
+								<Incrementor name="teleopampmissed" control={control} rules={{ required: true}} />
 							</div>
 						</div>
 						<div>
 							<label>Trap</label>
 							<div>
 								<label>Scored</label>
-								<Incrementor name="teleopTrapScored" />
+								<Incrementor name="teleoptrapscored" control={control} rules={{ required: true}} />
 							</div>
 							<div>
 								<label>Missed</label>
-								<Incrementor name="teleopTrapMissed" />
+								<Incrementor name="teleoptrapmissed" control={control} rules={{ required: true}} />
 							</div>
 						</div>
 					</div>
 					<div className="flex flex-row gap-4">
 						<label className="my-auto">Endgame Status:</label>
 						<select
-							id="endgame"
-							name="endgame"
 							defaultValue=""
-							aria-describedby="endgame-error"
-							className="p-2 border border-slate-950 rounded-md text-slate-950"
+							className="p-2 border border-ink rounded-md text-ink"
+							{...register("endgame", { required: true })}
 						>
 							<option value="" disabled></option>
 							<option>Nothing</option>
@@ -196,7 +195,7 @@ export default function StandForm() {
 					</div>
 				</div>
 			</div>
-			<div className="flex flex-row gap-5 p-2 border-4 border-slate-200 rounded-xl">
+			<div className="flex flex-row gap-5 p-2 border-4 border-snow rounded-xl">
 				<label>
 					<strong>Misc</strong>
 				</label>
@@ -211,11 +210,11 @@ export default function StandForm() {
 				<div>
 					<div>
 						<label>Fouls</label>
-						<Incrementor name="fouls" />
+						<Incrementor name="fouls" control={control} rules={{ required: true}} />
 					</div>
 					<div>
 						<label>Tech Fouls</label>
-						<Incrementor name="techfouls" />
+						<Incrementor name="techfouls" control={control} rules={{ required: true}} />
 					</div>
 				</div>
 				<div className="flex flex-col gap-4">
@@ -223,7 +222,7 @@ export default function StandForm() {
 				</div>
 			</div>
 			<div>
-				<input type="submit" value="Submit" className="flex items-center gap-5 self-start rounded-lg px-6 py-3 text-sm font-medium transition-colors text-slate-950 bg-slate-200 hover:bg-zinc-900 hover:text-slate-200 hover:outline md:text-base"/>
+				<input type="submit" value="Submit" className="flex items-center gap-5 self-start rounded-lg px-6 py-3 text-sm font-medium transition-colors text-ink bg-snow hover:bg-zinc-900 hover:text-snow hover:outline md:text-base"/>
 			</div>
 		</form>
 	);

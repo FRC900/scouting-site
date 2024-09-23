@@ -25,7 +25,7 @@ export default function RangeSelector({ name, ratings }: { name: string, ratings
                 step="1"
                 value={rangeval}
                 aria-describedby={aria}
-                className="p-2 border border-slate-950 rounded-md text-slate-950"
+                className="p-2 rounded-md accent-sunflower"
                 onChange={handleRangevalChange}
                 onInput={handleRangevalChange}
             />
