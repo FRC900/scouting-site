@@ -4,8 +4,8 @@ import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import { theme } from "../theme";
 
 export const metadata = {
-  title: "Mantine Next.js template",
-  description: "I am using Mantine with Next.js!",
+  title: "Zebracorns Scouting",
+  description: "The Scouting Site of the Zebracorns using Nextjs, Mantine, Vanilla Extract, and other cool tools!",
 };
 
 export default function RootLayout({ children }: { children: any }) {
@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: any }) {
         />
       </head>
       <body>
-        <MantineProvider theme={theme}>{children}</MantineProvider>
+        <MantineProvider theme={theme} defaultColorScheme="dark">{children}</MantineProvider>
       </body>
     </html>
   );
