@@ -1,23 +1,39 @@
-export interface StandForm {
-  match: number,
-  slot: 'Red 1' | 'Red 2' | 'Red 3' | 'Blue 1' | 'Blue 2' | 'Blue 3',
+import { StandFormSchema } from "./constants";
+import { z } from "zod";
+
+// export type StandForm = z.infer<typeof StandFormSchema>
+
+export type StandForm = {
+	match: number,
+  slot: string,
   team: number,
-  name: string,
-  leftstartzone: boolean,
-  autospeakerscored: number,
-  autospeakermissed: number,
-  autoampscored: number,
-  autoampmissed: number,
-  teleopspeakerscored: number,
-  teleopspeakermissed: number,
-  teleopampscored: number,
-  teleopampmissed: number,
-  teleoptrapscored: number,
-  teleoptrapmissed: number,
-  endgame: 'Nothing' | 'Parked' | 'Failed Climb' | 'Climbed' | 'Harmony',
-  defence: "0 - No Defence" | "1 - Penalties Galore" | "2 - Some Penalties" | "3 - Ineffective" | "4 - Good Defence" | "5 - Strong.",
-  status: "0 - No-Show" | "1 - Didn't Move" | "2 - Broke In Match" | "3 - Disconnections" | "4 - No Issues (Solid)" | "5 - Pro Preformance",
+  username: string,
+  startingZone: boolean,
+  autoSpeakerScored: number,
+  autoSpeakerMissed: number,
+  teleopSpeakerScored: number,
+  teleopSpeakerMissed: number,
+  teleopAmpScored: number,
+  teleopAmpMissed: number,
+  teleopTrapScored: number,
+  teleopTrapMissed: number,
+  endgame: string,
+  defence: string,
+  status: string,
   fouls: number,
   techfouls: number,
-  comments: string,
+  notes: string,
+  date: string,
 }
+
+export type TBATeamSimple = {
+	key: string;
+	team_number: number;
+	nickname: string;
+	name: string;
+	city: string;
+	state_prov: string;
+	country: string;
+}
+
+export type TBAMatchesKeys = string;
