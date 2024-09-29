@@ -13,6 +13,8 @@
     "@mantine/core": "^7.12.2",
     "@mantine/hooks": "^7.12.2",
     "@mantine/vanilla-extract": "7.12.2",
+    "@tabler/core": "1.0.0-beta21",
+    "@tabler/icons-react": "^3.19.0",
     "@vanilla-extract/css": "^1.15.3",
     "@vercel/postgres": "^0.10.0",
     "next": "^14.2.13",

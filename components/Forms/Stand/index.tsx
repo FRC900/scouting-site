@@ -3,7 +3,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Fieldset, Box, Button } from "@mantine/core";
 import { NumberInput } from "../NumberInput";
-import { NativeSelect } from "../NativeSelect";
+import { Select } from "../Select";
 import { Checkbox } from "../Checkbox";
 import { TextInput } from "../TextInput";
 import { createStandForm } from "../../../lib/actions";
@@ -31,10 +31,11 @@ export default function StandForm() {
 	return (
 		<Box component="form" onSubmit={handleSubmit(onSubmit)}>
 			<NumberInput name="match" control={control} label="Match" />
-			<NativeSelect
+			<Select
 				name="slot"
 				control={control}
 				label="Slot"
+				placeholder="Select"
 				data={["Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"]}
 			/>
 			<Fieldset legend="Auto">
@@ -93,18 +94,20 @@ export default function StandForm() {
 						label="Missed"
 					/>
 				</Fieldset>
-				<NativeSelect
+				<Select
 					name="endgame"
 					control={control}
 					label="Endgame"
+					placeholder="Select"
 					data={["Nothing", "Parked", "Failed Climb", "Climbed", "Harmony"]}
 				/>
 			</Fieldset>
 			<Fieldset legend="Misc">
-				<NativeSelect
+				<Select
 					name="defence"
 					control={control}
 					label="Defence"
+					placeholder="Select"
 					data={[
 						{ label: "No Defence", value: "0" },
 						{ label: "Penalties Galore", value: "1" },
@@ -114,10 +117,11 @@ export default function StandForm() {
 						{ label: "Strong.", value: "5" },
 					]}
 				/>
-				<NativeSelect
+				<Select
 					name="status"
 					control={control}
 					label="Status"
+					placeholder="Select"
 					data={[
 						{ label: "No-Show", value: "0" },
 						{ label: "Did Not Move", value: "1" },
