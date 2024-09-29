@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { Button, Group, useMantineTheme } from "@mantine/core";
 import { IconFileFilled, IconUserFilled, IconRosetteDiscountCheckFilled } from '@tabler/icons-react'
