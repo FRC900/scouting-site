@@ -16,7 +16,7 @@ import { Checkbox } from "../Checkbox";
 import { TextInput } from "../TextInput";
 import { createStandForm } from "../../../lib/actions";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { StandFormSchema, defaultValues } from "../../../lib/constants";
+import { StandFormSchema, standDefaultValues } from "../../../lib/constants";
 import { type StandForm } from "../../../lib/definitions";
 
 export default function StandForm() {
@@ -30,11 +30,9 @@ export default function StandForm() {
 	} = useForm<StandForm>({
 		resolver: zodResolver(StandFormSchema),
 		defaultValues: {
-			...defaultValues,
+			...standDefaultValues,
 		},
 	});
-
-	console.log("hellllloooooo");
 
 	const onSubmit: SubmitHandler<StandForm> = (data) => console.log(data);
 

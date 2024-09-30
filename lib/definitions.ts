@@ -1,5 +1,5 @@
-import { StandFormSchema } from "./constants";
-import { z } from "zod";
+// import { StandFormSchema } from "./constants";
+// import { z } from "zod";
 
 // export type StandForm = z.infer<typeof StandFormSchema>
 
@@ -23,6 +23,17 @@ export type StandForm = {
   fouls: number,
   techfouls: number,
   notes: string,
+  date: string,
+}
+
+export type PitForm = {
+  team: number,
+  drive: string,
+  weight: number,
+  preferredScoring: string,
+  electrical: string,
+  bumpers: string,
+  notes: string
   date: string,
 }
 

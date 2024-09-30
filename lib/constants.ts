@@ -28,7 +28,7 @@ export const StandFormSchema = z.object({
   date: z.string(),
 });
 
-export const defaultValues: Partial<StandForm> = {
+export const standDefaultValues: Partial<StandForm> = {
   match: undefined,
   slot: "Red 1",
   team: undefined,
@@ -50,3 +50,14 @@ export const defaultValues: Partial<StandForm> = {
   notes: '',
   date: undefined,
 }
+
+export const PitFormSchema = z.object({
+  team: z.number(),
+  drive: z.string(),
+  weight: z.number(),
+  preferredScoring: z.string(),
+  electrical: z.string(),
+  bumpers: z.string(),
+  notes: z.string(),
+  date: z.string(),
+})
