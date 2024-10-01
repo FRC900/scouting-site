@@ -48,3 +48,9 @@ export type TBATeamSimple = {
 }
 
 export type TBAMatchesKeys = string;
+
+
+// SQL Tables
+
+// Stand Forms
+// CREATE TABLE StandForms ( match varchar(255), slot varchar(255), team varchar(255), username varchar(255), startingZone varchar(255), autoSpeakerScored varchar(255), autoSpeakerMissed varchar(255), teleopSpeakerScored varchar(255), teleopSpeakerMissed varchar(255), TeleopAmpScored varchar(255), TeleopAmpMissed varchar(255), TeleopTrapScored varchar(255), TeleopTrapMissed varchar(255), endgame varchar(255), defence varchar(255), status varchar(255), fouls varchar(255), techfouls varchar(255), notes varchar(255), date varchar(255) );
