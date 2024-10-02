@@ -7,6 +7,8 @@ import { StandForm, TBAMatchesKeys, TBATeamSimple } from "./definitions";
 import { tbaEventKey } from "./constants";
 import fetcher from "./fetcher";
 import { StandFormSchema } from "./constants";
+import { signIn } from "../auth";
+import { AuthError } from 'next-auth';
 
 const CreateStandForm = StandFormSchema.omit({ date: true, team: true });
 
@@ -21,8 +23,6 @@ export async function createStandForm(formData: StandForm) {
 		startingZone,
 		autoSpeakerScored,
 		autoSpeakerMissed,
-    autoAmpScored,
-    autoAmpMissed,
 		teleopAmpScored,
 		teleopAmpMissed,
     teleopSpeakerScored,
@@ -58,4 +58,23 @@ export async function createStandForm(formData: StandForm) {
 	// 	return { message: 'Database Error: Failed to Submit Form.' };
 	// }
 
+}
+
+export async function authenticate(
+	prevState: String | undefined,
+	formData: FormData,
+) {
+	try {
+		await signIn('credentials', formData);
+	} catch (error) {
+		if (error instanceof AuthError) {
+			switch (error.type) {
+				case 'CredentialsSignin':
+					return 'Invalid credentials';
+				default:
+					return 'Something went wrong.';
+			}
+		}
+		throw error;
+	}
 }

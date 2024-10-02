@@ -37,6 +37,11 @@ export type PitForm = {
   date: string,
 }
 
+export type LoginForm = {
+  username: string,
+  password: string,
+}
+
 export type TBATeamSimple = {
 	key: string;
 	team_number: number;
@@ -48,6 +53,13 @@ export type TBATeamSimple = {
 }
 
 export type TBAMatchesKeys = string;
+
+export type User = {
+  name: string,
+  username: string,
+  password: string,
+  permissions: 'none' | 'member' | 'lead' | 'admin',
+}
 
 
 // SQL Tables

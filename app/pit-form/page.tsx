@@ -1,4 +1,4 @@
-import PitForm from "../../components/Forms/Pit"
+import PitForm from "../../components/Forms/pit"
 
 export default function Page() {
   return(

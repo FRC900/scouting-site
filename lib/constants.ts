@@ -61,3 +61,8 @@ export const PitFormSchema = z.object({
   notes: z.string(),
   date: z.string(),
 })
+
+export const LoginFormSchema = z.object({
+  username: z.string(),
+  password: z.string(),
+})

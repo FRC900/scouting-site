@@ -1,5 +1,5 @@
 import { style } from "@vanilla-extract/css";
-import { useMantineTheme } from "@mantine/core";
+import { vars } from "../../theme";
 
 export const header = style({
   position: 'fixed',
@@ -10,7 +10,8 @@ export const header = style({
   width: '100%',
   alignItems: 'center',
   padding: '0.5rem 1rem 0.5rem 1rem',
-  height: 48,
+  height: 60,
   zIndex: 2,
-  borderBottom: `1px solid`,
+  backgroundColor: vars.colors.dark[8],
+  color: vars.colors.snow[0],
 })

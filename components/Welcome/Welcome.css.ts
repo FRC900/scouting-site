@@ -10,7 +10,7 @@ export const title = style({
 
   selectors: {
     [vars.darkSelector]: {
-      color: vars.colors.white,
+      color: vars.colors.snow[0],
     },
   },
 

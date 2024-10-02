@@ -11,9 +11,9 @@ export default function Header() {
 					height={32}
 					alt="Zebracorns Logo"
 					unoptimized
-				/> */}
+				/> */} 
 			<Title order={3}>Zebracorn Scouting</Title>
-      <NavLinks />
+			<NavLinks />
 		</Paper>
 	);
 }

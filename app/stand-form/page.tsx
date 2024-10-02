@@ -1,4 +1,4 @@
-import StandForm from "../../components/Forms/Stand";
+import StandForm from "../../components/Forms/stand";
 
 export default function Page() {
   return(

@@ -3,21 +3,21 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import {
 	Fieldset,
-	Box,
 	Button,
 	Tabs,
 	useMantineTheme,
 	Container,
-	Flex,
+	Group,
+	Stack,
 } from "@mantine/core";
-import { NumberInput } from "../NumberInput";
-import { Select } from "../Select";
-import { Checkbox } from "../Checkbox";
-import { TextInput } from "../TextInput";
-import { createStandForm } from "../../../lib/actions";
+import { NumberInput } from "./inputs/NumberInput";
+import { Select } from "./inputs/Select";
+import { Checkbox } from "./inputs/Checkbox";
+import { TextInput } from "./inputs/TextInput";
+import { createStandForm } from "../../lib/actions";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { StandFormSchema, standDefaultValues } from "../../../lib/constants";
-import { type StandForm } from "../../../lib/definitions";
+import { StandFormSchema, standDefaultValues } from "../../lib/constants";
+import { type StandForm } from "../../lib/definitions";
 
 export default function StandForm() {
 	const theme = useMantineTheme();
@@ -37,8 +37,8 @@ export default function StandForm() {
 	const onSubmit: SubmitHandler<StandForm> = (data) => console.log(data);
 
 	return (
-		<Container component="form" onSubmit={handleSubmit(onSubmit)}>
-			<Flex gap="md" justify="center" align="center" direction="row">
+		<Stack component="form" onSubmit={handleSubmit(onSubmit)}>
+			<Group>
 				<NumberInput name="match" control={control} label="Match" />
 				<Select
 					name="slot"
@@ -47,9 +47,9 @@ export default function StandForm() {
 					placeholder="Select"
 					data={["Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"]}
 				/>
-			</Flex>
+			</Group>
 			<Tabs color={theme.colors.milkshake[4]} defaultValue="auto">
-				<Tabs.List justify="center">
+				<Tabs.List justify="center" grow>
 					<Tabs.Tab value="auto">Auto</Tabs.Tab>
 					<Tabs.Tab value="teleop">TeleOp</Tabs.Tab>
 					<Tabs.Tab value="Misc">Misc</Tabs.Tab>
@@ -111,6 +111,14 @@ export default function StandForm() {
 							label="Missed"
 						/>
 					</Fieldset>
+					<Fieldset legend="Penalties">
+						<NumberInput name="fouls" control={control} label="Fouls" />
+						<NumberInput
+							name="techfouls"
+							control={control}
+							label="Tech Fouls"
+						/>
+					</Fieldset>
 					<Select
 						name="endgame"
 						control={control}
@@ -156,7 +164,11 @@ export default function StandForm() {
 					/>
 				</Tabs.Panel>
 			</Tabs>
-			<Button type="submit" color={theme.colors.milkshake[4]}>Submit</Button>
-		</Container>
+			<Group justify="flex-end">
+				<Button type="submit" color={theme.colors.milkshake[4]}>
+					Submit
+				</Button>
+			</Group>
+		</Stack>
 	);
 }
