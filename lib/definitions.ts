@@ -33,13 +33,20 @@ export type PitForm = {
   preferredScoring: string,
   electrical: string,
   bumpers: string,
-  notes: string
-  date: string,
+  notes: string,
 }
 
 export type LoginForm = {
   username: string,
   password: string,
+}
+
+export type RegisterForm = {
+  name: string,
+  email: string,
+  username: string,
+  password: string,
+  confirm: string,
 }
 
 export type TBATeamSimple = {

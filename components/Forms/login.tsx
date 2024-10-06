@@ -9,8 +9,9 @@ import { type LoginForm } from "../../lib/definitions";
 import { LoginFormSchema } from "../../lib/constants";
 import { TextInput } from "./inputs/TextInput";
 import { PasswordInput } from "./inputs/PasswordInput";
+import { useDisclosure } from "@mantine/hooks";
 
-export default function AuthForm() {
+export default function LoginForm({ toggle = () => {} }) {
   const theme = useMantineTheme();
 
   // const [errorMessage, formAction, isPending] = useActionState(
@@ -47,7 +48,7 @@ export default function AuthForm() {
             placeholder="Your Password"
           />
           <Group justify="space-between">
-            <Anchor underline="never">Don't have an account? Register</Anchor>
+            <Button variant="subtle" onClick={toggle} color={theme.colors.pillow[0]}>Don't have an account? Register</Button>
             <Button type="submit" color={theme.colors.milkshake[4]}>Login</Button>
           </Group>
         </Stack>

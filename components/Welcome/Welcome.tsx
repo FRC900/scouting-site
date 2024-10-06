@@ -11,12 +11,14 @@ import {
 } from "@mantine/core";
 import * as classes from "./Welcome.css";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
-import AuthForm from "../Forms/auth";
+import RegisterForm from "../Forms/register";
+import LoginForm from "../Forms/login";
 
 export function Welcome() {
 	const theme = useMantineTheme();
 	const [opened, { open, close }] = useDisclosure(false);
-  const isMobile = useMediaQuery('(max-width: 50em)');
+	const isMobile = useMediaQuery("(max-width: 50em)");
+	const [registering, { toggle }] = useDisclosure(false);
 
 	return (
 		<>
@@ -24,13 +26,17 @@ export function Welcome() {
 				opened={opened}
 				onClose={close}
 				title="Authentication"
-        fullScreen={isMobile}
+				fullScreen={isMobile}
 				overlayProps={{
 					backgroundOpacity: 0.55,
 					blur: 3,
 				}}
 			>
-				<AuthForm />
+				{registering ? (
+					<RegisterForm toggle={toggle} />
+				) : (
+					<LoginForm toggle={toggle} />
+				)}
 			</Modal>
 			<Stack>
 				<Title className={classes.title} ta="center" mt={100}>

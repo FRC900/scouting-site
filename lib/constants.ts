@@ -6,8 +6,8 @@ export const tbaEventKey = "2024nccmp";
 export const StandFormSchema = z.object({
   match: z.number(),
 	slot: z.enum(["Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"]),
-	team: z.number(),
-	username: z.string(),
+	// team: z.number(),
+	// username: z.string(),
 	startingZone: z.boolean(),
 	autoSpeakerScored: z.number(),
 	autoSpeakerMissed: z.number(),
@@ -25,7 +25,6 @@ export const StandFormSchema = z.object({
 	fouls: z.number(),
 	techfouls: z.number(),
 	notes: z.string(),
-  date: z.string(),
 });
 
 export const standDefaultValues: Partial<StandForm> = {
@@ -48,7 +47,6 @@ export const standDefaultValues: Partial<StandForm> = {
   fouls: 0,
   techfouls: 0,
   notes: '',
-  date: undefined,
 }
 
 export const PitFormSchema = z.object({
@@ -59,10 +57,19 @@ export const PitFormSchema = z.object({
   electrical: z.string(),
   bumpers: z.string(),
   notes: z.string(),
-  date: z.string(),
 })
 
 export const LoginFormSchema = z.object({
   username: z.string(),
   password: z.string(),
 })
+
+export const RegisterFormSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters."),
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(8, "Password must be 8 characters long"),
+  confirm: z.string()
+}).refine((data) => data.password === data.confirm, {
+  message: "Passwords do not match",
+  path: ["confirmPassword"]
+}) 
