@@ -4,34 +4,34 @@ import { StandForm } from "./definitions";
 export const tbaEventKey = "2024nccmp";
 
 export const StandFormSchema = z.object({
-  match: z.number(),
+  match: z.number().min(1),
 	slot: z.enum(["Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"]),
 	// team: z.number(),
 	// username: z.string(),
 	startingZone: z.boolean(),
-	autoSpeakerScored: z.number(),
-	autoSpeakerMissed: z.number(),
-	autoAmpScored: z.number(),
-	autoAmpMissed: z.number(),
-	teleopSpeakerScored: z.number(),
-	teleopSpeakerMissed: z.number(),
-	teleopAmpScored: z.number(),
-	teleopAmpMissed: z.number(),
-	teleopTrapScored: z.number(),
-	teleopTrapMissed: z.number(),
+	autoSpeakerScored: z.number().min(0),
+	autoSpeakerMissed: z.number().min(0),
+	autoAmpScored: z.number().min(0),
+	autoAmpMissed: z.number().min(0),
+	teleopSpeakerScored: z.number().min(0),
+	teleopSpeakerMissed: z.number().min(0),
+	teleopAmpScored: z.number().min(0),
+	teleopAmpMissed: z.number().min(0),
+	teleopTrapScored: z.number().min(0),
+	teleopTrapMissed: z.number().min(0),
 	endgame: z.string(),
 	defence: z.string(),
 	status: z.string(),
-	fouls: z.number(),
-	techfouls: z.number(),
+	fouls: z.number().min(0),
+	techfouls: z.number().min(0),
 	notes: z.string(),
 });
 
 export const standDefaultValues: Partial<StandForm> = {
   match: undefined,
-  slot: "Red 1",
-  team: undefined,
-  username: undefined,
+  slot: undefined,
+  // team: undefined,
+  // username: undefined,
   startingZone: true,
   autoSpeakerScored: 0,
   autoSpeakerMissed: 0,
@@ -60,7 +60,7 @@ export const PitFormSchema = z.object({
 })
 
 export const LoginFormSchema = z.object({
-  username: z.string(),
+  email: z.string().email(),
   password: z.string(),
 })
 

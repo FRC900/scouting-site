@@ -6,8 +6,8 @@
 export type StandForm = {
 	match: number,
   slot: string,
-  team: number,
-  username: string,
+  // team: number,
+  // username: string,
   startingZone: boolean,
   autoSpeakerScored: number,
   autoSpeakerMissed: number,
@@ -23,7 +23,7 @@ export type StandForm = {
   fouls: number,
   techfouls: number,
   notes: string,
-  date: string,
+  // date: string,
 }
 
 export type PitForm = {
@@ -37,7 +37,7 @@ export type PitForm = {
 }
 
 export type LoginForm = {
-  username: string,
+  email: string,
   password: string,
 }
 

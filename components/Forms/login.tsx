@@ -22,7 +22,7 @@ export default function LoginForm({ toggle = () => {} }) {
   const { control } = useForm<LoginForm>({
     resolver: zodResolver(LoginFormSchema),
     defaultValues: {
-      username: "",
+      email: "",
       password: "",
     }
   });
@@ -36,7 +36,7 @@ export default function LoginForm({ toggle = () => {} }) {
       >
         <Stack>
           <TextInput
-            name="username"
+            name="email"
             control={control}
             label="Username"
             placeholder="Your Username"
