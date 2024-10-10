@@ -3,7 +3,7 @@
 
 // export type StandForm = z.infer<typeof StandFormSchema>
 
-export type StandForm = {
+export type StandFormOLD = {
 	match: number,
   slot: string,
   // team: number,
@@ -28,7 +28,7 @@ export type StandForm = {
   // date: string,
 }
 
-export type TestForm = {
+export type StandForm = {
   match: number,
   slot: string,
   preloaded: boolean,

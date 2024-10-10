@@ -3,7 +3,7 @@ import { StandForm } from "./definitions";
 
 export const tbaEventKey = "2024nccmp";
 
-export const StandFormSchema = z.object({
+export const StandFormSchemaOLD = z.object({
   match: z.number().min(1),
 	slot: z.string(),
 	// team: z.number(),
@@ -33,7 +33,7 @@ export const standDefaultValues: Partial<StandForm> = {
   
 }
 
-export const TestFormSchema = z.object({
+export const StandFormSchema = z.object({
   match: z.number(),
   slot: z.string(),
   preloaded: z.boolean(),
