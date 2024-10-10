@@ -82,7 +82,7 @@ export default function NavLinks() {
 					// transitionProps={{ transition: "slide-left", duration: 150 }}
 				>
 					<Menu.Target>
-						<Button variant="outline" color={theme.colors.snow[0]} size="compact-lg">{navButton.text}</Button>
+						<Button variant="subtle" color={theme.colors.snow[0]} size="compact-lg">{navButton.text}</Button>
 					</Menu.Target>
 
 					<Menu.Dropdown>

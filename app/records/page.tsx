@@ -1,10 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import {
-	ButtonProps,
 	Button,
-	ElementProps,
 	Group,
 	useMantineTheme,
 	SimpleGrid,
