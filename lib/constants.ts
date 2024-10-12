@@ -65,6 +65,17 @@ export const PitFormSchema = z.object({
   notes: z.string(),
 })
 
+export const PitFormDatabaseSchema = z.object({
+	team: z.number(),
+  drive: z.enum(['swerve', 'tank', 'mecanum']),
+  weight: z.number(),
+  preferredScoring: z.enum(['speaker', 'amp']),
+  electrical: z.enum(['1', '2', '3', '4', '5']),
+  bumpers: z.enum(['1', '2', '3']),
+  notes: z.string(),
+	date: z.string(),
+})
+
 export const LoginFormSchema = z.object({
   email: z.string().email(),
   password: z.string(),

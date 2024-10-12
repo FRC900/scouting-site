@@ -8,11 +8,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { NumberInput } from "./inputs/NumberInput";
 import { Select } from "./inputs/Select";
 import { TextInput } from "./inputs/TextInput";
+import { createPitForm } from "../../lib/actions";
+import { useState } from "react";
+import { useOnlineStatus } from "../../lib/useOnlineStatus";
 
 export default function PitForm() {
+	const [submitting, setSubmitting] = useState<"" | "fetching" | "done">("");
+	const isOnline = useOnlineStatus();
 	const theme = useMantineTheme();
 
-	const { control } = useForm<PitForm>({
+	const { control, reset } = useForm<PitForm>({
 		resolver: zodResolver(PitFormSchema),
 		defaultValues: {
 			team: undefined,
@@ -25,10 +30,18 @@ export default function PitForm() {
 		},
 	});
 
+	const submit = (data: PitForm) => {
+		if (isOnline) {
+			setSubmitting('fetching');
+			createPitForm(data).then(() => setSubmitting("done"));
+			// setTimeout(() => setSubmitting('done'), 5000)
+		}
+	};
+
 	return (
 		<Form
 			control={control}
-			onSubmit={({ data }) => console.log(data)}
+			onSubmit={({ data }) => submit(data)}
 			onError={(e) => console.log(e)}
 		>
 			<Stack>
@@ -44,11 +57,17 @@ export default function PitForm() {
 						{ label: "Mecanum", value: "mecanum" },
 					]}
 				/>
-				<NumberInput name="weight" control={control} label="Weight (lbs)" />
+				<NumberInput
+					name="weight"
+					control={control}
+					label="Weight (lbs)"
+					description="Without bumpers and battery."
+				/>
 				<Select
 					name="preferredScoring"
 					control={control}
 					label="Preferred Scoring Location"
+					description="For Qualifications."
 					placeholder="Select"
 					data={[
 						{ label: "Speaker", value: "speaker" },
@@ -86,7 +105,11 @@ export default function PitForm() {
 					placeholder="Additional Information Here"
 				/>
 				<Group justify="end">
-					<Button type="submit" color={theme.colors.milkshake[4]}>
+					<Button
+						type="submit"
+						disabled={submitting === "fetching"}
+						color={theme.colors.milkshake[4]}
+					>
 						Submit
 					</Button>
 				</Group>

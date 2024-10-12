@@ -60,6 +60,8 @@ export type PitForm = {
   notes: string,
 }
 
+export type PitFormDatabase = PitForm & { date: string }
+
 export type LoginForm = {
   email: string,
   password: string,
