@@ -10,7 +10,7 @@ import {
 	StandFormDatabaseSchema,
 } from "./constants";
 // import { signIn } from "../auth";
-import { AuthError } from "next-auth";
+// import { AuthError } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import findTeamNumber from "./fetchers/findTeamNumber";
