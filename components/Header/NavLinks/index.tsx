@@ -74,6 +74,7 @@ export default function NavLinks() {
 		<Group justify="end" gap="md">
 			{navButtons.map((navButton) => (
 				<Menu
+					key={navButton.text}
 					shadow="md"
 					width={200}
 					trigger="hover"
@@ -88,6 +89,7 @@ export default function NavLinks() {
 					<Menu.Dropdown>
 						{navButton.links.map((link) => (
 							<Menu.Item
+								key={link.text}
 								component={Link}
 								href={link.href}
 								leftSection={link.icon}

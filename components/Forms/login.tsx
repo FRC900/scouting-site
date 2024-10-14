@@ -1,7 +1,7 @@
 'use client';
 
 // import { useActionState } from "react";
-import { authenticate } from "../../lib/actions";
+// import { authenticate } from "../../lib/actions";
 import { Paper, Stack, Button, useMantineTheme, Group, Anchor } from "@mantine/core";
 import { Form, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -48,7 +48,7 @@ export default function LoginForm({ toggle = () => {} }) {
             placeholder="Your Password"
           />
           <Group justify="space-between">
-            <Button variant="subtle" onClick={toggle} color={theme.colors.pillow[0]}>Don't have an account? Register</Button>
+            <Button variant="subtle" onClick={toggle} color={theme.colors.pillow[0]}>Don&apos;t have an account? Register</Button>
             <Button type="submit" color={theme.colors.milkshake[4]}>Login</Button>
           </Group>
         </Stack>
