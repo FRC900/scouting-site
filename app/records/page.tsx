@@ -1,39 +1,61 @@
-import Link from "next/link"
+"use client";
+
+import {
+	Button,
+	Group,
+	useMantineTheme,
+	SimpleGrid,
+} from "@mantine/core";
+import {
+	IconFileFilled,
+	IconUserFilled,
+	IconRosetteDiscountCheckFilled,
+} from "@tabler/icons-react";
 
 export default function Page() {
-  return (
-    <div className="text-slate-200 flex flex-col gap-5 mt-10">
-      <p className="text-4xl">Records</p>
-      <div className="grid grid-cols-2 gap-6">
-      <Link
-          key="stand"
-          href="/records/stand"
-          className="flex rounded-md px-8 py-2 font-bold bg-slate-200 text-zinc-800 hover:bg-zinc-800 hover:text-slate-200 hover:outline"
-        >
-          <p>Stand Forms</p>
-        </Link>
-        <Link
-          key="pit"
-          href="/records/pit"
-          className="flex rounded-md px-8 py-2 font-bold bg-slate-200 text-zinc-800 hover:bg-zinc-800 hover:text-slate-200 hover:outline"
-        >
-          <p>Pit Forms</p>
-        </Link>
-        <Link
-          key="User"
-          href="/records/user"
-          className="flex rounded-md px-8 py-2 font-bold bg-slate-200 text-zinc-800 hover:bg-zinc-800 hover:text-slate-200 hover:outline"
-        >
-          <p>Users</p>
-        </Link>
-        <Link
-          key="verify"
-          href="/records/verify"
-          className="flex rounded-md px-8 py-2 font-bold bg-slate-200 text-zinc-800 hover:bg-zinc-800 hover:text-slate-200 hover:outline"
-        >
-          <p>Verify</p>
-        </Link>
-      </div>
-    </div>
-  )
+	const theme = useMantineTheme();
+
+	return (
+		<>
+			<Group justify="center" gap="lg">
+				<SimpleGrid cols={2}>
+					<Button
+						// component={Link}
+						variant="filled"
+						color={theme.colors.milkshake[4]}
+						size="md"
+						leftSection={
+							<IconFileFilled size={16} href="/records/stand-forms" />
+						}
+					>
+						Stand Forms
+					</Button>
+					<Button
+						variant="filled"
+						color={theme.colors.milkshake[4]}
+						size="md"
+						leftSection={<IconFileFilled size={16} />}
+					>
+						Pit Forms
+					</Button>
+					<Button
+						variant="filled"
+						color={theme.colors.milkshake[4]}
+						size="md"
+						leftSection={<IconUserFilled size={16} />}
+					>
+						Users
+					</Button>
+					<Button
+						variant="filled"
+						color={theme.colors.milkshake[4]}
+						size="md"
+						leftSection={<IconRosetteDiscountCheckFilled size={16} />}
+					>
+						Verify
+					</Button>
+				</SimpleGrid>
+			</Group>
+		</>
+	);
 }

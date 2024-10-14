@@ -1,31 +1,41 @@
-import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
-import "@/components/ui/globals.css";
-import Header from "@/components/header/header";
+import "@mantine/core/styles.css";
+import React from "react";
+import {
+	MantineProvider,
+	ColorSchemeScript,
+	AppShell,
+	Stack,
+} from "@mantine/core";
+import { theme } from "../theme";
+import Header from "../components/Header";
 
-export const metadata: Metadata = {
-	title: "Scouting",
+export const metadata = {
+	title: "Zebracorns Scouting",
 	description:
-		"The Zebracorn's scouting system for First Robotics Competitions.",
+		"The Scouting Site of the Zebracorns using Nextjs, Mantine, Vanilla Extract, and other cool tools!",
 };
 
-export const roboto = Roboto({ weight: ['300'], subsets: ['latin'] });
-
-export default function RootLayout({
-	children,
-}: Readonly<{
-	children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: any }) {
 	return (
 		<html lang="en">
-    <body className={`${roboto.className} antialiased flex flex-col h-screen overflow-auto bg-ink p-6 text-md`}>
-				<div className="w-full flex-none">
-					<Header />
-				</div>
-				<div className="flex-grow w-max mx-auto mt-10">{children}</div>
+			<head>
+				<ColorSchemeScript />
+				<link rel="shortcut icon" href="/favicon.svg" />
+				<meta
+					name="viewport"
+					content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
+				/>
+			</head>
+			<body>
+				<MantineProvider theme={theme} defaultColorScheme="dark">
+					<Stack align="stretch" justify="flex-start" gap="xs" pb="md">
+						<Header />
+						<Stack align="center" justify="flex-start" gap="xs" pt="5rem">
+							{children}
+						</Stack>
+					</Stack>
+				</MantineProvider>
 			</body>
 		</html>
 	);
 }
-
-// bg-gradient-to-tl from-slate-950 to-slate-800

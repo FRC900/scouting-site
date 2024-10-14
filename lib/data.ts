@@ -1,26 +1,19 @@
-import { TeamField, StandForm } from "./definitions";
-import { unstable_noStore as noStore } from "next/cache";
+import { StandForm } from "./definitions";
 import { sql } from "@vercel/postgres";
 
-const ITEMS_PER_PAGE = 20;
-export async function fetchFilteredStandForms(
-  query: string,
-  currentPage: number,
-) {
-  noStore();
-
-  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+export async function fetchStandForms() {
 
   try {
+    console.log('Fetching stand form data...');
+    await new Promise((resolve) => setTimeout(resolve, 3000));
 
-    const data = await sql<StandForm>`
-      SELECT
+    const data = await sql<StandForm>`SELECT * FROM standforms`;
 
-    `;
+    console.log('Data fetch completed after 3 seconds.');
 
     return data.rows;
   } catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch Scouting Forms.');
+    throw new Error('Failed to fetch stand form data');
   }
 }
