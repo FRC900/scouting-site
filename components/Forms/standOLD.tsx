@@ -13,7 +13,7 @@ import { NumberInput } from "./inputs/NumberInput";
 import { Select } from "./inputs/Select";
 import { Checkbox } from "./inputs/Checkbox";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { StandFormSchema, standDefaultValues } from "../../lib/constants";
+import { StandFormSchema } from "../../lib/constants";
 import { type StandForm } from "../../lib/definitions";
 import { Textarea } from "./inputs/Textarea";
 

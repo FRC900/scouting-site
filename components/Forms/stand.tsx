@@ -1,16 +1,29 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, useForm } from "react-hook-form";
+import { Form, useForm, useWatch } from "react-hook-form";
 import { StandFormSchema } from "../../lib/constants";
 import { NumberInput } from "./inputs/NumberInput";
 import { Select } from "./inputs/Select";
 import { Checkbox } from "./inputs/Checkbox";
 import { Textarea } from "./inputs/Textarea";
 import { type StandForm } from "../../lib/definitions";
-import { Button, Group, Stack } from "@mantine/core";
+import { Button, Group, Stack, useMantineTheme } from "@mantine/core";
+import { useEffect, useState } from "react";
+import { useOnlineStatus } from "../../lib/hooks/useOnlineStatus";
+import { createStandForm } from "../../lib/actions";
+import useSWR from "swr";
+import { TBAMatchSimple, TBATeamSimple } from "../../lib/definitions";
+import getMatchKey from "../../lib/getMatchKey";
+import fetcher from "../../lib/fetchers/fetcher";
+import { tbaEventKey } from "../../lib/constants";
+import findTeamNumber from "../../lib/fetchers/findTeamNumber";
 
 export default function StandForm() {
+	const [submitting, setSubmitting] = useState<"" | "fetching" | "done">("");
+	const isOnline = useOnlineStatus();
+	const theme = useMantineTheme();
+
 	const { control } = useForm<StandForm>({
 		resolver: zodResolver(StandFormSchema),
 		defaultValues: {
@@ -36,10 +49,47 @@ export default function StandForm() {
 		},
 	});
 
+	// useEffect(() => {
+	// 	const match_key = getMatchKey(watch('match') || 1);
+	// 	console.log(match_key);
+
+	// 	const { data: matches } = useSWR<TBAMatchSimple>(
+	// 		`https://www.thebluealliance.com/api/v3/event/${tbaEventKey}/match/${match_key}/simple`,
+	// 		fetcher
+	// 	);
+
+	// 	let team_key;
+	// 	if (matches) {
+	// 		const color = watch('slot').split(" ")[0];
+	// 		const spot: number = +watch('slot').split(" ")[1];
+	// 		let team_key: string;
+
+	// 		if (color === "Red") {
+	// 			team_key = matches.alliances.red.team_keys[spot];
+	// 		} else if (color === "Blue") {
+	// 			team_key = matches.alliances.blue.team_keys[spot];
+	// 		} else return;
+	// 	} else return;
+
+	// 	const { data: team } = useSWR<TBATeamSimple>(
+	// 		`https://www.thebluealliance.com/api/v3/event/${tbaEventKey}/match/${team_key}/simple`,
+	// 		fetcher
+	// 	);
+
+	// 	setValue("team", team?.team_number || 0);
+	// }, [watch("match"), watch("slot")]);
+
+	const submit = (data: StandForm) => {
+		if (isOnline) {
+			setSubmitting("fetching");
+			createStandForm(data).then(() => setSubmitting("done"));
+		}
+	};
+
 	return (
 		<Form
 			control={control}
-			onSubmit={({ data }) => console.log(data)}
+			onSubmit={({ data }) => submit(data)}
 			onError={(e) => console.log(e)}
 		>
 			<Stack>
@@ -57,13 +107,13 @@ export default function StandForm() {
 					<Checkbox
 						name="preloaded"
 						control={control}
-						// color={theme.colors.milkshake[4]}
+						color={theme.colors.milkshake[4]}
 						label="Preloaded?"
 					/>
 					<Checkbox
 						name="startingZone"
 						control={control}
-						// color={theme.colors.milkshake[4]}
+						color={theme.colors.milkshake[4]}
 						label="Left Starting Zone?"
 					/>
 				</Group>
@@ -168,7 +218,13 @@ export default function StandForm() {
 					placeholder="Type your short, useful, and consice note here."
 				/>
 				<Group justify="end">
-					<Button type="submit">Submit</Button>
+					<Button
+						type="submit"
+						disabled={submitting === "fetching"}
+						color={theme.colors.milkshake[4]}
+					>
+						Submit
+					</Button>
 				</Group>
 			</Stack>
 		</Form>

@@ -1,116 +1,97 @@
-'use server';
+"use server";
 
-import { z } from "zod";
 import { sql } from "@vercel/postgres";
-import useSWR from "swr";
-import { PitForm, StandForm, TBAMatchesKeys, TBATeamSimple } from "./definitions";
-import { PitFormDatabaseSchema, tbaEventKey } from "./constants";
-import fetcher from "./fetcher";
-import { StandFormSchema } from "./constants";
+import {
+	PitForm,
+	StandForm,
+} from "./definitions";
+import {
+	PitFormDatabaseSchema,
+	StandFormDatabaseSchema,
+} from "./constants";
 // import { signIn } from "../auth";
-import { AuthError } from 'next-auth';
-import { noop } from "@mantine/core";
+import { AuthError } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import findTeamNumber from "./fetchers/findTeamNumber";
 
-// const CreateStandForm = StandFormSchema.omit({ date: true, team: true });
+const CreateStandForm = StandFormDatabaseSchema.omit({
+	team: true,
+	username: true,
+	date: true,
+});
 
-// export async function createStandForm(formData: StandForm) {
+export async function createStandForm(data: StandForm) {
+	
+	// parse and extract data from data prop
+	const {
+		match,
+		slot,
+		// team,
+		preloaded,
+		startingZone,
+		autoSpeakerScored,
+		autoSpeakerMissed,
+		teleopAmplifiedSpeakerScored,
+		teleopSpeakerScored,
+		teleopSpeakerMissed,
+		teleopAmpScored,
+		teleopAmpMissed,
+		teleopTrapScored,
+		teleopTrapMissed,
+		fouls,
+		techfouls,
+		endgame,
+		defence,
+		status,
+		notes,
+	} = CreateStandForm.parse({
+		...data,
+	});
 
-//   console.log('HERE');
+	const team = await findTeamNumber(match, slot);
+	const username = "temp";
+	const date = new Date().toISOString().split(".")[0];
 
-//   const {
-// 		match,
-// 		slot,
-// 		// username,
-// 		startingZone,
-// 		autoSpeakerScored,
-// 		autoSpeakerMissed,
-// 		teleopAmpScored,
-// 		teleopAmpMissed,
-//     teleopSpeakerScored,
-//     teleopSpeakerMissed,
-// 		teleopTrapScored,
-// 		teleopTrapMissed,
-// 		endgame,
-// 		defence,
-// 		status,
-// 		fouls,
-// 		techfouls,
-// 		notes,
-// 	} = formData;
+	try {
+		await sql`
+			INSERT INTO standforms (match, slot, team, username, preloaded, startingzone, autospeakerscored, autospeakermissed, teleopamplifiedspeakerscored, teleopspeakerscored, teleopspeakermissed, teleopampscored, teleopampmissed, teleoptrapscored, teleoptrapmissed, endgame, defence, status, fouls, techfouls, notes, date)
+			VALUES (${match}, ${slot}, ${team}, ${username}, ${preloaded}, ${startingZone}, ${autoSpeakerScored}, ${autoSpeakerMissed}, ${teleopAmplifiedSpeakerScored}, ${teleopAmpScored}, ${teleopAmpMissed}, ${teleopSpeakerScored}, ${teleopSpeakerMissed}, ${teleopTrapScored}, ${teleopTrapMissed}, ${endgame}, ${defence}, ${status}, ${fouls}, ${techfouls}, ${notes}, ${date})
+		`
+	} catch (error) {
+		return { message: "Database Error: Failed to Submit Pit Form." };
+	}
 
-//   // const { data: teams } = useSWR<TBATeamSimple[]>(`https://www.thebluealliance.com/api/v3/event/${tbaEventKey}/teams/simple`, fetcher)
-// 	// if (!teams) return null;
-
-//   const {data: keys } = useSWR<TBAMatchesKeys[]>(`https://www.thebluealliance.com/api/v3/event/${tbaEventKey}/matches/keys`, fetcher);
-//   if (!keys) return {
-//     message: 'Could not fetch team.',
-//   }
-//   console.log(keys);
-//   // const {data:  } = useSWR<>(`https://www.thebluealliance.com/api/v3/event/${tbaEventKey}/matches/simple`, fetcher);
-//   // const date = new Date().toISOString().split('T')[0];
-
-//   // try{
-// 	// 	console.log('trying sql');
-// 	// 	await sql`
-//   //   INSERT INFO standforms (match, slot, team, name, leftstartzone, autospeakerscored, autospeakermissed, autoampscored, autoampmissed, teleopampscored, teleopampmissed, teleopspeakerscored, teleopspeakermissed, teleoptrapscored, teleoptrapmissed, endgame, defence, status, fouls, techfouls, notes, date)
-//   //   VALUES (${match}, ${slot}, ${team}, ${username}, ${startingZone}, ${autoSpeakerScored}, ${autoSpeakerMissed}, ${autoAmpScored}, ${autoAmpMissed}, ${teleopAmpScored}, ${teleopAmpMissed}, ${teleopSpeakerScored}, ${teleopSpeakerMissed}, ${teleopTrapScored}, ${teleopTrapMissed}, ${endgame}, ${defence}, ${status}, ${fouls}, ${techfouls}, ${notes}, ${date})
-//   // 	`;
-// 	// } catch (error) {
-// 	// 	return { message: 'Database Error: Failed to Submit Form.' };
-// 	// }
-
-// }
+	revalidatePath("/stand-form");
+	redirect("/stand-form");
+}
 
 const CreatePitForm = PitFormDatabaseSchema.omit({ date: true });
 
 export async function createPitForm(data: PitForm) {
+	const { team, drive, weight, preferredScoring, electrical, bumpers, notes } =
+		CreatePitForm.parse({
+			...data,
+		});
 
-	console.log('at action ts')
+	const date = new Date().toISOString().split(".")[0];
 
-	// const formData = new FormData();
-	// formData.append()
-
-	const {
-		team,
-		drive,
-		weight,
-		preferredScoring,
-		electrical,
-		bumpers,
-		notes,
-	} = CreatePitForm.parse({
-		// team: formData.get('team'),
-		// drive: formData.get('drive'),
-		// weight: formData.get('weight'),
-		// preferredScoring: formData.get('preferredScoring'),
-		// electrical: formData.get('electrical'),
-		// bumpers: formData.get('bumpers'),
-		// notes: formData.get('notes'),
-		team: data.team,
-		drive: data.drive,
-		weight: data.weight,
-		preferredScoring: data.preferredScoring,
-		electrical: data.electrical,
-		bumpers: data.bumpers,
-		notes: data.notes,
-	})
-
-	const date = new Date().toISOString().split('T')[0];
+	console.log(`
+		INSERT INFO pitforms (team, drive, weight, preferredScoring, eletrical, bumpers, notes, date)
+		VALUES (${team}, ${drive}, ${weight}, ${preferredScoring}, ${electrical}, ${bumpers}, ${notes}, ${date})
+	`);
 
 	try {
 		await sql`
-			INSERT INFO pitforms (team, drive, weight, preferredScoring, eletrical, bumpers, notes, date)
+			INSERT INTO pitforms (team, drive, weight, preferredScoring, eletrical, bumpers, notes, date)
 			VALUES (${team}, ${drive}, ${weight}, ${preferredScoring}, ${electrical}, ${bumpers}, ${notes}, ${date})
 		`;
-		console.log('submitting pit form')
 	} catch (error) {
-		return { message: 'Database Error: Failed to Submit Pit Form.' };
-	};
+		return { message: "Database Error: Failed to Submit Pit Form." };
+	}
 
-	revalidatePath('/pit-form');
-	redirect('/pit-form');
+	revalidatePath("/pit-form");
+	redirect("/pit-form");
 }
 
 // export async function authenticate(

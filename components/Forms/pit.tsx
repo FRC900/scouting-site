@@ -10,7 +10,7 @@ import { Select } from "./inputs/Select";
 import { TextInput } from "./inputs/TextInput";
 import { createPitForm } from "../../lib/actions";
 import { useState } from "react";
-import { useOnlineStatus } from "../../lib/useOnlineStatus";
+import { useOnlineStatus } from "../../lib/hooks/useOnlineStatus";
 
 export default function PitForm() {
 	const [submitting, setSubmitting] = useState<"" | "fetching" | "done">("");
@@ -34,7 +34,6 @@ export default function PitForm() {
 		if (isOnline) {
 			setSubmitting('fetching');
 			createPitForm(data).then(() => setSubmitting("done"));
-			// setTimeout(() => setSubmitting('done'), 5000)
 		}
 	};
 
@@ -71,7 +70,7 @@ export default function PitForm() {
 					placeholder="Select"
 					data={[
 						{ label: "Speaker", value: "speaker" },
-						{ label: "Amp", value: "Amp" },
+						{ label: "Amp", value: "amp" },
 					]}
 				/>
 				<Select

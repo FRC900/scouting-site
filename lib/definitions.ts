@@ -31,6 +31,7 @@ export type StandFormOLD = {
 export type StandForm = {
   match: number,
   slot: string,
+  // team: number,
   preloaded: boolean,
   startingZone: boolean,
   autoSpeakerScored: number,
@@ -50,6 +51,8 @@ export type StandForm = {
   notes: string,
 }
 
+export type StandFormDatabase = StandForm & { team: number, username: string, date: string }
+
 export type PitForm = {
   team: number,
   drive: string,
@@ -61,6 +64,13 @@ export type PitForm = {
 }
 
 export type PitFormDatabase = PitForm & { date: string }
+
+export type User = {
+  name: string,
+  username: string,
+  password: string,
+  permissions: 'none' | 'member' | 'lead' | 'admin',
+}
 
 export type LoginForm = {
   email: string,
@@ -85,17 +95,34 @@ export type TBATeamSimple = {
 	country: string;
 }
 
-export type TBAMatchesKeys = string;
-
-export type User = {
-  name: string,
-  username: string,
-  password: string,
-  permissions: 'none' | 'member' | 'lead' | 'admin',
+export type TBAMatchSimple = {
+  key: string,
+  comp_level: string,
+  set_number: number,
+  match_number: number,
+  alliances: {
+    red: {
+      score: number,
+      team_keys: string[],
+      surrogate_team_keys: string[],
+      dq_team_keys: string[],
+    },
+    blue: {
+      score: number,
+      team_keys: string[],
+      surrogate_team_keys: string[],
+      dq_team_keys: string[],
+    },
+  },
+  winning_alliance: ["red", "blue"],
+  event_key: string,
+  time: number,
+  predicted_time: number,
+  actual_time: number,
 }
 
 
 // SQL Tables
 
 // Stand Forms
-// CREATE TABLE StandForms ( match varchar(255), slot varchar(255), team varchar(255), username varchar(255), startingZone varchar(255), autoSpeakerScored varchar(255), autoSpeakerMissed varchar(255), teleopSpeakerScored varchar(255), teleopSpeakerMissed varchar(255), TeleopAmpScored varchar(255), TeleopAmpMissed varchar(255), TeleopTrapScored varchar(255), TeleopTrapMissed varchar(255), endgame varchar(255), defence varchar(255), status varchar(255), fouls varchar(255), techfouls varchar(255), notes varchar(255), date varchar(255) );
+// CREATE TABLE standforms ( match varchar(255), slot varchar(255), team varchar(255), username varchar(255), preloaded varchar(255), startingZone varchar(255), autoSpeakerScored varchar(255), autoSpeakerMissed varchar(255), teleopAmplifiedSpeakerScored varchar(255), teleopSpeakerScored varchar(255), teleopSpeakerMissed varchar(255), TeleopAmpScored varchar(255), TeleopAmpMissed varchar(255), TeleopTrapScored varchar(255), TeleopTrapMissed varchar(255), endgame varchar(255), defence varchar(255), status varchar(255), fouls varchar(255), techfouls varchar(255), notes varchar(255), date varchar(255) );
