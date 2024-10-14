@@ -1,7 +1,6 @@
 "use client";
 
 import { createTheme, rem } from "@mantine/core";
-import { themeToVars } from "@mantine/vanilla-extract";
 
 export const theme = createTheme({
   colors: {
@@ -187,5 +186,3 @@ export const theme = createTheme({
     xl: '1.65',
   },
 });
-
-export const vars = themeToVars(theme);

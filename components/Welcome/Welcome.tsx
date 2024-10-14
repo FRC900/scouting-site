@@ -9,7 +9,7 @@ import {
 	Stack,
 	Group,
 } from "@mantine/core";
-import * as classes from "./Welcome.css";
+import classes from "./Welcome.module.css";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import RegisterForm from "../Forms/register";
 import LoginForm from "../Forms/login";
