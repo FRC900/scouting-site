@@ -1,105 +1,133 @@
 "use client";
 
-import Link from 'next/link';
-import { Group, Menu, Button, useMantineTheme, rem } from "@mantine/core";
+import Link from "next/link";
+import { Menu, Button, rem, Center, Box, useMantineTheme } from "@mantine/core";
 import {
 	IconCalendarEvent,
+	IconChartArcs,
+	IconChartArrowsVertical,
+	IconChartDots3,
+	IconChevronDown,
+	IconClipboardData,
 	IconFileFilled,
 	IconForms,
-	IconSquareCheckFilled,
 	IconUserFilled,
 } from "@tabler/icons-react";
+import classes from "../Header.module.css";
 
-interface navlink {
-	text: string;
-	href: string;
-	icon: JSX.Element;
-}
-
-interface navbuttons {
-	text: string;
-	links: navlink[];
-}
-
-const scoutingLinks: navlink[] = [
+const links = [
 	{
-		text: "Stand Form",
-		href: "/stand-form",
-		icon: <IconForms style={{ width: rem(14), height: rem(14) }} />,
+		label: "Scouting",
+		links: [
+			{
+				link: "/stand-form",
+				label: "Stand Form",
+				icon: <IconForms style={{ width: rem(14), height: rem(14) }} />,
+				perm: "member",
+			},
+			{
+				link: "/pit-form",
+				label: "Pit Form",
+				icon: <IconForms style={{ width: rem(14), height: rem(14) }} />,
+				perm: "member",
+			},
+			{
+				link: "/stand-schedule",
+				label: "Stand Schedule",
+				icon: <IconCalendarEvent style={{ width: rem(14), height: rem(14) }} />,
+				perm: "member",
+			},
+		],
 	},
 	{
-		text: "Pit Form",
-		href: "/pit-form",
-		icon: <IconForms style={{ width: rem(14), height: rem(14) }} />,
+		label: "Records",
+		links: [
+			{
+				link: "/records/stand-forms",
+				label: "Stand Forms",
+				icon: <IconFileFilled style={{ width: rem(14), height: rem(14) }} />,
+				perm: "member",
+			},
+			{
+				link: "/records/pit-forms",
+				label: "Pit Forms",
+				icon: <IconFileFilled style={{ width: rem(14), height: rem(14) }} />,
+				perm: "member",
+			},
+			{
+				link: "/records/users",
+				label: "Users",
+				icon: <IconUserFilled style={{ width: rem(14), height: rem(14) }} />,
+				perm: "admin",
+			},
+		],
 	},
 	{
-		text: "Stand Schedule",
-		href: "/stand-schedule",
-		icon: <IconCalendarEvent style={{ width: rem(14), height: rem(14) }} />,
+		label: "Analysis",
+		links: [
+			{
+				link: "/data",
+				label: "Team Data",
+				icon: <IconClipboardData style={{ width: rem(14), height: rem(14) }} />,
+				perm: "member",
+			},
+			{
+				link: "/insights",
+				label: "Insights",
+				icon: <IconChartDots3 style={{ width: rem(14), height: rem(14) }} />,
+				perm: "member"
+			},
+			{
+				link: "/qual",
+				label: "Qual Matches",
+				icon: <IconChartArrowsVertical style={{ width: rem(14), height: rem(14) }} />,
+				perm: "member"
+			},
+			{
+				link: "/simulation",
+				label: "Simulation",
+				icon: <IconChartArcs style={{ width: rem(14), height: rem(14) }} />,
+				perm: "member"
+			},
+		],
 	},
-];
-
-const recordLinks: navlink[] = [
-	{
-		text: "Stand Forms",
-		href: "/records/stand-forms",
-		icon: <IconFileFilled style={{ width: rem(14), height: rem(14) }} />,
-	},
-	{
-		text: "Pit Forms",
-		href: "/records/pit-forms",
-		icon: <IconFileFilled style={{ width: rem(14), height: rem(14) }} />,
-	},
-	{
-		text: "Users",
-		href: "records/users",
-		icon: <IconUserFilled style={{ width: rem(14), height: rem(14) }} />,
-	},
-	{
-		text: "Verify",
-		href: "records/verify",
-		icon: <IconSquareCheckFilled style={{ width: rem(14), height: rem(14) }} />,
-	},
-];
-
-const navButtons: navbuttons[] = [
-	{ text: "Scouting", links: scoutingLinks },
-	{ text: "Records", links: recordLinks },
 ];
 
 export default function NavLinks() {
 	const theme = useMantineTheme();
 
-	return (
-		<Group justify="end" gap="md">
-			{navButtons.map((navButton) => (
-				<Menu
-					key={navButton.text}
-					shadow="md"
-					width={200}
-					trigger="hover"
-					openDelay={0}
-					closeDelay={0}
-					// transitionProps={{ transition: "slide-left", duration: 150 }}
-				>
-					<Menu.Target>
-						<Button variant="subtle" color={theme.colors.snow[0]} size="compact-lg">{navButton.text}</Button>
-					</Menu.Target>
+	const items = links.map((link) => {
+		const menuItems = link.links?.map((item) => (
+			<Menu.Item key={item.link} component={Link} leftSection={item.icon} href={item.link}>
+				{item.label}
+			</Menu.Item>
+		));
 
-					<Menu.Dropdown>
-						{navButton.links.map((link) => (
-							<Menu.Item
-								key={link.text}
-								component={Link}
-								href={link.href}
-								leftSection={link.icon}
-							>
-								{link.text}
-							</Menu.Item>
-						))}
-					</Menu.Dropdown>
-				</Menu>
-			))}
-		</Group>
-	);
+		return (
+			<Menu
+				key={link.label}
+				trigger="hover"
+				transitionProps={{ exitDuration: 0 }}
+				withinPortal
+			>
+				<Menu.Target>
+					<Box
+						className={classes.link}
+						//size='compact-md'
+						// onClick={(event) => event.preventDefault()}
+						//variant="subtle"
+						// color={theme.colors.milkshake[4]}
+					>
+						<Center>
+							<span className={classes.linkLabel}>{link.label}</span>
+							<IconChevronDown size="0.9rem" stroke={1.5} />
+						</Center>
+					</Box>
+				</Menu.Target>
+				<Menu.Dropdown>{menuItems}</Menu.Dropdown>
+			</Menu>
+		);
+	});
+
+	return items;
 }

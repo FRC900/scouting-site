@@ -1,11 +1,11 @@
 import { Title } from "@mantine/core";
-import RecordTable from "../../../components/Tables/records";
+import StandFormsTable from "../../../components/Tables/stand-form-table";
 
 export default function Page() {
   return(
     <>
       <Title>Stand Forms</Title>
-      <RecordTable />
+      <StandFormsTable />
     </>
   )
 }

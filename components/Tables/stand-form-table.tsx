@@ -2,7 +2,7 @@
 
 import { Table } from "@mantine/core";
 
-export default function RecordTable() {
+export default async function StandFormTable() {
 
   const elements = [
     { position: 6, mass: 12.011, symbol: 'C', name: 'Carbon' },
