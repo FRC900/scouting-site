@@ -30,7 +30,7 @@ export default function RootLayout({ children }: { children: any }) {
 				<MantineProvider theme={theme} defaultColorScheme="dark">
 					<Stack align="stretch" justify="flex-start" gap="xs" pb="md">
 						<Header />
-						<Stack align="center" justify="flex-start" gap="xs" pt="5rem">
+						<Stack align="center" gap="xs" pt="1rem">
 							{children}
 						</Stack>
 					</Stack>

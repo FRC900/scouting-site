@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Menu, Button, rem, Center, useMantineTheme } from "@mantine/core";
+import { Menu, Button, rem, Center, Box, useMantineTheme } from "@mantine/core";
 import {
 	IconCalendarEvent,
 	IconChartArcs,
@@ -111,17 +111,18 @@ export default function NavLinks() {
 				withinPortal
 			>
 				<Menu.Target>
-					<Button
+					<Box
 						className={classes.link}
-						onClick={(event) => event.preventDefault()}
-						variant="subtle"
+						//size='compact-md'
+						// onClick={(event) => event.preventDefault()}
+						//variant="subtle"
 						// color={theme.colors.milkshake[4]}
 					>
 						<Center>
 							<span className={classes.linkLabel}>{link.label}</span>
 							<IconChevronDown size="0.9rem" stroke={1.5} />
 						</Center>
-					</Button>
+					</Box>
 				</Menu.Target>
 				<Menu.Dropdown>{menuItems}</Menu.Dropdown>
 			</Menu>
