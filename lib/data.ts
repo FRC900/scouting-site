@@ -1,16 +1,13 @@
-import { StandForm } from "./definitions";
+import { StandRecordRow } from "../components/Tables/stand-form-table";
 import { sql } from "@vercel/postgres";
+import { unstable_noStore as noStore } from "next/cache";
 
 export async function fetchStandForms() {
 
+  noStore()
+
   try {
-    console.log('Fetching stand form data...');
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-
-    const data = await sql<StandForm>`SELECT * FROM standforms`;
-
-    console.log('Data fetch completed after 3 seconds.');
-
+    const data = await sql<StandRecordRow>`SELECT (match, team, username, date) FROM standforms`;
     return data.rows;
   } catch (error) {
     console.error('Database Error:', error);

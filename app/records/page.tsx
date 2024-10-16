@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
 	Button,
 	Group,
@@ -20,7 +21,8 @@ export default function Page() {
 			<Group justify="center" gap="lg">
 				<SimpleGrid cols={2}>
 					<Button
-						// component={Link}
+						component={Link}
+						href="/records/stand-forms"
 						variant="filled"
 						color={theme.colors.milkshake[4]}
 						size="md"
@@ -31,6 +33,8 @@ export default function Page() {
 						Stand Forms
 					</Button>
 					<Button
+						component={Link}
+						href="/records/pit-forms"
 						variant="filled"
 						color={theme.colors.milkshake[4]}
 						size="md"
@@ -39,6 +43,8 @@ export default function Page() {
 						Pit Forms
 					</Button>
 					<Button
+						component={Link}
+						href="/records/users"
 						variant="filled"
 						color={theme.colors.milkshake[4]}
 						size="md"
@@ -46,14 +52,14 @@ export default function Page() {
 					>
 						Users
 					</Button>
-					<Button
+					{/* <Button
 						variant="filled"
 						color={theme.colors.milkshake[4]}
 						size="md"
 						leftSection={<IconRosetteDiscountCheckFilled size={16} />}
 					>
 						Verify
-					</Button>
+					</Button> */}
 				</SimpleGrid>
 			</Group>
 		</>
