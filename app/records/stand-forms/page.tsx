@@ -17,9 +17,7 @@ export default async function Page() {
     data.splice(count, 0, {match, team, username, date});
     count++
 	});
-
-  console.log(data);
-
+  
   return(
     <>
       <Title>Stand Forms</Title>
