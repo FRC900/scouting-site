@@ -1,70 +1,24 @@
 "use client";
 
-import {
-	Group,
-	Text,
-	Table,
-	UnstyledButton,
-	Center,
-	rem,
-	keys,
-	TextInput,
-	ScrollArea,
-} from "@mantine/core";
 import { useState } from "react";
-import classes from "./Table.module.css";
-import {
-	IconChevronDown,
-	IconChevronUp,
-	IconSearch,
-	IconSelect,
-} from "@tabler/icons-react";
+import { Th } from "./stand-form-table";
+import { rem, ScrollArea, Table, TextInput, Text, keys } from "@mantine/core";
+import { IconSearch } from "@tabler/icons-react";
 
 interface Props {
-	data: StandRecord[];
+	data: PitRecord[];
 }
 
-export interface StandRecordRow {
-  row: string,
+export interface PitRecordRow {
+	row: string;
 }
 
-export interface StandRecord {
-	match: number;
+export interface PitRecord {
 	team: number;
-	username: string;
 	date: string;
 }
 
-export interface ThProps {
-	children: React.ReactNode;
-	reversed: boolean;
-	sorted: boolean;
-	onSort(): void;
-}
-
-export function Th({ children, reversed, sorted, onSort }: ThProps) {
-	const Icon = sorted
-		? reversed
-			? IconChevronUp
-			: IconChevronDown
-		: IconSelect;
-	return (
-		<Table.Th className={classes.th}>
-			<UnstyledButton onClick={onSort} className={classes.control}>
-				<Group justify="space-between">
-					<Text fw={500} fz="sm">
-						{children}
-					</Text>
-					<Center className={classes.icon}>
-						<Icon style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
-					</Center>
-				</Group>
-			</UnstyledButton>
-		</Table.Th>
-	);
-}
-
-function filterData(data: StandRecord[], search: string) {
+function filterData(data: PitRecord[], search: string) {
 	const query = search.toLowerCase().trim();
 	return data.filter((item) =>
 		keys(data[0]).some((key) =>
@@ -74,9 +28,9 @@ function filterData(data: StandRecord[], search: string) {
 }
 
 function sortData(
-	data: StandRecord[],
+	data: PitRecord[],
 	payload: {
-		sortBy: keyof StandRecord | null;
+		sortBy: keyof PitRecord | null;
 		reversed: boolean;
 		search: string;
 	}
@@ -99,13 +53,13 @@ function sortData(
 	);
 }
 
-export default function StandFormTable({ data }: Props) {
+export default function PitFormsTable({ data }: Props) {
 	const [search, setSearch] = useState("");
 	const [sortedData, setSortedData] = useState(data);
-	const [sortBy, setSortBy] = useState<keyof StandRecord | null>(null);
+	const [sortBy, setSortBy] = useState<keyof PitRecord | null>(null);
 	const [reverseSortDirection, setReverseSortDirection] = useState(false);
 
-	const setSorting = (field: keyof StandRecord) => {
+	const setSorting = (field: keyof PitRecord) => {
 		const reversed = field === sortBy ? !reverseSortDirection : false;
 		setReverseSortDirection(reversed);
 		setSortBy(field);
@@ -122,9 +76,7 @@ export default function StandFormTable({ data }: Props) {
 
 	const rows = sortedData.map((form) => (
 		<Table.Tr key={form.date}>
-			<Table.Td>{form.match}</Table.Td>
 			<Table.Td>{form.team}</Table.Td>
-			<Table.Td>{form.username}</Table.Td>
 			<Table.Td>{form.date}</Table.Td>
 		</Table.Tr>
 	));
@@ -134,7 +86,7 @@ export default function StandFormTable({ data }: Props) {
 			<TextInput
 				placeholder="Search by any field"
 				mb="md"
-				leftSection={
+				leftSectionProps={
 					<IconSearch
 						style={{ width: rem(16), height: rem(16) }}
 						stroke={1.5}
@@ -152,25 +104,11 @@ export default function StandFormTable({ data }: Props) {
 				<Table.Tbody>
 					<Table.Tr>
 						<Th
-							sorted={sortBy === "match"}
-							reversed={reverseSortDirection}
-							onSort={() => setSorting("match")}
-						>
-							Match
-						</Th>
-						<Th
 							sorted={sortBy === "team"}
 							reversed={reverseSortDirection}
 							onSort={() => setSorting("team")}
 						>
 							Team
-						</Th>
-						<Th
-							sorted={sortBy === "username"}
-							reversed={reverseSortDirection}
-							onSort={() => setSorting("username")}
-						>
-							Scouter
 						</Th>
 						<Th
 							sorted={sortBy === "date"}
