@@ -1,14 +1,8 @@
 "use server";
 
 import { sql } from "@vercel/postgres";
-import {
-	PitForm,
-	StandForm,
-} from "./definitions";
-import {
-	PitFormDatabaseSchema,
-	StandFormDatabaseSchema,
-} from "./constants";
+import { PitForm, StandForm } from "./definitions";
+import { PitFormDatabaseSchema, StandFormDatabaseSchema } from "./constants";
 // import { signIn } from "../auth";
 // import { AuthError } from "next-auth";
 import { revalidatePath } from "next/cache";
@@ -22,7 +16,6 @@ const CreateStandForm = StandFormDatabaseSchema.omit({
 });
 
 export async function createStandForm(data: StandForm) {
-	
 	// parse and extract data from data prop
 	const {
 		match,
@@ -57,7 +50,7 @@ export async function createStandForm(data: StandForm) {
 		await sql`
 			INSERT INTO standforms (match, slot, team, username, preloaded, startingzone, autospeakerscored, autospeakermissed, teleopamplifiedspeakerscored, teleopspeakerscored, teleopspeakermissed, teleopampscored, teleopampmissed, teleoptrapscored, teleoptrapmissed, endgame, defence, status, fouls, techfouls, notes, date)
 			VALUES (${match}, ${slot}, ${team}, ${username}, ${preloaded}, ${startingZone}, ${autoSpeakerScored}, ${autoSpeakerMissed}, ${teleopAmplifiedSpeakerScored}, ${teleopAmpScored}, ${teleopAmpMissed}, ${teleopSpeakerScored}, ${teleopSpeakerMissed}, ${teleopTrapScored}, ${teleopTrapMissed}, ${endgame}, ${defence}, ${status}, ${fouls}, ${techfouls}, ${notes}, ${date})
-		`
+		`;
 	} catch (error) {
 		return { message: "Database Error: Failed to Submit Pit Form." };
 	}
@@ -69,7 +62,7 @@ export async function createStandForm(data: StandForm) {
 const CreatePitForm = PitFormDatabaseSchema.omit({ date: true });
 
 export async function createPitForm(data: PitForm) {
-	const { team, drive, weight, preferredScoring, electrical, bumpers, notes } =
+	const { team, drive, weight, preferredscoring, electrical, bumpers, notes } =
 		CreatePitForm.parse({
 			...data,
 		});
@@ -77,14 +70,14 @@ export async function createPitForm(data: PitForm) {
 	const date = new Date().toISOString().split(".")[0];
 
 	console.log(`
-		INSERT INFO pitforms (team, drive, weight, preferredScoring, eletrical, bumpers, notes, date)
-		VALUES (${team}, ${drive}, ${weight}, ${preferredScoring}, ${electrical}, ${bumpers}, ${notes}, ${date})
+		INSERT INTO pitforms (team, drive, weight, preferredscoring, electrical, bumpers, notes, date)
+		VALUES (${team}, '${drive}', ${weight}, '${preferredscoring}', ${electrical}, ${bumpers}, '${notes}', '${date}')
 	`);
 
 	try {
 		await sql`
-			INSERT INTO pitforms (team, drive, weight, preferredScoring, eletrical, bumpers, notes, date)
-			VALUES (${team}, ${drive}, ${weight}, ${preferredScoring}, ${electrical}, ${bumpers}, ${notes}, ${date})
+			INSERT INTO pitforms (team, drive, weight, preferredscoring, electrical, bumpers, notes, date)
+			VALUES (${team}, '${drive}', ${weight}, '${preferredscoring}', ${electrical}, ${bumpers}, '${notes}', '${date}')
 		`;
 	} catch (error) {
 		return { message: "Database Error: Failed to Submit Pit Form." };
@@ -93,6 +86,8 @@ export async function createPitForm(data: PitForm) {
 	revalidatePath("/pit-form");
 	redirect("/pit-form");
 }
+
+export async function deletePitForm(id: string) {}
 
 // export async function authenticate(
 // 	prevState: String | undefined,

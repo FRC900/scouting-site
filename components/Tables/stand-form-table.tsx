@@ -10,22 +10,25 @@ import {
 	keys,
 	TextInput,
 	ScrollArea,
+	ActionIcon,
 } from "@mantine/core";
 import { useState } from "react";
 import classes from "./Table.module.css";
 import {
 	IconChevronDown,
 	IconChevronUp,
+	IconPencil,
 	IconSearch,
 	IconSelect,
 } from "@tabler/icons-react";
+import { EditButton } from "../Misc/edit-button";
 
 interface Props {
 	data: StandRecord[];
 }
 
 export interface StandRecordRow {
-  row: string,
+	row: string;
 }
 
 export interface StandRecord {
@@ -126,6 +129,9 @@ export default function StandFormTable({ data }: Props) {
 			<Table.Td>{form.team}</Table.Td>
 			<Table.Td>{form.username}</Table.Td>
 			<Table.Td>{form.date}</Table.Td>
+			<Table.Td>
+				<EditButton id="temp" form="stand-forms" />
+			</Table.Td>
 		</Table.Tr>
 	));
 
@@ -147,7 +153,7 @@ export default function StandFormTable({ data }: Props) {
 				miw={700}
 				horizontalSpacing="md"
 				verticalSpacing="xs"
-				layout="fixed"
+				layout="auto"
 			>
 				<Table.Tbody>
 					<Table.Tr>

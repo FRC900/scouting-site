@@ -2,8 +2,16 @@
 
 import { useState } from "react";
 import { Th } from "./stand-form-table";
-import { rem, ScrollArea, Table, TextInput, Text, keys } from "@mantine/core";
+import {
+	rem,
+	ScrollArea,
+	Table,
+	TextInput,
+	Text,
+	keys,
+} from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
+import { EditButton } from "../Misc/edit-button";
 
 interface Props {
 	data: PitRecord[];
@@ -14,6 +22,7 @@ export interface PitRecordRow {
 }
 
 export interface PitRecord {
+	id: string;
 	team: number;
 	date: string;
 }
@@ -75,9 +84,12 @@ export default function PitFormsTable({ data }: Props) {
 	};
 
 	const rows = sortedData.map((form) => (
-		<Table.Tr key={form.date}>
+		<Table.Tr key={form.id}>
 			<Table.Td>{form.team}</Table.Td>
 			<Table.Td>{form.date}</Table.Td>
+			<Table.Td>
+				<EditButton id={form.id} form="pit-forms" />
+			</Table.Td>
 		</Table.Tr>
 	));
 
@@ -99,7 +111,7 @@ export default function PitFormsTable({ data }: Props) {
 				miw={700}
 				horizontalSpacing="md"
 				verticalSpacing="xs"
-				layout="fixed"
+				//layout="fixed"
 			>
 				<Table.Tbody>
 					<Table.Tr>
@@ -117,6 +129,7 @@ export default function PitFormsTable({ data }: Props) {
 						>
 							Date
 						</Th>
+						<Table.Th />
 					</Table.Tr>
 				</Table.Tbody>
 				<Table.Tbody>

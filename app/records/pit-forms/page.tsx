@@ -10,10 +10,11 @@ export default async function Page() {
   let count = 0;
   pitforms.map((entry) => {
     const values = entry.row.toString().split("(")[1].split(")")[0];
-    const team = +values.split(",")[0];
-    const date = values.split(",")[1];
+    const id = values.split(",")[0];
+    const team = +values.split(",")[1];
+    const date = values.split(",")[2];
 
-    data.splice(count, 0, {team, date});
+    data.splice(count, 0, {id, team, date});
     count++
   });
 
