@@ -87,7 +87,10 @@ export async function createPitForm(data: PitForm) {
 	redirect("/pit-form");
 }
 
-export async function deletePitForm(id: string) {}
+export async function deletePitForm(id: string) {
+	await sql`DELETE FROM pitforms WHERE id = ${id}`;
+	revalidatePath('/records/pit-forms');
+}
 
 // export async function authenticate(
 // 	prevState: String | undefined,

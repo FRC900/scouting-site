@@ -22,7 +22,7 @@ interface Props {
 export default function PitForm({ create, defaultForm, id }: Props) {
 	const [submitting, setSubmitting] = useState<"" | "fetching" | "done">("");
 	const isOnline = useOnlineStatus();
-	const [opened, { open, close }] = useDisclosure(false);
+	const [opened, { toggle }] = useDisclosure(false);
 	const theme = useMantineTheme();
 
 	const { control } = useForm<PitForm>({
@@ -40,7 +40,7 @@ export default function PitForm({ create, defaultForm, id }: Props) {
 	});
 
 	const submit = (data: PitForm, create: boolean) => {
-		if (isOnline) {
+		if (isOnline && create) {
 			setSubmitting("fetching");
 			createPitForm(data).then(() => setSubmitting("done"));
 		}
@@ -125,7 +125,8 @@ export default function PitForm({ create, defaultForm, id }: Props) {
 							disabled={submitting === "fetching"}
 							color={theme.colors.rose[5]}
 							onClick={() => {
-								open;
+								toggle();
+								console.log(opened);
 							}}
 						>
 							Delete
@@ -136,17 +137,18 @@ export default function PitForm({ create, defaultForm, id }: Props) {
 				</Group>
 				<Modal
 					opened={opened}
-					onClose={close}
+					onClose={toggle}
 					title="Are you sure you want to delete? This cannot be undone."
 					centered
 				>
 					<Group justify="center" align="center">
 						<Button
+						  type="submit"
 							variant="outline"
 							color="red"
 							size="md"
 							onClick={() => {
-								deletePitForm(id);
+								deletePitForm(id).then(() => toggle());
 							}}
 						>
 							Delete
@@ -155,9 +157,9 @@ export default function PitForm({ create, defaultForm, id }: Props) {
 							variant="filled"
 							color={theme.colors.milkshake[4]}
 							size="md"
-							onClick={close}
+							onClick={toggle}
 						>
-							Nevermind
+							Cancel
 						</Button>
 					</Group>
 				</Modal>

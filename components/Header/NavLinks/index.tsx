@@ -3,17 +3,14 @@
 import Link from "next/link";
 import { Menu, Button, rem, Center, Box, useMantineTheme } from "@mantine/core";
 import {
-	Icon,
 	IconCalendarEvent,
 	IconChartArcs,
 	IconChartArrowsVertical,
 	IconChartDots3,
 	IconChevronDown,
-	IconChevronUp,
 	IconClipboardData,
 	IconFileFilled,
 	IconForms,
-	IconProps,
 	IconUserFilled,
 } from "@tabler/icons-react";
 import classes from "../Header.module.css";
