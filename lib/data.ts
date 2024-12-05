@@ -42,8 +42,6 @@ export async function fetchPitFormById(id: string) {
       ...form,
     }));
 
-    console.log(form[0]);
-
     return form[0];
   } catch (error) {
     console.error('Database Error:', error);
