@@ -6,15 +6,16 @@ export default async function Page() {
   const standforms: StandRecordRow[] = await fetchStandForms();
 
   let data: StandRecord[] = [];
-  let count = 0
+  let count = 0;
 	standforms.map((entry) => {
 		const values = entry.row.toString().split("(")[1].split(")")[0];
-		const match = +values.split(",")[0];
-		const team = +values.split(",")[1];
-		const username = values.split(",")[2];
-		const date = values.split(",")[3];
+    const id = values.split(",")[0];
+		const match = +values.split(",")[1];
+		const team = +values.split(",")[2];
+		const username = values.split(",")[3];
+		const date = values.split(",")[4];
 
-    data.splice(count, 0, {match, team, username, date});
+    data.splice(count, 0, {id, match, team, username, date});
     count++
 	});
   

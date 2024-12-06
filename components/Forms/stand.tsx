@@ -8,14 +8,22 @@ import { Select } from "./inputs/Select";
 import { Checkbox } from "./inputs/Checkbox";
 import { Textarea } from "./inputs/Textarea";
 import { type StandForm } from "../../lib/definitions";
-import { Button, Group, Stack, useMantineTheme } from "@mantine/core";
+import { Button, Group, Modal, Stack, useMantineTheme } from "@mantine/core";
 import { useState } from "react";
 import { useOnlineStatus } from "../../lib/hooks/useOnlineStatus";
-import { createStandForm } from "../../lib/actions";
+import { createStandForm, deleteStandForm } from "../../lib/actions";
+import { useDisclosure } from "@mantine/hooks";
 
-export default function StandForm() {
+interface Props {
+	create: boolean;
+	defaultForm?: StandForm;
+	id: string;
+}
+
+export default function StandForm({ create, defaultForm, id }: Props) {
 	const [submitting, setSubmitting] = useState<"" | "fetching" | "done">("");
 	const isOnline = useOnlineStatus();
+	const [opened, { toggle }] = useDisclosure(false);
 	const theme = useMantineTheme();
 
 	const { control } = useForm<StandForm>({
@@ -40,11 +48,13 @@ export default function StandForm() {
 			defence: undefined,
 			status: undefined,
 			notes: "",
+			...defaultForm,
 		},
-	});``
+	});
+	``;
 
-	const submit = (data: StandForm) => {
-		if (isOnline) {
+	const submit = (data: StandForm, create: boolean) => {
+		if (isOnline && create) {
 			setSubmitting("fetching");
 			createStandForm(data).then(() => setSubmitting("done"));
 		}
@@ -53,7 +63,7 @@ export default function StandForm() {
 	return (
 		<Form
 			control={control}
-			onSubmit={({ data }) => submit(data)}
+			onSubmit={({ data }) => submit(data, create)}
 			onError={(e) => console.log(e)}
 		>
 			<Stack>
@@ -187,9 +197,51 @@ export default function StandForm() {
 						disabled={submitting === "fetching"}
 						color={theme.colors.milkshake[4]}
 					>
-						Submit
+						{create ? "Submit" : "Update"}
 					</Button>
+					{!create ? (
+						<Button
+							disabled={submitting === "fetching"}
+							color={theme.colors.rose[5]}
+							onClick={() => {
+								toggle();
+								console.log(opened);
+							}}
+						>
+							Delete
+						</Button>
+					) : (
+						<></>
+					)}
 				</Group>
+				<Modal
+					opened={opened}
+					onClose={toggle}
+					title="Are you sure you want to delete? This cannot be undone."
+					centered
+				>
+					<Group justify="center" align="center">
+						<Button
+						  type="submit"
+							variant="outline"
+							color="red"
+							size="md"
+							onClick={() => {
+								deleteStandForm(id).then(() => toggle());
+							}}
+						>
+							Delete
+						</Button>
+						<Button
+							variant="filled"
+							color={theme.colors.milkshake[4]}
+							size="md"
+							onClick={toggle}
+						>
+							Cancel
+						</Button>
+					</Group>
+				</Modal>
 			</Stack>
 		</Form>
 	);

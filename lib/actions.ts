@@ -94,6 +94,13 @@ export async function deletePitForm(id: string) {
 	redirect('/records/pit-forms');
 }
 
+export async function deleteStandForm(id: string) {
+	await sql`DELETE FROM standforms WHERE id = ${id}`
+
+	revalidatePath('/records/stand-forms');
+	redirect('/records/stand-forms');
+}
+
 // export async function authenticate(
 // 	prevState: String | undefined,
 // 	formData: FormData,

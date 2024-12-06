@@ -7,7 +7,7 @@ export default function Page() {
       <Group justify="start">
         <Title order={1} fw={700}>Stand Form</Title>
       </Group>
-      <StandForm />
+      <StandForm create={true} id=""/>
     </>
   )
 }

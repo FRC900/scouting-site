@@ -125,14 +125,14 @@ export type TBAMatchSimple = {
 // SQL Tables
 
 // Stand Forms
-// CREATE TABLE standforms ( match varchar(255), slot varchar(255), team varchar(255), username varchar(255), preloaded varchar(255), startingZone varchar(255), autoSpeakerScored varchar(255), autoSpeakerMissed varchar(255), teleopAmplifiedSpeakerScored varchar(255), teleopSpeakerScored varchar(255), teleopSpeakerMissed varchar(255), TeleopAmpScored varchar(255), TeleopAmpMissed varchar(255), TeleopTrapScored varchar(255), TeleopTrapMissed varchar(255), endgame varchar(255), defence varchar(255), status varchar(255), fouls varchar(255), techfouls varchar(255), notes varchar(255), date varchar(255) );
+// CREATE TABLE standforms ( id UUID DEFAULT uuid_generate_v4() PRIMARY KEY, match varchar(255), slot varchar(255), team varchar(255), username varchar(255), preloaded varchar(255), startingZone varchar(255), autoSpeakerScored varchar(255), autoSpeakerMissed varchar(255), teleopAmplifiedSpeakerScored varchar(255), teleopSpeakerScored varchar(255), teleopSpeakerMissed varchar(255), TeleopAmpScored varchar(255), TeleopAmpMissed varchar(255), TeleopTrapScored varchar(255), TeleopTrapMissed varchar(255), endgame varchar(255), defence varchar(255), status varchar(255), fouls varchar(255), techfouls varchar(255), notes varchar(255), date varchar(255) );
 
 // Pit Forms
 // CREATE TABLE IF NOT EXISTS pitforms (
 //   id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
 //   team VARCHAR(255) NOT NULL,
 //   drive VARCHAR(255) NOT NULL,
-//   weight VARCHAR(255) NOT NULL,
+//   weight VARCHAR(255) NOT NULL,  
 //   preferredscoring VARCHAR(255) NOT NULL,
 //   electrical VARCHAR(255) NOT NULL,
 //   bumpers VARCHAR(255) NOT NULL,

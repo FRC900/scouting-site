@@ -10,14 +10,12 @@ import {
 	keys,
 	TextInput,
 	ScrollArea,
-	ActionIcon,
 } from "@mantine/core";
 import { useState } from "react";
 import classes from "./Table.module.css";
 import {
 	IconChevronDown,
 	IconChevronUp,
-	IconPencil,
 	IconSearch,
 	IconSelect,
 } from "@tabler/icons-react";
@@ -32,6 +30,7 @@ export interface StandRecordRow {
 }
 
 export interface StandRecord {
+	id: string;
 	match: number;
 	team: number;
 	username: string;
@@ -124,13 +123,13 @@ export default function StandFormTable({ data }: Props) {
 	};
 
 	const rows = sortedData.map((form) => (
-		<Table.Tr key={form.date}>
+		<Table.Tr key={form.id}>
 			<Table.Td>{form.match}</Table.Td>
 			<Table.Td>{form.team}</Table.Td>
 			<Table.Td>{form.username}</Table.Td>
 			<Table.Td>{form.date}</Table.Td>
 			<Table.Td>
-				<EditButton id="temp" form="stand-forms" />
+				<EditButton id={form.id} form="stand-forms" />
 			</Table.Td>
 		</Table.Tr>
 	));
