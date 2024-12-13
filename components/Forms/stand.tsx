@@ -11,7 +11,7 @@ import { type StandForm } from "../../lib/definitions";
 import { Button, Group, Modal, Stack, useMantineTheme } from "@mantine/core";
 import { useState } from "react";
 import { useOnlineStatus } from "../../lib/hooks/useOnlineStatus";
-import { createStandForm, deleteStandForm } from "../../lib/actions";
+import { createStandForm, deleteStandForm, updateStandForm } from "../../lib/actions";
 import { useDisclosure } from "@mantine/hooks";
 
 interface Props {
@@ -53,17 +53,22 @@ export default function StandForm({ create, defaultForm, id }: Props) {
 	});
 	``;
 
-	const submit = (data: StandForm, create: boolean) => {
-		if (isOnline && create) {
+	const submit = (data: StandForm, create: boolean, id: string) => {
+		if (isOnline) {	
 			setSubmitting("fetching");
-			createStandForm(data).then(() => setSubmitting("done"));
+			if (create) {
+				createStandForm(data).then(() => setSubmitting("done"));
+			} else {
+				updateStandForm(data, id).then(() => setSubmitting("done"));
+			}
+			
 		}
 	};
 
 	return (
 		<Form
 			control={control}
-			onSubmit={({ data }) => submit(data, create)}
+			onSubmit={({ data }) => submit(data, create, id)}
 			onError={(e) => console.log(e)}
 		>
 			<Stack>

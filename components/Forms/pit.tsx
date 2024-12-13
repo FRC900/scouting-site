@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { NumberInput } from "./inputs/NumberInput";
 import { Select } from "./inputs/Select";
 import { TextInput } from "./inputs/TextInput";
-import { createPitForm, deletePitForm } from "../../lib/actions";
+import { createPitForm, deletePitForm, updatePitForm } from "../../lib/actions";
 import { useState } from "react";
 import { useOnlineStatus } from "../../lib/hooks/useOnlineStatus";
 import { useDisclosure } from "@mantine/hooks";
@@ -39,17 +39,21 @@ export default function PitForm({ create, defaultForm, id }: Props) {
 		},
 	});
 
-	const submit = (data: PitForm, create: boolean) => {
-		if (isOnline && create) {
+	const submit = (data: PitForm, create: boolean, id: string) => {
+		if (isOnline) {
 			setSubmitting("fetching");
-			createPitForm(data).then(() => setSubmitting("done"));
+			if (create) {
+				createPitForm(data).then(() => setSubmitting("done"));
+			} else {
+				updatePitForm(data, id).then(() => setSubmitting("done"));
+			}		
 		}
 	};
 
 	return (
 		<Form
 			control={control}
-			onSubmit={({ data }) => submit(data, create)}
+			onSubmit={({ data }) => submit(data, create, id)}
 			onError={(e) => console.log(e)}
 		>
 			<Stack>
