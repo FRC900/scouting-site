@@ -3,31 +3,6 @@
 
 // export type StandForm = z.infer<typeof StandFormSchema>
 
-export type StandFormOLD = {
-	match: number,
-  slot: string,
-  // team: number,
-  // username: string,
-  preloaded: boolean
-  startingZone: boolean,
-  autoSpeakerScored: number,
-  autoSpeakerMissed: number,
-  teleopAmplifiedSpeakerScored: number,
-  teleopSpeakerScored: number,
-  teleopSpeakerMissed: number,
-  teleopAmpScored: number,
-  teleopAmpMissed: number,
-  teleopTrapScored: number,
-  teleopTrapMissed: number,
-  fouls: number,
-  techfouls: number,
-  endgame: string,
-  defence: string,
-  status: string,
-  notes: string,
-  // date: string,
-}
-
 export type StandForm = {
   match: number,
   slot: string,
@@ -69,7 +44,7 @@ export type User = {
   name: string,
   username: string,
   password: string,
-  permissions: 'none' | 'member' | 'lead' | 'admin',
+  permissions: 'member' | 'lead' | 'admin',
 }
 
 export type LoginForm = {
