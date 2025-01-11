@@ -5,7 +5,7 @@ export default function Page() {
   return(
     <>
       <Title>Pit Form</Title>
-      <PitForm />
+      <PitForm create={true} id="" />
     </>
   )
 }

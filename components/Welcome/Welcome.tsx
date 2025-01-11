@@ -47,7 +47,7 @@ export function Welcome() {
 						component="span"
 						gradient={{ from: "#6e56d8", to: "#b7ace9" }}
 					>
-						ZebrScouting
+						ZebraScouting
 					</Text>
 				</Title>
 				<Group justify="center">

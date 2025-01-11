@@ -1,6 +1,6 @@
 "use client";
 
-import { Stack, Button, useMantineTheme, Group } from "@mantine/core";
+import { Stack, Button, useMantineTheme, Group, Modal } from "@mantine/core";
 import { useForm, Form } from "react-hook-form";
 import { type PitForm } from "../../lib/definitions";
 import { PitFormSchema } from "../../lib/constants";
@@ -8,39 +8,52 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { NumberInput } from "./inputs/NumberInput";
 import { Select } from "./inputs/Select";
 import { TextInput } from "./inputs/TextInput";
-import { createPitForm } from "../../lib/actions";
+import { createPitForm, deletePitForm, updatePitForm } from "../../lib/actions";
 import { useState } from "react";
 import { useOnlineStatus } from "../../lib/hooks/useOnlineStatus";
+import { useDisclosure } from "@mantine/hooks";
 
-export default function PitForm() {
+interface Props {
+	create: boolean;
+	defaultForm?: PitForm;
+	id: string;
+}
+
+export default function PitForm({ create, defaultForm, id }: Props) {
 	const [submitting, setSubmitting] = useState<"" | "fetching" | "done">("");
 	const isOnline = useOnlineStatus();
+	const [opened, { toggle }] = useDisclosure(false);
 	const theme = useMantineTheme();
 
-	const { control, reset } = useForm<PitForm>({
+	const { control } = useForm<PitForm>({
 		resolver: zodResolver(PitFormSchema),
 		defaultValues: {
 			team: undefined,
 			drive: undefined,
 			weight: undefined,
-			preferredScoring: undefined,
+			preferredscoring: undefined,
 			electrical: undefined,
 			bumpers: undefined,
 			notes: "",
+			...defaultForm,
 		},
 	});
 
-	const submit = (data: PitForm) => {
+	const submit = (data: PitForm, create: boolean, id: string) => {
 		if (isOnline) {
-			setSubmitting('fetching');
-			createPitForm(data).then(() => setSubmitting("done"));
+			setSubmitting("fetching");
+			if (create) {
+				createPitForm(data).then(() => setSubmitting("done"));
+			} else {
+				updatePitForm(data, id).then(() => setSubmitting("done"));
+			}		
 		}
 	};
 
 	return (
 		<Form
 			control={control}
-			onSubmit={({ data }) => submit(data)}
+			onSubmit={({ data }) => submit(data, create, id)}
 			onError={(e) => console.log(e)}
 		>
 			<Stack>
@@ -63,7 +76,7 @@ export default function PitForm() {
 					description="Without bumpers and battery."
 				/>
 				<Select
-					name="preferredScoring"
+					name="preferredscoring"
 					control={control}
 					label="Preferred Scoring Location"
 					description="For Qualifications."
@@ -109,9 +122,51 @@ export default function PitForm() {
 						disabled={submitting === "fetching"}
 						color={theme.colors.milkshake[4]}
 					>
-						Submit
+						{create ? "Submit" : "Update"}
 					</Button>
+					{!create ? (
+						<Button
+							disabled={submitting === "fetching"}
+							color={theme.colors.rose[5]}
+							onClick={() => {
+								toggle();
+								console.log(opened);
+							}}
+						>
+							Delete
+						</Button>
+					) : (
+						<></>
+					)}
 				</Group>
+				<Modal
+					opened={opened}
+					onClose={toggle}
+					title="Are you sure you want to delete? This cannot be undone."
+					centered
+				>
+					<Group justify="center" align="center">
+						<Button
+						  type="submit"
+							variant="outline"
+							color="red"
+							size="md"
+							onClick={() => {
+								deletePitForm(id).then(() => toggle());
+							}}
+						>
+							Delete
+						</Button>
+						<Button
+							variant="filled"
+							color={theme.colors.milkshake[4]}
+							size="md"
+							onClick={toggle}
+						>
+							Cancel
+						</Button>
+					</Group>
+				</Modal>
 			</Stack>
 		</Form>
 	);
