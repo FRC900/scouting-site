@@ -8,16 +8,16 @@ import { LoginFormSchema } from "../../lib/constants";
 import { TextInput } from "./inputs/TextInput";
 import { PasswordInput } from "./inputs/PasswordInput";
 import { useActionState } from "react";
-import { authenticate } from "../../lib/actions";
+// import { authenticate } from "../../lib/actions";
 import { IconExclamationCircle } from "@tabler/icons-react";
 
 export default function LoginForm({ toggle = () => {} }) {
   const theme = useMantineTheme();
 
-  const [errorMessage, formAction, isPending] = useActionState(
-    authenticate,
-    undefined,
-  )
+  // const [errorMessage, formAction, isPending] = useActionState(
+  //   authenticate,
+  //   undefined,
+  // )
 
   const { control } = useForm<LoginForm>({
     resolver: zodResolver(LoginFormSchema),
@@ -31,7 +31,7 @@ export default function LoginForm({ toggle = () => {} }) {
     <Paper>
       <Form
         control={control}
-        onSubmit={() => formAction}
+        onSubmit={() => console.log('submit')} // formAction}
         onError={(e) => console.log(e)}
       >
         <Stack>
@@ -51,12 +51,12 @@ export default function LoginForm({ toggle = () => {} }) {
             <Button variant="subtle" onClick={toggle} color={theme.colors.pillow[0]}>Don&apos;t have an account? Register</Button>
             <Button type="submit" color={theme.colors.milkshake[4]}>Login</Button>
           </Group>
-          {errorMessage && (
+          {/* {errorMessage && (
             <>
               <IconExclamationCircle />
               <Text size="sm" c="red">{errorMessage}</Text>
             </>
-          )}
+          )} */}
         </Stack>
       </Form>
     </Paper>
