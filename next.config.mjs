@@ -8,7 +8,7 @@ const nextConfig = {
   swcMinify: true,
   experimental: {
     optimizePackageImports: ['@mantine/core', '@mantine/hooks'],
-  }, 
+  },
 };
 
 export default withVanillaExtract(nextConfig);
