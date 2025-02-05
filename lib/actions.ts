@@ -4,7 +4,7 @@ import { sql } from "@vercel/postgres";
 import { PitForm, StandForm } from "./definitions";
 import { PitFormDatabaseSchema, StandFormDatabaseSchema } from "./constants";
 // import { signIn } from "../auth";
-// import { AuthError } from "next-auth";
+import { AuthError } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import findTeamNumber from "./fetchers/findTeamNumber";
@@ -96,8 +96,8 @@ export async function updatePitForm(data: PitForm, id: string) {
 		WHERE id = ${id}
 	`;
 
-	revalidatePath('/records/pit-forms');
-	redirect('/records/pit-forms');
+	revalidatePath("/records/pit-forms");
+	redirect("/records/pit-forms");
 }
 
 export async function updateStandForm(data: StandForm, id: string) {
@@ -137,37 +137,38 @@ export async function updateStandForm(data: StandForm, id: string) {
 		WHERE id = ${id}
 	`;
 
-	revalidatePath('/records/stand-forms');
-	redirect('/records/stand-forms');
+	revalidatePath("/records/stand-forms");
+	redirect("/records/stand-forms");
 }
 
 export async function deletePitForm(id: string) {
 	await sql`DELETE FROM pitforms WHERE id = ${id}`;
-	
-	revalidatePath('/records/pit-forms');
-	redirect('/records/pit-forms');
+
+	revalidatePath("/records/pit-forms");
+	redirect("/records/pit-forms");
 }
 
 export async function deleteStandForm(id: string) {
-	await sql`DELETE FROM standforms WHERE id = ${id}`
+	await sql`DELETE FROM standforms WHERE id = ${id}`;
 
-	revalidatePath('/records/stand-forms');
-	redirect('/records/stand-forms');
+	revalidatePath("/records/stand-forms");
+	redirect("/records/stand-forms");
 }
 
 // export async function authenticate(
-// 	prevState: String | undefined,
-// 	formData: FormData,
+// 	prevState: string | undefined,
+// 	formData: FormData
 // ) {
 // 	try {
-// 		await signIn('credentials', formData);
+// 		console.log('hello')
+// 		await signIn("crednetials", formData);
 // 	} catch (error) {
 // 		if (error instanceof AuthError) {
 // 			switch (error.type) {
-// 				case 'CredentialsSignin':
-// 					return 'Invalid credentials';
+// 				case "CredentialsSignin":
+// 					return "Invalid crednetials.";
 // 				default:
-// 					return 'Something went wrong.';
+// 					return "Something went wrong.";
 // 			}
 // 		}
 // 		throw error;
