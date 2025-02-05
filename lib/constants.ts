@@ -66,7 +66,7 @@ export const PitFormDatabaseSchema = z.object({
 	team: z.number(),
   drive: z.enum(['swerve', 'tank', 'mecanum']),
   weight: z.number(),
-  preferredscoring: z.enum(['speaker', 'amp']),
+  preferredscoring: z.enum(['coral', 'algae']),
   electrical: z.enum(['1', '2', '3', '4', '5']),
   bumpers: z.enum(['1', '2', '3']),
   notes: z.string(),

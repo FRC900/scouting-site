@@ -48,8 +48,9 @@ export async function createStandForm(data: StandForm) {
 	const date = new Date().toISOString().split(".")[0];
 
 	try {
+		console.log(team);
 		await sql`
-			INSERT INTO standforms (match, slot, team, username, preloaded, startingzone, autol1, autol2, autol3, autol4, teleopl1, teleopl2, teleopl3, teleopl4, teleoprocessor], teleopnet, endgame, defence, status, fouls, techfouls, notes, date)
+			INSERT INTO standforms (match, slot, team, username, preloaded, startingzone, autol1, autol2, autol3, autol4, teleopl1, teleopl2, teleopl3, teleopl4, teleopprocessor, teleopnet, endgame, defence, status, fouls, techfouls, notes, date)
 			VALUES (${match}, ${slot}, ${team}, ${username}, ${preloaded}, ${startingZone}, ${autoL1}, ${autoL2}, ${autoL3}, ${autoL4}, ${teleopL1}, ${teleopL2}, ${teleopL3}, ${teleopL4}, ${teleopProcessor}, ${teleopNet}, ${endgame}, ${defence}, ${status}, ${fouls}, ${techfouls}, ${notes}, ${date})
 		`;
 	} catch (error) {
