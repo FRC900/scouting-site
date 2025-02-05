@@ -8,7 +8,7 @@ import { Select } from "./inputs/Select";
 import { Checkbox } from "./inputs/Checkbox";
 import { Textarea } from "./inputs/Textarea";
 import { type StandForm } from "../../lib/definitions";
-import { Button, Group, Modal, Stack, useMantineTheme } from "@mantine/core";
+import { Button, Stack, Group, Modal, useMantineTheme, Text } from "@mantine/core";
 import { useState } from "react";
 import { useOnlineStatus } from "../../lib/hooks/useOnlineStatus";
 import { createStandForm, deleteStandForm, updateStandForm } from "../../lib/actions";
@@ -33,15 +33,16 @@ export default function StandForm({ create, defaultForm, id }: Props) {
 			slot: undefined,
 			preloaded: true,
 			startingZone: false,
-			autoSpeakerScored: 0,
-			autoSpeakerMissed: 0,
-			teleopAmplifiedSpeakerScored: 0,
-			teleopSpeakerScored: 0,
-			teleopSpeakerMissed: 0,
-			teleopAmpScored: 0,
-			teleopAmpMissed: 0,
-			teleopTrapScored: 0,
-			teleopTrapMissed: 0,
+			autoL1: 0,
+			autoL2: 0,
+			autoL3: 0,
+			autoL4: 0,
+			teleopL1: 0,
+			teleopL2: 0,
+			teleopL3: 0,
+			teleopL4: 0,
+			teleopProcessor: 0,
+			teleopNet: 0,
 			fouls: 0,
 			techfouls: 0,
 			endgame: undefined,
@@ -72,7 +73,7 @@ export default function StandForm({ create, defaultForm, id }: Props) {
 			onError={(e) => console.log(e)}
 		>
 			<Stack>
-				<Group>
+				<Stack>
 					<NumberInput name="match" control={control} label="Match Number" />
 					<Select
 						name="slot"
@@ -81,8 +82,9 @@ export default function StandForm({ create, defaultForm, id }: Props) {
 						placeholder="Select"
 						data={["Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"]}
 					/>
-				</Group>
-				<Group>
+				</Stack>
+				<Stack>
+					<Text fw={700}>Auto</Text>
 					<Checkbox
 						name="preloaded"
 						control={control}
@@ -95,71 +97,73 @@ export default function StandForm({ create, defaultForm, id }: Props) {
 						color={theme.colors.milkshake[4]}
 						label="Left Starting Zone?"
 					/>
-				</Group>
-				<Group>
 					<NumberInput
-						name="autoSpeakerScored"
+						name="autoL1"
 						control={control}
-						label="Auto Speaker Scored"
+						label="Level 1"
 					/>
 					<NumberInput
-						name="autoSpeakerMissed"
+						name="autoL2"
 						control={control}
-						label="Auto Speaker Missed"
-					/>
-				</Group>
-				<Group>
-					<NumberInput
-						name="teleopAmplifiedSpeakerScored"
-						control={control}
-						label="TeleOp Amplified Scored"
+						label="Level 2"
 					/>
 					<NumberInput
-						name="teleopSpeakerScored"
+						name="autoL3"
 						control={control}
-						label="Teleop Speaker Scored"
+						label="Level 3"
 					/>
 					<NumberInput
-						name="teleopSpeakerMissed"
+						name="autoL4"
 						control={control}
-						label="Teleop Speaker Missed"
+						label="Level 4"
 					/>
-				</Group>
-				<Group>
+				</Stack>
+				<Stack>
+					<Text fw={700}>TeleOp</Text>
 					<NumberInput
-						name="teleopAmpScored"
+						name="teleopL1"
 						control={control}
-						label="Teleop Amp Scored"
-					/>
-					<NumberInput
-						name="teleopAmpMissed"
-						control={control}
-						label="Teleop Amp Missed"
-					/>
-				</Group>
-				<Group>
-					<NumberInput
-						name="teleopTrapScored"
-						control={control}
-						label="Teleop Trap Scored"
+						label="Level 1"
 					/>
 					<NumberInput
-						name="teleopTrapMissed"
+						name="teleopL2"
 						control={control}
-						label="Teleop Trap Missed"
+						label="Level 2"
 					/>
-				</Group>
-				<Group>
+					<NumberInput
+						name="teleopL3"
+						control={control}
+						label="Level 3"
+					/>
+					<NumberInput
+						name="teleopL4"
+						control={control}
+						label="Level 4"
+					/>
+					<NumberInput
+						name="teleopProcessor"
+						control={control}
+						label="Processor"
+					/>
+					<NumberInput
+						name="teleopNet"
+						control={control}
+						label="Net"
+					/>
+				</Stack>
+				<Stack>
+					<Text fw={700}>Penalties</Text>
 					<NumberInput name="fouls" control={control} label="Fouls" />
 					<NumberInput name="techfouls" control={control} label="Tech Fouls" />
-				</Group>
-				<Group>
+				</Stack>
+				<Stack>
+					<Text fw={700}>Misc.</Text>
 					<Select
 						name="endgame"
 						control={control}
 						label="Endgame"
 						placeholder="Select"
-						data={["Nothing", "Parked", "Failed Climb", "Climbed", "Harmony"]}
+						data={["Nothing", "Parked", "Shallow", "Deep"]}
 					/>
 					<Select
 						name="defence"
@@ -189,14 +193,14 @@ export default function StandForm({ create, defaultForm, id }: Props) {
 							{ label: "Pro Performance", value: "5" },
 						]}
 					/>
-				</Group>
+				</Stack>
 				<Textarea
 					name="notes"
 					control={control}
 					label="Notes"
 					placeholder="Type your short, useful, and consice note here."
 				/>
-				<Group justify="end">
+				<Stack justify="end">
 					<Button
 						type="submit"
 						disabled={submitting === "fetching"}
@@ -218,7 +222,7 @@ export default function StandForm({ create, defaultForm, id }: Props) {
 					) : (
 						<></>
 					)}
-				</Group>
+				</Stack>
 				<Modal
 					opened={opened}
 					onClose={toggle}

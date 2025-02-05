@@ -23,15 +23,16 @@ export async function createStandForm(data: StandForm) {
 		// team,
 		preloaded,
 		startingZone,
-		autoSpeakerScored,
-		autoSpeakerMissed,
-		teleopAmplifiedSpeakerScored,
-		teleopSpeakerScored,
-		teleopSpeakerMissed,
-		teleopAmpScored,
-		teleopAmpMissed,
-		teleopTrapScored,
-		teleopTrapMissed,
+		autoL1,
+		autoL2,
+		autoL3,
+		autoL4,
+		teleopL1,
+		teleopL2,
+		teleopL3,
+		teleopL4,
+		teleopProcessor,
+		teleopNet,
 		fouls,
 		techfouls,
 		endgame,
@@ -48,8 +49,8 @@ export async function createStandForm(data: StandForm) {
 
 	try {
 		await sql`
-			INSERT INTO standforms (match, slot, team, username, preloaded, startingzone, autospeakerscored, autospeakermissed, teleopamplifiedspeakerscored, teleopspeakerscored, teleopspeakermissed, teleopampscored, teleopampmissed, teleoptrapscored, teleoptrapmissed, endgame, defence, status, fouls, techfouls, notes, date)
-			VALUES (${match}, ${slot}, ${team}, ${username}, ${preloaded}, ${startingZone}, ${autoSpeakerScored}, ${autoSpeakerMissed}, ${teleopAmplifiedSpeakerScored}, ${teleopAmpScored}, ${teleopAmpMissed}, ${teleopSpeakerScored}, ${teleopSpeakerMissed}, ${teleopTrapScored}, ${teleopTrapMissed}, ${endgame}, ${defence}, ${status}, ${fouls}, ${techfouls}, ${notes}, ${date})
+			INSERT INTO standforms (match, slot, team, username, preloaded, startingzone, autol1, autol2, autol3, autol4, teleopl1, teleopl2, teleopl3, teleopl4, teleoprocessor], teleopnet, endgame, defence, status, fouls, techfouls, notes, date)
+			VALUES (${match}, ${slot}, ${team}, ${username}, ${preloaded}, ${startingZone}, ${autoL1}, ${autoL2}, ${autoL3}, ${autoL4}, ${teleopL1}, ${teleopL2}, ${teleopL3}, ${teleopL4}, ${teleopProcessor}, ${teleopNet}, ${endgame}, ${defence}, ${status}, ${fouls}, ${techfouls}, ${notes}, ${date})
 		`;
 	} catch (error) {
 		return { message: "Database Error: Failed to Submit Pit Form." };
@@ -108,15 +109,16 @@ export async function updateStandForm(data: StandForm, id: string) {
 		// team,
 		preloaded,
 		startingZone,
-		autoSpeakerScored,
-		autoSpeakerMissed,
-		teleopAmplifiedSpeakerScored,
-		teleopSpeakerScored,
-		teleopSpeakerMissed,
-		teleopAmpScored,
-		teleopAmpMissed,
-		teleopTrapScored,
-		teleopTrapMissed,
+		autoL1,
+		autoL2,
+		autoL3,
+		autoL4,
+		teleopL1,
+		teleopL2,
+		teleopL3,
+		teleopL4,
+		teleopProcessor,
+		teleopNet,
 		fouls,
 		techfouls,
 		endgame,
@@ -133,7 +135,7 @@ export async function updateStandForm(data: StandForm, id: string) {
 
 	await sql`
 		UPDATE standforms
-		SET match = ${match}, slot = ${slot}, team = ${team}, username = ${username}, preloaded = ${preloaded}, startingzone = ${startingZone}, autospeakerscored = ${autoSpeakerScored}, autospeakermissed = ${autoSpeakerMissed}, teleopamplifiedspeakerscored = ${teleopAmplifiedSpeakerScored}, teleopspeakerscored = ${teleopSpeakerScored}, teleopspeakermissed = ${teleopSpeakerMissed}, teleopampscored = ${teleopAmpScored}, teleopampmissed = ${teleopAmpMissed}, endgame = ${endgame}, defence = ${defence}, status = ${status}, fouls = ${fouls}, techfouls = ${techfouls}, notes = ${notes}, date = ${date}
+		SET match = ${match}, slot = ${slot}, team = ${team}, username = ${username}, preloaded = ${preloaded}, startingzone = ${startingZone}, autosl1 = ${autoL1}, autol2 = ${autoL2}, autol3 = ${autoL3}, autol4 = ${autoL4}, teleopl1 = ${teleopL1}, teleopl2 = ${teleopL2}, teleopl3 = ${teleopL3}, teleopl4 = ${teleopL4}, teleoprocessor = ${teleopProcessor}, teleopnet = ${teleopNet}, endgame = ${endgame}, defence = ${defence}, status = ${status}, fouls = ${fouls}, techfouls = ${techfouls}, notes = ${notes}, date = ${date}
 		WHERE id = ${id}
 	`;
 

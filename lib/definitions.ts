@@ -9,15 +9,16 @@ export type StandForm = {
   // team: number,
   preloaded: boolean,
   startingZone: boolean,
-  autoSpeakerScored: number,
-  autoSpeakerMissed: number,
-  teleopAmplifiedSpeakerScored: number,
-  teleopSpeakerScored: number,
-  teleopSpeakerMissed: number,
-  teleopAmpScored: number,
-  teleopAmpMissed: number,
-  teleopTrapScored: number,
-  teleopTrapMissed: number,
+  autoL1: number,
+  autoL2: number,
+  autoL3: number,
+  autoL4: number,
+  teleopL1: number,
+  teleopL2: number,
+  teleopL3: number,
+  teleopL4: number,
+  teleopProcessor: number,
+  teleopNet: number,
   fouls: number,
   techfouls: number,
   endgame: string,
@@ -100,7 +101,30 @@ export type TBAMatchSimple = {
 // SQL Tables
 
 // Stand Forms
-// CREATE TABLE standforms ( id UUID DEFAULT uuid_generate_v4() PRIMARY KEY, match varchar(255), slot varchar(255), team varchar(255), username varchar(255), preloaded varchar(255), startingZone varchar(255), autoSpeakerScored varchar(255), autoSpeakerMissed varchar(255), teleopAmplifiedSpeakerScored varchar(255), teleopSpeakerScored varchar(255), teleopSpeakerMissed varchar(255), TeleopAmpScored varchar(255), TeleopAmpMissed varchar(255), TeleopTrapScored varchar(255), TeleopTrapMissed varchar(255), endgame varchar(255), defence varchar(255), status varchar(255), fouls varchar(255), techfouls varchar(255), notes varchar(255), date varchar(255) );
+// CREATE TABLE standforms (
+//  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+//  match varchar(255), slot varchar(255), team varchar(255), 
+//  username varchar(255), 
+//  preloaded varchar(255), 
+//  startingZone varchar(255), 
+//  autoL1 varchar(255),   
+//  autoL2 varchar(255), 
+//  autoL3 varchar(255),
+//  autoL4 varchar(255),
+//  teleopL1 varchar(255), 
+//  teleopL2 varchar(255), 
+//  teleopL3 varchar(255), 
+//  teleopL4 varchar(255), 
+//  teleopProcessor varchar(255), 
+//  teleopNet varchar(255),
+//  endgame varchar(255), 
+//  defence varchar(255), 
+//  status varchar(255), 
+//  fouls varchar(255), 
+//  techfouls varchar(255), 
+//  notes varchar(255), 
+//  date varchar(255)
+// );
 
 // Pit Forms
 // CREATE TABLE IF NOT EXISTS pitforms (

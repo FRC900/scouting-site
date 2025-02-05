@@ -78,12 +78,12 @@ export default function PitForm({ create, defaultForm, id }: Props) {
 				<Select
 					name="preferredscoring"
 					control={control}
-					label="Preferred Scoring Location"
+					label="Preferred Gamepiece"
 					description="For Qualifications."
 					placeholder="Select"
 					data={[
-						{ label: "Speaker", value: "speaker" },
-						{ label: "Amp", value: "amp" },
+						{ label: "Coral", value: "coral" },
+						{ label: "Algae", value: "algae" },
 					]}
 				/>
 				<Select
