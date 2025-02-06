@@ -1,6 +1,7 @@
 import { Breadcrumbs, Title } from "@mantine/core";
 import { fetchStandFormById } from "../../../../../lib/data";
 import StandForm from "../../../../../components/Forms/stand";
+import { parseStandFormNumbers } from "../../../../../lib/parseNumbers";
 
 const items = [
   { title: 'Pit Form' },
@@ -18,7 +19,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <>
       <Breadcrumbs>{items}</Breadcrumbs>
-      <StandForm create={false} defaultForm={form} id={id} />
+      <StandForm create={false} defaultForm={parseStandFormNumbers(form)} id={id} />
     </>
   )
 }

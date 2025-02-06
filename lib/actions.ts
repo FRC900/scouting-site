@@ -135,7 +135,7 @@ export async function updateStandForm(data: StandForm, id: string) {
 
 	await sql`
 		UPDATE standforms
-		SET match = ${match}, slot = ${slot}, team = ${team}, username = ${username}, preloaded = ${preloaded}, startingzone = ${startingZone}, autosl1 = ${autoL1}, autol2 = ${autoL2}, autol3 = ${autoL3}, autol4 = ${autoL4}, teleopl1 = ${teleopL1}, teleopl2 = ${teleopL2}, teleopl3 = ${teleopL3}, teleopl4 = ${teleopL4}, teleopprocessor = ${teleopProcessor}, teleopnet = ${teleopNet}, endgame = ${endgame}, defence = ${defence}, status = ${status}, fouls = ${fouls}, techfouls = ${techfouls}, notes = ${notes}, date = ${date}
+		SET match = ${match}, slot = ${slot}, team = ${team}, username = ${username}, preloaded = ${preloaded}, startingzone = ${startingZone}, autol1 = ${autoL1}, autol2 = ${autoL2}, autol3 = ${autoL3}, autol4 = ${autoL4}, teleopl1 = ${teleopL1}, teleopl2 = ${teleopL2}, teleopl3 = ${teleopL3}, teleopl4 = ${teleopL4}, teleopprocessor = ${teleopProcessor}, teleopnet = ${teleopNet}, endgame = ${endgame}, defence = ${defence}, status = ${status}, fouls = ${fouls}, techfouls = ${techfouls}, notes = ${notes}, date = ${date}
 		WHERE id = ${id}
 	`;
 

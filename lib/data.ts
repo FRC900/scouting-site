@@ -63,6 +63,6 @@ export async function fetchStandFormById(id: string) {
     return form[0];
   } catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch pit form.');
+    throw new Error('Failed to fetch stand form.');
   }
 }
