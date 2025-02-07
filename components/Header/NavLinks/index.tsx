@@ -14,7 +14,6 @@ import {
 	IconUserFilled,
 } from "@tabler/icons-react";
 import classes from "../Header.module.css";
-import { ForwardRefExoticComponent, RefAttributes, useState } from "react";
 
 const links = [
 	{
@@ -33,8 +32,8 @@ const links = [
 				perm: "member",
 			},
 			{
-				link: "/stand-schedule",
-				label: "Stand Schedule",
+				link: "/schedule",
+				label: "Schedule",
 				icon: <IconCalendarEvent style={{ width: rem(14), height: rem(14) }} />,
 				perm: "member",
 			},
