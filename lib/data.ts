@@ -3,6 +3,7 @@ import { sql } from "@vercel/postgres";
 import { unstable_noStore as noStore } from "next/cache";
 import { PitRecordRow } from "../components/Tables/pit-form-table";
 import { PitFormDatabase, StandFormDatabase } from "./definitions";
+import { parsePitFormNumbers, parseStandFormNumbers } from "./parseNumbers";
 
 export async function fetchStandForms() {
   noStore();
@@ -40,7 +41,7 @@ export async function fetchPitFormById(id: string) {
       ...form,
     }));
 
-    return form[0];
+    return parsePitFormNumbers(form[0]);
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch pit form.');
@@ -60,7 +61,7 @@ export async function fetchStandFormById(id: string) {
       ...form,
     }));
 
-    return form[0];
+    return parseStandFormNumbers(form[0]);
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch stand form.');

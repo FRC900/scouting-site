@@ -1,7 +1,4 @@
-import { StandForm } from "./definitions";
-
-export const parseStandFormNumbers = (data: StandForm) => {
-
+export const parseStandFormNumbers = (data: any) => {
     const match = parseInt(data.match);
     const preloaded = data.preloaded === "true";
     const startingZone = data.startingzone === "true";
@@ -35,5 +32,16 @@ export const parseStandFormNumbers = (data: StandForm) => {
         teleopNet,
         fouls,
         techfouls
+    })
+}
+
+export const parsePitFormNumbers = (data: any) => {
+    const team = parseInt(data.team);
+    const weight = parseInt(data.weight);
+
+    return ({
+        ...data,
+        team,
+        weight
     })
 }
