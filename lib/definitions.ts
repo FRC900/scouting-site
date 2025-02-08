@@ -6,7 +6,7 @@
 export type StandForm = {
   match: number,
   slot: string,
-  // team: number,
+  team: number,
   preloaded: boolean,
   startingZone: boolean,
   autoL1: number,

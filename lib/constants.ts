@@ -45,7 +45,7 @@ export const StandFormDatabaseSchema = z.object({
   teleopNet: z.number().min(0),
   fouls: z.number().min(0),
   techfouls: z.number().min(0),
-  endgame: z.enum(["Nothing", "Parked", "Failed Climb", "Climbed", "Harmony"]),
+  endgame: z.enum(["Nothing", "Parked", "Shallow", "Deep"]),
   defence: z.enum(['0', '1', '2', '3', '4', '5']),
   status: z.enum(['0', '1', '2', '3', '4', '5']),
   notes: z.string(),
