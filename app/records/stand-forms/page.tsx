@@ -1,9 +1,9 @@
 import { Container, Title } from "@mantine/core";
 import StandFormsTable, { StandRecordRow, StandRecord } from "../../../components/Tables/stand-form-table";
-import { fetchStandForms } from "../../../lib/data";
+import { fetchStandFormsLimited } from "../../../lib/data";
 
 export default async function Page() {
-  const standforms: StandRecordRow[] = await fetchStandForms();
+  const standforms: StandRecordRow[] = await fetchStandFormsLimited();
 
   let data: StandRecord[] = [];
   let count = 0;

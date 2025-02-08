@@ -1,5 +1,6 @@
 export const parseStandFormNumbers = (data: any) => {
     const match = parseInt(data.match);
+    const team = parseInt(data.team);
     const preloaded = data.preloaded === "true";
     const startingZone = data.startingzone === "true";
     const autoL1 = parseInt(data.autol1);
@@ -15,9 +16,21 @@ export const parseStandFormNumbers = (data: any) => {
     const fouls = parseInt(data.fouls);
     const techfouls = parseInt(data.techfouls);
 
+    const id = data.id;
+    const slot = data.slot;
+    const username = data.username;
+    const endgame = data.endgame;
+    const defence = data.defence;
+    const status = data.status;
+    const notes = data.notes;
+    const date = data.date;
+
     return ({
-        ...data,
+        id,
         match,
+        slot,
+        team,
+        username,
         preloaded,
         startingZone,
         autoL1,
@@ -30,8 +43,13 @@ export const parseStandFormNumbers = (data: any) => {
         teleopL4,
         teleopProcessor,
         teleopNet,
+        endgame,
+        defence,
+        status,
         fouls,
-        techfouls
+        techfouls,
+        notes,
+        date
     })
 }
 

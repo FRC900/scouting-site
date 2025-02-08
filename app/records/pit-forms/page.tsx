@@ -1,10 +1,10 @@
 import { Title, Container } from "@mantine/core";
 import { PitRecord, PitRecordRow } from "../../../components/Tables/pit-form-table"
-import { fetchPitForms } from "../../../lib/data";
+import { fetchPitFormsLimited } from "../../../lib/data";
 import PitFormsTable from "../../../components/Tables/pit-form-table";
 
 export default async function Page() {
-  const pitforms: PitRecordRow[] = await fetchPitForms();
+  const pitforms: PitRecordRow[] = await fetchPitFormsLimited();
   
   let data: PitRecord[] = [];
   let count = 0;

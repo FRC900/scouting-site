@@ -5,7 +5,7 @@ import { PitRecordRow } from "../components/Tables/pit-form-table";
 import { PitFormDatabase, StandFormDatabase } from "./definitions";
 import { parsePitFormNumbers, parseStandFormNumbers } from "./parseNumbers";
 
-export async function fetchStandForms() {
+export async function fetchStandFormsLimited() {
   noStore();
 
   try {
@@ -17,7 +17,7 @@ export async function fetchStandForms() {
   }
 }
 
-export async function fetchPitForms() {
+export async function fetchPitFormsLimited() {
   noStore();
 
   try{
@@ -65,5 +65,22 @@ export async function fetchStandFormById(id: string) {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch stand form.');
+  }
+}
+
+export async function fetchStandForms() {
+  // noStore();
+
+  try {
+    const data = await sql<StandRecordRow>`SELECT * FROM standforms`;
+
+    const form = data.rows.map((form) => ({
+      ...parseStandFormNumbers(form),
+    }));
+
+    return form;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch stand form data');
   }
 }
