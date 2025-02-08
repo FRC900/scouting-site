@@ -61,6 +61,25 @@ export type RegisterForm = {
   confirm: string,
 }
 
+export type TeamData = {
+  team_number: number;
+  team_name: string;
+  avePA: number,
+  aveAutoPA:  number,
+  aveTeleopPA: number,
+  aveEndgamePA: number,
+  coral: number,
+  coralL1: number,
+  coralL2: number,
+  coralL3: number,
+  coralL4: number,
+  algae: number,
+  percentClimbed: number,
+  percentDeep: number,
+  percentParked: number,
+  percentStartZone: number,
+}
+
 export type TBATeamSimple = {
 	key: string;
 	team_number: number;
