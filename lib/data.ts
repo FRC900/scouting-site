@@ -68,11 +68,11 @@ export async function fetchStandFormById(id: string) {
   }
 }
 
-export async function fetchStandForms() {
-  // noStore();
+export async function fetchStandFormsByTeam(team: Number) {
+  noStore();
 
   try {
-    const data = await sql<StandRecordRow>`SELECT * FROM standforms`;
+    const data = await sql<StandRecordRow>`SELECT * FROM standforms WHERE standforms.team = ${team.toString()}`;
 
     const form = data.rows.map((form) => ({
       ...parseStandFormNumbers(form),

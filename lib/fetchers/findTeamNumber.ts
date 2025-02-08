@@ -1,5 +1,6 @@
 import { TBAMatchSimple, TBATeamSimple } from "../definitions";
 import getMatchKey from "../getMatchKey";
+import getHeaders from "./getHeaders";
 
 export default async function findTeamNumber<Promise = number>(
 	match: number,
@@ -26,13 +27,6 @@ const deduceteamKey = (matches: TBAMatchSimple, slot: string) => {
 		return team_key;
 	} else return 'fail';
 };
-
-function getHeaders() {
-	const headers = new Headers();
-	headers.append("X-TBA-Auth-Key", String(process.env.NEXT_PUBLIC_TBA_SECRET));
-	headers.append("accept", "application/json");
-	return headers;
-}
 
 async function getMatch(match_key: string): Promise<TBAMatchSimple> {
 	const headers = getHeaders();

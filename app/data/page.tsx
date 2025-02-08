@@ -1,7 +1,7 @@
-import { fetchStandForms } from '../../lib/data';
+import calculateTeamData from '../../lib/analysis/calculateTeamData';
 
 export default async function Page() {
-    const standForms = await fetchStandForms();
+    const calculations = calculateTeamData();
 
     return (
        <>

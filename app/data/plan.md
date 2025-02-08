@@ -11,7 +11,13 @@ Consider:
 
 Create a new file and functions in order to sort an array of all the data entries by team and then average out the data of each team. We want the data returned as an array (or map) where each entry contains all the processed data for that team.
 
-Fields per team:
+### (Potential) Steps:
+* Fetch Array of Team Numbers
+* Break master array into individual arrays for each team
+* Now we can calculate data team at a time and add it back into a calculated data master array
+* return this array
+
+### Data Fields per team:
 * Team Number
 * Team Name
 * Calculated Direct EPA
