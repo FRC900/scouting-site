@@ -1,6 +1,6 @@
 "use client";
 
-import { type TeamData } from "../../lib/definitions";
+import { type SimpleTeamData } from "../../lib/definitions";
 import { Th } from "./stand-form-table";
 import { rem, ScrollArea, Table, TextInput, Text, keys, Group, Progress, Anchor } from "@mantine/core";
 import { useState } from "react";
@@ -8,19 +8,19 @@ import classes from "./Table.module.css";
 import capitalize from "../../lib/capitalize";
 
 interface Props {
-  data: TeamData[];
+  data: SimpleTeamData[];
 }
 
-function filterData(data: TeamData[]) {
+function filterData(data: SimpleTeamData[]) {
   return data.filter((item) =>
     keys(data[0]).some((key) => item[key].toString().toLowerCase())
   );
 }
 
 function sortData(
-  data: TeamData[],
+  data: SimpleTeamData[],
   payload: {
-    sortBy: keyof TeamData | null;
+    sortBy: keyof SimpleTeamData | null;
     reversed: boolean;
   }
 ) {
@@ -42,10 +42,10 @@ function sortData(
 
 export default function TeamDataTable({ data }: Props) {
   const [sortedData, setSortedData] = useState(data);
-  const [sortBy, setSortBy] = useState<keyof TeamData | null>(null);
+  const [sortBy, setSortBy] = useState<keyof SimpleTeamData | null>(null);
   const [reverseSortDirection, setReverseSortDirection] = useState(false);
 
-  const setSorting = (field: keyof TeamData) => {
+  const setSorting = (field: keyof SimpleTeamData) => {
     const reversed = field === sortBy ? !reverseSortDirection : false;
     setReverseSortDirection(reversed);
     setSortBy(field);
@@ -163,9 +163,9 @@ export default function TeamDataTable({ data }: Props) {
             {Object.keys(data[0]).map((key) => (
               <Th
                 key={key}
-                sorted={sortBy === (key as keyof TeamData)}
+                sorted={sortBy === (key as keyof SimpleTeamData)}
                 reversed={reverseSortDirection}
-                onSort={() => setSorting(key as keyof TeamData)}
+                onSort={() => setSorting(key as keyof SimpleTeamData)}
               >
                 {capitalize(key)}
               </Th>

@@ -1,6 +1,6 @@
-import { TBAMatchSimple, TBATeamSimple } from "../definitions";
-import getMatchKey from "../getMatchKey";
-import getHeaders from "./getHeaders";
+import { TBAMatchSimple, TBATeamSimple } from "../../definitions";
+import getMatchKey from "../../getMatchKey";
+import { getTBAHeaders } from "../getHeaders";
 
 export default async function findTeamNumber<Promise = number>(
   match: number,
@@ -29,7 +29,7 @@ const deduceteamKey = (matches: TBAMatchSimple, slot: string) => {
 };
 
 async function getMatch(match_key: string): Promise<TBAMatchSimple> {
-  const headers = getHeaders();
+  const headers = getTBAHeaders();
   const apiRes = await fetch(
     `https://www.thebluealliance.com/api/v3/match/${match_key}/simple`,
     {
@@ -40,7 +40,7 @@ async function getMatch(match_key: string): Promise<TBAMatchSimple> {
 }
 
 async function getTeam(team_key: string): Promise<TBATeamSimple> {
-  const headers = getHeaders();
+  const headers = getTBAHeaders();
   const apiRes = await fetch(
     `https://www.thebluealliance.com/api/v3/team/${team_key}/simple`,
     {

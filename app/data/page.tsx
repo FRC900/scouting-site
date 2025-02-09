@@ -1,16 +1,16 @@
 import { Container, Title } from "@mantine/core";
-import calculateTeamData from "../../lib/analysis/calculateTeamData";
+import calculateSimpleTeamData from "../../lib/analysis/calculateSimpleTeamData";
 import TeamDataTable from "../../components/Tables/team-data-table";
-import { TeamData } from "../../lib/definitions";
+import { SimpleTeamData } from "../../lib/definitions";
 
 export default async function Page() {
-  const calculations: TeamData[] = await calculateTeamData();
+  const simpleTeamData: SimpleTeamData[] = await calculateSimpleTeamData();
 
   return (
     <>
       <Title>Team Data</Title>
       <Container>
-        <TeamDataTable data={calculations} />
+        <TeamDataTable data={simpleTeamData} />
       </Container>
     </>
   );

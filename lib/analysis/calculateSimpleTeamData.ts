@@ -1,6 +1,6 @@
-import findTeamAtEvent from "../fetchers/findTeamsAtEvent";
+import eventTeamsKeys from "../fetchers/tba/eventTeamsKeys";
 import { fetchStandFormsByTeam } from "../data";
-import { StandForm, TeamData } from "../definitions";
+import { StandForm, SimpleTeamData } from "../definitions";
 
 const averagePA = (forms: StandForm[]) => {
   const totalPA = forms
@@ -80,11 +80,11 @@ const averageEndgamePA = (forms: StandForm[]) => {
   return totalEndgamePA / forms.length;
 };
 
-export default async function calculateTeamData() {
+export default async function calculateSimpleTeamData() {
   // Using Event Key, Fetch all the Participating Teams.
-  const teams = await findTeamAtEvent();
+  const teams = await eventTeamsKeys();
 
-  let calculations: TeamData[] = [];
+  let calculations: SimpleTeamData[] = [];
 
   const promises = teams.map(async (team) => {
     const teamStandForms: StandForm[] = await fetchStandFormsByTeam(team);
@@ -130,7 +130,7 @@ export default async function calculateTeamData() {
         return +form.defence;
     }).reduce((a, b) => a + b, 0)) / count;
 
-    const data: TeamData = {
+    const data: SimpleTeamData = {
       team: team,
       avePA: avePA,
     //   aveAutoPA: aveAutoPA,

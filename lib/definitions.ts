@@ -61,7 +61,7 @@ export type RegisterForm = {
   confirm: string,
 }
 
-export type TeamData = {
+export type SimpleTeamData = {
   team: number;
   avePA: number,
   // aveAutoPA:  number,
@@ -82,6 +82,10 @@ export type TeamData = {
     deep: number,
   }
   defence: number | string,
+}
+
+export type FullTeamData = {
+  name: string,
 }
 
 export type TBATeamSimple = {

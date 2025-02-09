@@ -7,7 +7,7 @@ import { PitFormDatabaseSchema, StandFormDatabaseSchema } from "./constants";
 import { AuthError } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import findTeamNumber from "./fetchers/findTeamNumber";
+import findTeamNumber from "./fetchers/tba/findTeamNumber";
 
 const CreateStandForm = StandFormDatabaseSchema.omit({
 	team: true,

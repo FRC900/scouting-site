@@ -1,7 +1,7 @@
-import getHeaders from "./getHeaders";
-import { tbaEventKey } from "../constants";
+import {getTBAHeaders} from "../getHeaders";
+import { tbaEventKey } from "../../constants";
 
-export default async function findTeamAtEvent() {
+export default async function eventTeamsKeys() {
     const frcteams: string[] = await getTeams();
 
     let teams: number[] = [];
@@ -16,7 +16,7 @@ export default async function findTeamAtEvent() {
 }
 
 async function getTeams() {
-    const headers = getHeaders();
+    const headers = getTBAHeaders();
     const apiRes = await fetch(
 		`https://www.thebluealliance.com/api/v3/event/${tbaEventKey}/teams/keys`,
 		{

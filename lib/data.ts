@@ -84,3 +84,20 @@ export async function fetchStandFormsByTeam(team: Number) {
     throw new Error('Failed to fetch stand form data');
   }
 }
+
+export async function fetchPitFormByTeam(team: Number) {
+  noStore();
+
+  try {
+    const data = await sql<PitRecordRow>`SELECT * FROM pitforms WHERE pitforms.team = ${team.toString()}`;
+
+    const form = data.rows.map((form) => ({
+      ...parsePitFormNumbers(form),
+    }));
+
+    return form;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch pit form data');
+  }
+}
