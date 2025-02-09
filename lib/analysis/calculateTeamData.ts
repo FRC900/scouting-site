@@ -95,31 +95,68 @@ export default async function calculateTeamData() {
     const aveEndgamePA = averageEndgamePA(teamStandForms);
     const aveTeleopPA = avePA - aveAutoPA - aveEndgamePA;
 
+    const aveCoral = (teamStandForms.map((form) => {
+        return form.autoL1 + form.autoL2 + form.autoL3 + form.autoL4 + form.teleopL1 + form.teleopL2 + form.teleopL3 + form.teleopL4;
+    }).reduce((a, b) => a + b, 0)) / teamStandForms.length;
+
+    const aveL1 = (teamStandForms.map((form) => {
+        return form.autoL1 + form.teleopL1;
+    }).reduce((a, b) => a + b, 0)) / teamStandForms.length;
+
+    const aveL2 = (teamStandForms.map((form) => {
+        return form.autoL2 + form.teleopL2;
+    }).reduce((a, b) => a + b, 0)) / teamStandForms.length;
+
+    const aveL3 = (teamStandForms.map((form) => {
+        return form.autoL3 + form.teleopL3;
+    }).reduce((a, b) => a + b, 0)) / teamStandForms.length;
+
+    const aveL4 = (teamStandForms.map((form) => {
+        return form.autoL4 + form.teleopL4;
+    }).reduce((a, b) => a + b, 0)) / teamStandForms.length;
+
+    const aveAlgae = (teamStandForms.map((form) => {
+        return form.teleopProcessor + form.teleopNet;
+    }).reduce((a, b) => a + b, 0)) / teamStandForms.length;
+
+    const nothing = teamStandForms.filter((form) => form.endgame === "Nothing").length;
+    const parked = teamStandForms.filter((form) => form.endgame === "Parked").length;
+    const shallow = teamStandForms.filter((form) => form.endgame === "Shallow").length;
+    const deep = teamStandForms.filter((form) => form.endgame === "Deep").length;
+
+    let count = 0;
+    const defenceRating = (teamStandForms.map((form, count) => {
+        if (form.defence != '0') count++;
+        return +form.defence;
+    }).reduce((a, b) => a + b, 0)) / count;
+
     const data: TeamData = {
       team: team,
       avePA: avePA,
     //   aveAutoPA: aveAutoPA,
     //   aveTeleopPA: aveTeleopPA,
     //   aveEndgamePA: aveEndgamePA,
+      aveCoral: aveCoral,
       coral: {
-        l1: 2,
-        l2: 2,
-        l3: 2,
-        l4: 2,
+        l1: aveL1,
+        l2: aveL2,
+        l3: aveL3,
+        l4: aveL4,
       },
-      algae: 4,
+      algae: aveAlgae,
       climb: {
-        nothing: 2,
-        parked: 2,
-        shallow: 1,
-        deep: 3,
+        nothing: nothing,
+        parked: parked,
+        shallow: shallow,
+        deep: deep,
       },
+      defence: defenceRating || 'N/A',
     };
 
     calculations.push(data);
   });
 
   await Promise.all(promises);
-//testing testing
+
   return calculations;
 }

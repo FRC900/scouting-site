@@ -67,6 +67,7 @@ export type TeamData = {
   // aveAutoPA:  number,
   // aveTeleopPA: number,
   // aveEndgamePA: number,
+  aveCoral: number,
   coral: {
     l1: number,
     l2: number,
@@ -80,6 +81,7 @@ export type TeamData = {
     shallow: number,
     deep: number,
   }
+  defence: number | string,
 }
 
 export type TBATeamSimple = {

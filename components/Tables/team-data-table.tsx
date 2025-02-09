@@ -2,9 +2,10 @@
 
 import { type TeamData } from "../../lib/definitions";
 import { Th } from "./stand-form-table";
-import { rem, ScrollArea, Table, TextInput, Text, keys, Group, Progress } from "@mantine/core";
+import { rem, ScrollArea, Table, TextInput, Text, keys, Group, Progress, Anchor } from "@mantine/core";
 import { useState } from "react";
 import classes from "./Table.module.css";
+import capitalize from "../../lib/capitalize";
 
 interface Props {
   data: TeamData[];
@@ -66,11 +67,12 @@ export default function TeamDataTable({ data }: Props) {
     
     return (
       <Table.Tr key={form.team}>
-        <Table.Td>{form.team}</Table.Td>
+        <Table.Td><Anchor href={`/data/${form.team}/team`} fz="md">{form.team}</Anchor></Table.Td>
         <Table.Td>{form.avePA}</Table.Td>
         {/* <Table.Td>{form.aveAutoPA}</Table.Td>
         <Table.Td>{form.aveTeleopPA}</Table.Td>
         <Table.Td>{form.aveEndgamePA}</Table.Td> */}
+        <Table.Td>{form.aveCoral}</Table.Td>
         <Table.Td>
           <Group justify="space-between">
             <Text fz="xs" c="pink" fw={700}>
@@ -148,13 +150,14 @@ export default function TeamDataTable({ data }: Props) {
             />
           </Progress.Root>
         </Table.Td>
+        <Table.Td>{form.defence}</Table.Td>
       </Table.Tr>
     );
   });
 
   return (
     <ScrollArea>
-      <Table miw={700} horizontalSpacing="xs" verticalSpacing="xs">
+      <Table miw={900} horizontalSpacing="xs" verticalSpacing="xs">
         <Table.Tbody>
           <Table.Tr>
             {Object.keys(data[0]).map((key) => (
@@ -164,7 +167,7 @@ export default function TeamDataTable({ data }: Props) {
                 reversed={reverseSortDirection}
                 onSort={() => setSorting(key as keyof TeamData)}
               >
-                {key}
+                {capitalize(key)}
               </Th>
             ))}
           </Table.Tr>
