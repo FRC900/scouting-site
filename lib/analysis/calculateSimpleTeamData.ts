@@ -82,7 +82,7 @@ const averageEndgamePA = (forms: StandForm[]) => {
 
 export default async function calculateSimpleTeamData() {
   // Using Event Key, Fetch all the Participating Teams.
-  const teams = await eventTeamsKeys();
+  const teams: number[] = await eventTeamsKeys();
 
   let calculations: SimpleTeamData[] = [];
 
