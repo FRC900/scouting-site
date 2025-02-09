@@ -1,7 +1,13 @@
 import { Title } from "@mantine/core";
 import calculateTeam from "../../../../lib/analysis/calculateFullTeamData";
+import { useRouter } from "next/router";
 
 export default async function Page({ params }: { params: { id: string } }) {
+    const router = useRouter();
+    if (router.isFallback) {
+        return <div>Loading...</div>;
+    }
+
     const team = await calculateTeam(+params.id);
     
     // Team Number and Name
