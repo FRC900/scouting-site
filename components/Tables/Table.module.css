@@ -16,3 +16,9 @@
   height: rem(21px);
   border-radius: rem(21px);
 }
+
+.progressSection {
+  &:not(:first-of-type) {
+    border-left: 3px solid light-dark(var(--mantine-color-white), var(--mantine-color-dark-7));
+  }
+}

@@ -62,22 +62,24 @@ export type RegisterForm = {
 }
 
 export type TeamData = {
-  team_number: number;
-  team_name: string;
+  team: number;
   avePA: number,
-  aveAutoPA:  number,
-  aveTeleopPA: number,
-  aveEndgamePA: number,
-  coral: number,
-  coralL1: number,
-  coralL2: number,
-  coralL3: number,
-  coralL4: number,
+  // aveAutoPA:  number,
+  // aveTeleopPA: number,
+  // aveEndgamePA: number,
+  coral: {
+    l1: number,
+    l2: number,
+    l3: number,
+    l4: number,
+  }
   algae: number,
-  percentClimbed: number,
-  percentDeep: number,
-  percentParked: number,
-  percentStartZone: number,
+  climb: {
+    nothing: number,
+    parked: number,
+    shallow: number,
+    deep: number,
+  }
 }
 
 export type TBATeamSimple = {

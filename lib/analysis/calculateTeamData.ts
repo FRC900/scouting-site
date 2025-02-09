@@ -96,22 +96,24 @@ export default async function calculateTeamData() {
     const aveTeleopPA = avePA - aveAutoPA - aveEndgamePA;
 
     const data: TeamData = {
-      team_number: team,
-      team_name: "temp",
+      team: team,
       avePA: avePA,
-      aveAutoPA: aveAutoPA,
-      aveTeleopPA: aveTeleopPA,
-      aveEndgamePA: aveEndgamePA,
-      coral: 0,
-      coralL1: 0,
-      coralL2: 0,
-      coralL3: 0,
-      coralL4: 0,
-      algae: 0,
-      percentClimbed: 0,
-      percentDeep: 0,
-      percentParked: 0,
-      percentStartZone: 0,
+    //   aveAutoPA: aveAutoPA,
+    //   aveTeleopPA: aveTeleopPA,
+    //   aveEndgamePA: aveEndgamePA,
+      coral: {
+        l1: 2,
+        l2: 2,
+        l3: 2,
+        l4: 2,
+      },
+      algae: 4,
+      climb: {
+        nothing: 2,
+        parked: 2,
+        shallow: 1,
+        deep: 3,
+      },
     };
 
     calculations.push(data);
