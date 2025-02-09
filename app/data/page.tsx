@@ -7,11 +7,6 @@ import { useRouter } from "next/router";
 export const dynamic = 'force-dynamic';
 
 export default async function Page() {
-  const router = useRouter();
-  if (router.isFallback) {
-    return <div>Loading...</div>;
-  }
-
   const simpleTeamData: SimpleTeamData[] = await calculateSimpleTeamData();
 
   return (
