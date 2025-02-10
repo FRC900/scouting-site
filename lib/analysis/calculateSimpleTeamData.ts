@@ -125,7 +125,7 @@ export default async function calculateSimpleTeamData() {
     const deep = teamStandForms.filter((form) => form.endgame === "Deep").length;
 
     let count = 0;
-    const defenceRating = (teamStandForms.map((form, count) => {
+    const defenceRating = (teamStandForms.map((form) => {
         if (form.defence != '0') count++;
         return +form.defence;
     }).reduce((a, b) => a + b, 0)) / count;

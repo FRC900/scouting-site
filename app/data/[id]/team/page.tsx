@@ -25,6 +25,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     return (
         <>
             <Title>{params.id} / {team.name}</Title>
+            <p>Charts and stuff on the way</p>
         </>
     )
 }

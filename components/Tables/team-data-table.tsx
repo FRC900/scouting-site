@@ -68,23 +68,23 @@ export default function TeamDataTable({ data }: Props) {
     return (
       <Table.Tr key={form.team}>
         <Table.Td><Anchor href={`/data/${form.team}/team`} fz="md">{form.team}</Anchor></Table.Td>
-        <Table.Td>{form.avePA}</Table.Td>
+        <Table.Td fz="md">{form.avePA}</Table.Td>
         {/* <Table.Td>{form.aveAutoPA}</Table.Td>
         <Table.Td>{form.aveTeleopPA}</Table.Td>
         <Table.Td>{form.aveEndgamePA}</Table.Td> */}
-        <Table.Td>{form.aveCoral}</Table.Td>
+        <Table.Td fz="md">{form.aveCoral}</Table.Td>
         <Table.Td>
           <Group justify="space-between">
-            <Text fz="xs" c="pink" fw={700}>
+            <Text fz="sm" c="#5474B4" fw={700}>
               {l1Percent.toFixed(0)}%
             </Text>
-            <Text fz="xs" c="magenta" fw={700}>
+            <Text fz="sm" c="#4c5897" fw={700}>
               {l2Percent.toFixed(0)}%
             </Text>
-            <Text fz="xs" c="purple" fw={700}>
+            <Text fz="sm" c="#6b31b2" fw={700}>
               {l3Percent.toFixed(0)}%
             </Text>
-            <Text fz="xs" c="red" fw={700}>
+            <Text fz="sm" c="#c91a52" fw={700}>
               {l4Percent.toFixed(0)}%
             </Text>
           </Group>
@@ -92,38 +92,38 @@ export default function TeamDataTable({ data }: Props) {
             <Progress.Section
               className={classes.progressSection}
               value={l1Percent}
-              color="pink"
+              color="#5474B4"
             />
             <Progress.Section
               className={classes.progressSection}
               value={l2Percent}
-              color="magenta"
+              color="#4c5897"
             />
             <Progress.Section
               className={classes.progressSection}
               value={l3Percent}
-              color="purple"
+              color="#6b31b2"
             />
             <Progress.Section
               className={classes.progressSection}
               value={l4Percent}
-              color="red"
+              color="#c91a52"
             />
           </Progress.Root>
         </Table.Td>
-        <Table.Td>{form.algae}</Table.Td>
+        <Table.Td fz="md">{form.algae}</Table.Td>
         <Table.Td>
           <Group justify="space-between">
-            <Text fz="xs" c="orange" fw={700}>
+            <Text fz="sm" c="#fc8c0c" fw={700}>
               {form.climb.nothing}
             </Text>
-            <Text fz="xs" c="gold" fw={700}>
+            <Text fz="sm" c="#ffab09" fw={700}>
               {form.climb.parked}
             </Text>
-            <Text fz="xs" c="teal" fw={700}>
+            <Text fz="sm" c="#2f7f49" fw={700}>
               {form.climb.shallow}
             </Text>
-            <Text fz="xs" c="blue" fw={700}>
+            <Text fz="sm" c="#0088e4" fw={700}>
               {form.climb.deep}
             </Text>
           </Group>
@@ -131,26 +131,26 @@ export default function TeamDataTable({ data }: Props) {
             <Progress.Section
               className={classes.progressSection}
               value={nothingPercent}
-              color="orange"
+              color="#fc8c0c"
             />
             <Progress.Section
               className={classes.progressSection}
               value={parkedPercent}
-              color="gold"
+              color="#ffab09"
             />
             <Progress.Section
               className={classes.progressSection}
               value={shallowPercent}
-              color="teal"
+              color="#2f7f49"
             />
             <Progress.Section
               className={classes.progressSection}
               value={deepPercent}
-              color="blue"
+              color="#0088e4"
             />
           </Progress.Root>
         </Table.Td>
-        <Table.Td>{form.defence}</Table.Td>
+        <Table.Td fz="md">{form.defence}</Table.Td>
       </Table.Tr>
     );
   });
