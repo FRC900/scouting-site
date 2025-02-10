@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const tbaEventKey = "2024nccmp";
+export const year = 2024;
 
 export const StandFormSchema = z.object({
   match: z.number().min(1),
@@ -45,7 +46,7 @@ export const StandFormDatabaseSchema = z.object({
   teleopNet: z.number().min(0),
   fouls: z.number().min(0),
   techfouls: z.number().min(0),
-  endgame: z.enum(["Nothing", "Parked", "Failed Climb", "Climbed", "Harmony"]),
+  endgame: z.enum(["Nothing", "Parked", "Shallow", "Deep"]),
   defence: z.enum(['0', '1', '2', '3', '4', '5']),
   status: z.enum(['0', '1', '2', '3', '4', '5']),
   notes: z.string(),

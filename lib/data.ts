@@ -5,7 +5,7 @@ import { PitRecordRow } from "../components/Tables/pit-form-table";
 import { PitFormDatabase, StandFormDatabase } from "./definitions";
 import { parsePitFormNumbers, parseStandFormNumbers } from "./parseNumbers";
 
-export async function fetchStandForms() {
+export async function fetchStandFormsLimited() {
   noStore();
 
   try {
@@ -17,7 +17,7 @@ export async function fetchStandForms() {
   }
 }
 
-export async function fetchPitForms() {
+export async function fetchPitFormsLimited() {
   noStore();
 
   try{
@@ -65,5 +65,39 @@ export async function fetchStandFormById(id: string) {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch stand form.');
+  }
+}
+
+export async function fetchStandFormsByTeam(team: Number) {
+  noStore();
+
+  try {
+    const data = await sql<StandRecordRow>`SELECT * FROM standforms WHERE standforms.team = ${team.toString()}`;
+
+    const form = data.rows.map((form) => ({
+      ...parseStandFormNumbers(form),
+    }));
+
+    return form;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch stand form data');
+  }
+}
+
+export async function fetchPitFormByTeam(team: Number) {
+  noStore();
+
+  try {
+    const data = await sql<PitRecordRow>`SELECT * FROM pitforms WHERE pitforms.team = ${team.toString()}`;
+
+    const form = data.rows.map((form) => ({
+      ...parsePitFormNumbers(form),
+    }));
+
+    return form;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch pit form data');
   }
 }

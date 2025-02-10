@@ -6,7 +6,7 @@
 export type StandForm = {
   match: number,
   slot: string,
-  // team: number,
+  team: number,
   preloaded: boolean,
   startingZone: boolean,
   autoL1: number,
@@ -59,6 +59,33 @@ export type RegisterForm = {
   username: string,
   password: string,
   confirm: string,
+}
+
+export type SimpleTeamData = {
+  team: number;
+  avePA: number,
+  // aveAutoPA:  number,
+  // aveTeleopPA: number,
+  // aveEndgamePA: number,
+  aveCoral: number,
+  coral: {
+    l1: number,
+    l2: number,
+    l3: number,
+    l4: number,
+  }
+  algae: number,
+  climb: {
+    nothing: number,
+    parked: number,
+    shallow: number,
+    deep: number,
+  }
+  defence: number | string,
+}
+
+export type FullTeamData = {
+  name: string,
 }
 
 export type TBATeamSimple = {
