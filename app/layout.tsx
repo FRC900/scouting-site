@@ -3,11 +3,16 @@ import React from "react";
 import {
 	MantineProvider,
 	ColorSchemeScript,
-	AppShell,
 	Stack,
 } from "@mantine/core";
 import { theme } from "../theme";
 import Header from "../components/Header";
+import { Roboto } from "next/font/google";
+
+const ubuntu = Roboto({
+	weight: '400',
+	subsets: ['latin'],
+})
 
 export const metadata = {
 	title: "Zebracorns Scouting",
