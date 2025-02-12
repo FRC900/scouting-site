@@ -1,7 +1,7 @@
 import { Form, useForm } from "react-hook-form";
 import { TextInput } from "./inputs/TextInput";
 import { type RegisterForm } from "../../lib/definitions";
-import { Stack, Group, Anchor, useMantineTheme, Button } from "@mantine/core";
+import { Stack, Group, useMantineTheme, Button } from "@mantine/core";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterFormSchema } from "../../lib/constants";
 import { PasswordInput } from "./inputs/PasswordInput";

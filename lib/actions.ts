@@ -5,7 +5,7 @@ import { PitForm, StandForm } from "./definitions";
 import { PitFormDatabaseSchema, StandFormDatabaseSchema } from "./constants";
 // import { signIn } from "../auth";
 import { AuthError } from "next-auth";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import findTeamNumber from "./fetchers/tba/findTeamNumber";
 
@@ -57,6 +57,7 @@ export async function createStandForm(data: StandForm) {
 	}
 
 	revalidatePath("/stand-form");
+	revalidateTag('stand');
 	redirect("/stand-form");
 }
 
@@ -80,6 +81,7 @@ export async function createPitForm(data: PitForm) {
 	}
 
 	revalidatePath("/pit-form");
+	revalidateTag('pit');
 	redirect("/pit-form");
 }
 
@@ -98,6 +100,7 @@ export async function updatePitForm(data: PitForm, id: string) {
 	`;
 
 	revalidatePath("/records/pit-forms");
+	revalidateTag('pit');
 	redirect("/records/pit-forms");
 }
 
@@ -140,6 +143,7 @@ export async function updateStandForm(data: StandForm, id: string) {
 	`;
 
 	revalidatePath("/records/stand-forms");
+	revalidateTag('stand');
 	redirect("/records/stand-forms");
 }
 
@@ -147,6 +151,7 @@ export async function deletePitForm(id: string) {
 	await sql`DELETE FROM pitforms WHERE id = ${id}`;
 
 	revalidatePath("/records/pit-forms");
+	revalidateTag('pit');
 	redirect("/records/pit-forms");
 }
 
@@ -154,6 +159,7 @@ export async function deleteStandForm(id: string) {
 	await sql`DELETE FROM standforms WHERE id = ${id}`;
 
 	revalidatePath("/records/stand-forms");
+	revalidateTag('stand'); 	
 	redirect("/records/stand-forms");
 }
 

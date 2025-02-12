@@ -9,7 +9,7 @@ import { theme } from "../theme";
 import Header from "../components/Header";
 import { Roboto } from "next/font/google";
 
-const ubuntu = Roboto({
+const roboto = Roboto({
 	weight: '400',
 	subsets: ['latin'],
 })
@@ -22,7 +22,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: any }) {
 	return (
-		<html lang="en">
+		<html lang="en" className={roboto.className}>
 			<head>
 				<ColorSchemeScript />
 				<link rel="shortcut icon" href="/favicon.svg" />
