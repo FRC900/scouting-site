@@ -10,12 +10,11 @@ ZebraScouting is a powerful new scouting site application for recording and proc
   * Insights
   * Breakdown
   * Strength of Schedule
-  * Figures? Bubble Chart?
-
 * team report page
 * Backend for logging in, logging out, registering.
 * Enable authentication and implment specific access requirements
 * Add image submission to pit forms.
+* ability to manually input team number (stand form)
 
 ### Lesser Priority:
 

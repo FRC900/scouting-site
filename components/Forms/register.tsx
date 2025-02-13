@@ -5,60 +5,83 @@ import { Stack, Group, useMantineTheme, Button } from "@mantine/core";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterFormSchema } from "../../lib/constants";
 import { PasswordInput } from "./inputs/PasswordInput";
+import { useOnlineStatus } from "../../lib/hooks/useOnlineStatus";
+import { useState } from "react";
+import { register } from "../../lib/actions";
 
 export default function RegisterForm({ toggle = () => {} }) {
-	const theme = useMantineTheme();
+  const theme = useMantineTheme();
+  const isOnline = useOnlineStatus();
+  const [submitting, setSubmitting] = useState<"" | "fetching" | "done">("");
 
-	const { control } = useForm<RegisterForm>({
-		resolver: zodResolver(RegisterFormSchema),
-    defaultValues:{
+  const { control } = useForm<RegisterForm>({
+    resolver: zodResolver(RegisterFormSchema),
+    defaultValues: {
       name: "",
       email: "",
       password: "",
       confirm: "",
-    }
-	});
+    },
+  });
 
-	return (
-		<>
-			<Form
-				control={control}
-				onSubmit={({ data }) => console.log(data)}
-				onError={(e) => console.log(e)}
-			>
-				<Stack>
-					<TextInput
-						name="name"
-						control={control}
-						label="First Name"
-						placeholder="Your Preferred Name"
-					/>
-					<TextInput
-						name="email"
-						control={control}
-						label="NCSSM Email"
-						placeholder="Your Email"
-					/>
-					<PasswordInput
-						name="password"
-						control={control}
-						label="Password"
-						placeholder="Your Password"
-					/>
-					<PasswordInput
-						name="confirm"
-						control={control}
-						label="Confirm Password"
-						placeholder="Your Password"
-					/>
-					<Group justify="space-between">
-						<Button variant="subtle" onClick={toggle} color={theme.colors.pillow[0]}>Already have an account? Login</Button>
-						<Button type="submit" color={theme.colors.milkshake[4]}>
-							Register
-						</Button>
-					</Group>
-				</Stack>
-			</Form>
-		</>
-	);
+  const submit = (data: RegisterForm) => {
+    if (isOnline) {
+      setSubmitting("fetching");
+      register(data);
+      setSubmitting("done");
+    }
+  };
+
+  return (
+    <>
+      <Form
+        control={control}
+        onSubmit={({ data }) => submit(data)}
+        onError={(e) => console.log(e)}
+      >
+        <Stack>
+          <TextInput
+            name="name"
+            control={control}
+            label="First Name"
+            placeholder="Your Preferred Name"
+          />
+          <TextInput
+            name="email"
+            control={control}
+            label="Email"
+            placeholder="Your Email"
+          />
+          <PasswordInput
+            name="password"
+            control={control}
+            label="Password"
+            placeholder="Your Password"
+          />
+          <PasswordInput
+            name="confirm"
+            control={control}
+            label="Confirm Password"
+            placeholder="Your Password"
+          />
+          <Group justify="space-between">
+            <Button
+              variant="subtle"
+              onClick={toggle}
+              color={theme.colors.pillow[0]}
+            >
+              Already have an account? Login
+            </Button>
+            <Button
+              type="submit"
+              color={theme.colors.milkshake[4]}
+              disabled={submitting === "fetching"}
+            >
+              Register
+            </Button>
+          </Group>
+        </Stack>
+      </Form>
+    </>
+  );
 }

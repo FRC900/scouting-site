@@ -1,13 +1,14 @@
 "use server";
 
 import { sql } from "@vercel/postgres";
-import { PitForm, StandForm } from "./definitions";
-import { PitFormDatabaseSchema, StandFormDatabaseSchema } from "./constants";
-// import { signIn } from "../auth";
+import { PitForm, RegisterForm, StandForm } from "./definitions";
+import { PitFormDatabaseSchema, RegisterFormSchema, StandFormDatabaseSchema } from "./constants";
+import { signIn, signOut } from "../auth";
 import { AuthError } from "next-auth";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import findTeamNumber from "./fetchers/tba/findTeamNumber";
+import bcrypt from 'bcrypt'
 
 const CreateStandForm = StandFormDatabaseSchema.omit({
 	team: true,
@@ -163,22 +164,59 @@ export async function deleteStandForm(id: string) {
 	redirect("/records/stand-forms");
 }
 
-// export async function authenticate(
-// 	prevState: string | undefined,
-// 	formData: FormData
-// ) {
-// 	try {
-// 		console.log('hello')
-// 		await signIn("crednetials", formData);
-// 	} catch (error) {
-// 		if (error instanceof AuthError) {
-// 			switch (error.type) {
-// 				case "CredentialsSignin":
-// 					return "Invalid crednetials.";
-// 				default:
-// 					return "Something went wrong.";
-// 			}
-// 		}
-// 		throw error;
-// 	}
-// }
+export async function register(data: RegisterForm) {
+	// 2. Prepare data for insersion
+	const {
+		name,
+		email,
+		password,
+		confirm,
+	} = RegisterFormSchema.parse({
+		...data
+	})
+
+	if (password != confirm) return console.log("passwords do not match"); // add error message
+
+	// Hash password
+	const hashedPassword = await bcrypt.hash(password, 10);
+	const permission = 'member';
+
+	// 3. Insert user into the database
+	try {
+		await sql`
+			INSERT INTO users (name, email, password, permission)
+			VALUES (${name}, ${email}, ${hashedPassword}, ${permission})
+		`
+	} catch (error) {
+		return { message: "Error submitting user to database." }
+	}
+
+	// 4. Create user session
+
+
+	// 5. Redirect user
+}
+
+export async function serverSignOut() {
+	await signOut({ redirectTo: "/" });
+}
+
+export async function authenticate(
+	prevState: string | undefined,
+	formData: FormData
+) {
+	try {
+		console.log('hello')
+		await signIn("crednetials", formData);
+	} catch (error) {
+		if (error instanceof AuthError) {
+			switch (error.type) {
+				case "CredentialsSignin":
+					return "Invalid crednetials.";
+				default:
+					return "Something went wrong.";
+			}
+		}
+		throw error;
+	}
+}
