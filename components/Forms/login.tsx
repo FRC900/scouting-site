@@ -1,39 +1,50 @@
-'use client';
+"use client";
 
-import { Paper, Stack, Button, useMantineTheme, Group, Text } from "@mantine/core";
-import { Form, useForm } from "react-hook-form";
+import {
+  Paper,
+  Stack,
+  Button,
+  useMantineTheme,
+  Group,
+  Text,
+} from "@mantine/core";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { type LoginForm } from "../../lib/definitions";
 import { LoginFormSchema } from "../../lib/constants";
 import { TextInput } from "./inputs/TextInput";
 import { PasswordInput } from "./inputs/PasswordInput";
-import { useActionState } from "react";
-// import { authenticate } from "../../lib/actions";
+import { useFormState } from "react-dom";
+import { authenticate } from "../../lib/actions";
+import { useSearchParams } from "next/navigation";
 import { IconExclamationCircle } from "@tabler/icons-react";
 
 export default function LoginForm({ toggle = () => {} }) {
   const theme = useMantineTheme();
 
-  // const [errorMessage, formAction, isPending] = useActionState(
-  //   authenticate,
-  //   undefined,
-  // )
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || "/data";
 
-  const { control } = useForm<LoginForm>({
+  // const [errorMessage, formAction, isPending] = useFormState(
+  //   authenticate,
+  //   undefined
+  // );
+
+  const { control, handleSubmit } = useForm<LoginForm>({
     resolver: zodResolver(LoginFormSchema),
     defaultValues: {
       email: "",
       password: "",
-    }
+    },
   });
 
-  return(
+  const onSubmit: SubmitHandler<LoginForm> = (data) => {
+    authenticate(data);
+  }
+
+  return (
     <Paper>
-      <Form
-        control={control}
-        onSubmit={() => console.log('submit')} // formAction}
-        onError={(e) => console.log(e)}
-      >
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Stack>
           <TextInput
             name="email"
@@ -48,8 +59,17 @@ export default function LoginForm({ toggle = () => {} }) {
             placeholder="Your Password"
           />
           <Group justify="space-between">
-            <Button variant="subtle" onClick={toggle} color={theme.colors.pillow[0]}>Don&apos;t have an account? Register</Button>
-            <Button type="submit" color={theme.colors.milkshake[4]}>Login</Button>
+            <Button
+              variant="subtle"
+              onClick={toggle}
+              color={theme.colors.pillow[0]}
+            >
+              Don&apos;t have an account? Register
+            </Button>
+            <input type="hidden" name="redirectTo" value={callbackUrl} />
+            <Button color={theme.colors.milkshake[4]} type="submit">
+              Login
+            </Button>
           </Group>
           {/* {errorMessage && (
             <>
@@ -58,7 +78,7 @@ export default function LoginForm({ toggle = () => {} }) {
             </>
           )} */}
         </Stack>
-      </Form>
+      </form>
     </Paper>
-  )
+  );
 }

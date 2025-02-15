@@ -1,10 +1,18 @@
 import { Title } from "@mantine/core";
-import calculateTeam from "../../../../lib/analysis/calculateFullTeamData";
-import { useRouter } from "next/router";
+import calculateTeam from "../../../lib/analysis/calculateFullTeamData";
+import { unstable_cache } from "next/cache";
+
+const getTeam = unstable_cache(
+    async (team) => {
+        return await calculateTeam(+team);
+    },
+    ['stand', 'pit'],
+    { revalidate: 3600, tags: ['stand', 'pit'] }
+)
 
 export default async function Page({ params }: { params: { id: string } }) {
-
-    const team = await calculateTeam(+params.id);
+    
+    const team = await getTeam(params.id);
     
     // Team Number and Name
     // Robot Picture

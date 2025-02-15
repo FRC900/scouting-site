@@ -2,10 +2,11 @@
 
 import { type SimpleTeamData } from "../../lib/definitions";
 import { Th } from "./stand-form-table";
-import { rem, ScrollArea, Table, TextInput, Text, keys, Group, Progress, Anchor } from "@mantine/core";
+import { ScrollArea, Table, Text, keys, Group, Progress, Anchor } from "@mantine/core";
 import { useState } from "react";
 import classes from "./Table.module.css";
 import capitalize from "../../lib/capitalize";
+import Link from "next/link";
 
 interface Props {
   data: SimpleTeamData[];
@@ -67,7 +68,7 @@ export default function TeamDataTable({ data }: Props) {
     
     return (
       <Table.Tr key={form.team}>
-        <Table.Td><Anchor href={`/data/${form.team}/team`} fz="md">{form.team}</Anchor></Table.Td>
+        <Table.Td><Anchor component={Link} href={`/data/${form.team}`} fz="md">{form.team}</Anchor></Table.Td>
         <Table.Td fz="md">{form.avePA}</Table.Td>
         {/* <Table.Td>{form.aveAutoPA}</Table.Td>
         <Table.Td>{form.aveTeleopPA}</Table.Td>
