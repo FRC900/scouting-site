@@ -5,7 +5,6 @@ import classes from "./Header.module.css";
 import NavLinks from "./NavLinks";
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
-import { signOut } from "../../auth";
 import { serverSignOut } from "../../lib/actions";
 
 export default function Header() {
@@ -34,6 +33,7 @@ export default function Header() {
 								fw="500"
 								size="compact-md"
 								className={classes.link}
+                type="submit"
               >
                 <Center>
                   <span className={classes.linkLabel}>Sign Out</span>

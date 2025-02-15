@@ -199,6 +199,7 @@ export async function register(data: RegisterForm) {
 }
 
 export async function serverSignOut() {
+	console.log('hi hello singout ello')
 	await signOut({ redirectTo: "/" });
 }
 

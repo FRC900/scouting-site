@@ -17,9 +17,9 @@ const team = unstable_cache(
 export default async function Page() {
   const simpleTeamData: SimpleTeamData[] = await team();
 
-  console.log("simpleTeamData:", simpleTeamData);
-  console.log("Type of simpleTeamData:", typeof simpleTeamData);
-  console.log("Is simpleTeamData an array?", Array.isArray(simpleTeamData));
+  // console.log("simpleTeamData:", simpleTeamData);
+  // console.log("Type of simpleTeamData:", typeof simpleTeamData);
+  // console.log("Is simpleTeamData an array?", Array.isArray(simpleTeamData));
 
   return (
     <>
