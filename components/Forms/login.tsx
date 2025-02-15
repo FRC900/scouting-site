@@ -25,10 +25,10 @@ export default function LoginForm({ toggle = () => {} }) {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/data";
 
-  const [errorMessage, formAction, isPending] = useFormState(
-    authenticate,
-    undefined
-  );
+  // const [errorMessage, formAction, isPending] = useFormState(
+  //   authenticate,
+  //   undefined
+  // );
 
   const { control, handleSubmit } = useForm<LoginForm>({
     resolver: zodResolver(LoginFormSchema),
@@ -39,7 +39,7 @@ export default function LoginForm({ toggle = () => {} }) {
   });
 
   const onSubmit: SubmitHandler<LoginForm> = (data) => {
-    formAction;
+    authenticate(data);
   }
 
   return (
@@ -67,16 +67,16 @@ export default function LoginForm({ toggle = () => {} }) {
               Don&apos;t have an account? Register
             </Button>
             <input type="hidden" name="redirectTo" value={callbackUrl} />
-            <Button color={theme.colors.milkshake[4]}>
+            <Button color={theme.colors.milkshake[4]} type="submit">
               Login
             </Button>
           </Group>
-          {errorMessage && (
+          {/* {errorMessage && (
             <>
               <IconExclamationCircle />
               <Text size="sm" c="red">{errorMessage}</Text>
             </>
-          )}
+          )} */}
         </Stack>
       </form>
     </Paper>

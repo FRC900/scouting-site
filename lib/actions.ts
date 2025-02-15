@@ -1,7 +1,7 @@
 "use server";
 
 import { sql } from "@vercel/postgres";
-import { PitForm, RegisterForm, StandForm } from "./definitions";
+import { LoginForm, PitForm, RegisterForm, StandForm } from "./definitions";
 import { PitFormDatabaseSchema, RegisterFormSchema, StandFormDatabaseSchema } from "./constants";
 import { signIn, signOut } from "../auth";
 import { AuthError } from "next-auth";
@@ -192,9 +192,10 @@ export async function register(data: RegisterForm) {
 	}
 
 	// 4. Create user session
-
+	await signIn("credentials", data);
 
 	// 5. Redirect user
+	redirect("/data")
 }
 
 export async function serverSignOut() {
@@ -202,17 +203,18 @@ export async function serverSignOut() {
 }
 
 export async function authenticate(
-	prevState: string | undefined,
-	formData: FormData
+	// prevState: string | undefined,
+	formData: LoginForm
 ) {
 	try {
 		console.log('hello')
-		await signIn("crednetials", formData);
+		await signIn("credentials", formData);
+		redirect("/data")
 	} catch (error) {
 		if (error instanceof AuthError) {
 			switch (error.type) {
 				case "CredentialsSignin":
-					return "Invalid crednetials.";
+					return "Invalid credentials.";
 				default:
 					return "Something went wrong.";
 			}
