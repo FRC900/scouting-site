@@ -2,10 +2,6 @@
 
 ZebraScouting is a powerful new scouting site application for recording and processing robot analytics.
 
-## Critical Bug Fixes:
-
-* **TypeError: e.map is not a function** when loading data page.
-
 ## Features Robbie Needs to Remember to Add
 
 ### Priority (Big Stuff):
@@ -15,11 +11,9 @@ ZebraScouting is a powerful new scouting site application for recording and proc
   * Breakdown
   * Strength of Schedule
 * team report page
-* Backend for logging in, logging out, registering.
-* Enable authentication and implment specific access requirements
+* implment specific access requirements (auth)
 * Add image submission to pit forms.
 * ability to manually input team number (stand form)
-* dashboard (home page)
 * stand form upgrades:
   * big add/sub buttons
   * Tabs
@@ -27,6 +21,7 @@ ZebraScouting is a powerful new scouting site application for recording and proc
 
 ### Lesser Priority:
 
+* dashboard (home page)
 * Matches
   * Qual Matches
   * Alliances
@@ -40,3 +35,8 @@ ZebraScouting is a powerful new scouting site application for recording and proc
 * Admin Dashboard
   * Switch Match Key
 * Ability to factor in the influence of previous competitions
+
+## Completed!!
+
+* Backend for logging in, logging out, registering.
+* Enable authentication

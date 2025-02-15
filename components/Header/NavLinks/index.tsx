@@ -72,12 +72,6 @@ const links = [
 				perm: "member",
 			},
 			{
-				link: "/insights",
-				label: "Insights",
-				icon: <IconChartDots3 style={{ width: rem(14), height: rem(14) }} />,
-				perm: "member",
-			},
-			{
 				link: "/qual",
 				label: "Qual Matches",
 				icon: (
