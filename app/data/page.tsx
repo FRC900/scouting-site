@@ -17,11 +17,19 @@ const team = unstable_cache(
 export default async function Page() {
   const simpleTeamData: SimpleTeamData[] = await team();
 
+  console.log("simpleTeamData:", simpleTeamData);
+  console.log("Type of simpleTeamData:", typeof simpleTeamData);
+  console.log("Is simpleTeamData an array?", Array.isArray(simpleTeamData));
+
   return (
     <>
       <Title>Team Data</Title>
       <Container>
-        <TeamDataTable data={simpleTeamData} />
+        {Array.isArray(simpleTeamData) ? (
+          <TeamDataTable data={simpleTeamData} />
+        ) : (
+          <p>Error: Data is not an array</p>
+        )}
       </Container>
     </>
   );
