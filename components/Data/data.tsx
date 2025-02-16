@@ -2,19 +2,74 @@
 
 import { Title, useMantineTheme, Tabs, rem, Container } from "@mantine/core";
 import {
-  IconChartDots3,
+  IconChartArcs,
+  IconChartCandleFilled,
   IconClipboardData,
   IconSos,
 } from "@tabler/icons-react";
-import { SimpleTeamData } from "../../lib/definitions";
-import TeamDataTable from "../Tables/team-data-table";
+import {
+  Breakdown,
+  Data,
+  Insights,
+  Monstrosity,
+  SOS,
+} from "../../lib/definitions";
+import InsightsTable from "../Tables/insights-table";
+import { useEffect } from "react";
+import BreakdownTable from "../Tables/breakdown-table";
+import DataTable from "../Tables/data-table";
+import SOSTable from "../Tables/sos-table";
 
 interface DataTabsProps {
-  data: SimpleTeamData[];
+  teamData: Monstrosity[];
 }
 
-export default function DataTabs({ data }: DataTabsProps) {
+export default function DataTabs({ teamData }: DataTabsProps) {
   const theme = useMantineTheme();
+
+  const insights: Insights[] = teamData.map((row) => {
+    const insight: Insights = {
+      team: row.team,
+      name: row.name,
+      rank: row.rank,
+      avePA: row.avePA,
+      ...row.insights,
+    };
+    return insight;
+  });
+
+  const breakdown: Breakdown[] = teamData.map((row) => {
+    const breakdown: Breakdown = {
+      team: row.team,
+      name: row.name,
+      rank: row.rank,
+      avePA: row.avePA,
+      ...row.breakdown,
+    };
+    return breakdown;
+  });
+
+  const data: Data[] = teamData.map((row) => {
+    const data: Data = {
+      team: row.team,
+      name: row.name,
+      rank: row.rank,
+      avePA: row.avePA,
+      ...row.data,
+    };
+    return data;
+  });
+
+  const sos: SOS[] = teamData.map((row) => {
+    const sos: SOS = {
+      team: row.team,
+      name: row.name,
+      rank: row.rank,
+      avePA: row.avePA,
+      ...row.sos,
+    };
+    return sos;
+  });
 
   return (
     <>
@@ -28,7 +83,9 @@ export default function DataTabs({ data }: DataTabsProps) {
           <Tabs.Tab
             value="insights"
             leftSection={
-              <IconChartDots3 style={{ width: rem(14), height: rem(14) }} />
+              <IconChartCandleFilled
+                style={{ width: rem(14), height: rem(14) }}
+              />
             }
           >
             Insights
@@ -36,10 +93,18 @@ export default function DataTabs({ data }: DataTabsProps) {
           <Tabs.Tab
             value="breakdown"
             leftSection={
-              <IconClipboardData style={{ width: rem(14), height: rem(14) }} />
+              <IconChartArcs style={{ width: rem(14), height: rem(14) }} />
             }
           >
             Breakdown
+          </Tabs.Tab>
+          <Tabs.Tab
+            value="data"
+            leftSection={
+              <IconClipboardData style={{ width: rem(14), height: rem(14) }} />
+            }
+          >
+            Data
           </Tabs.Tab>
           <Tabs.Tab
             value="sos"
@@ -51,16 +116,33 @@ export default function DataTabs({ data }: DataTabsProps) {
           </Tabs.Tab>
         </Tabs.List>
         <Tabs.Panel value="insights">
-          <Container>
-            {Array.isArray(data) ? (
-              <TeamDataTable data={data} />
-            ) : (
-              <p>Error: Data is not an array</p>
-            )}
-          </Container>
+          {Array.isArray(insights) ? (
+            <InsightsTable data={insights} />
+          ) : (
+            <p>Error: Data is not an array</p>
+          )}
         </Tabs.Panel>
-        <Tabs.Panel value="breakdown">Breakdown content</Tabs.Panel>
-        <Tabs.Panel value="sos">Strength of Schedule content</Tabs.Panel>
+        <Tabs.Panel value="breakdown">
+          {Array.isArray(breakdown) ? (
+            <BreakdownTable data={breakdown} />
+          ) : (
+            <p>Error: Data is not an array</p>
+          )}
+        </Tabs.Panel>
+        <Tabs.Panel value="data">
+          {Array.isArray(data) ? (
+            <DataTable data={data} />
+          ) : (
+            <p>Error: Data is not an array</p>
+          )}
+        </Tabs.Panel>
+        <Tabs.Panel value="sos">
+          {Array.isArray(sos) ? (
+            <SOSTable data={sos} />
+          ) : (
+            <p>Error: Data is not an array</p>
+          )}
+        </Tabs.Panel>
       </Tabs>
     </>
   );
