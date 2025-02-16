@@ -9,10 +9,13 @@ import getSOS from "./sos";
 import teamEventStatus from "../../fetchers/tba/teamEventStatus";
 import { calcPointsAdded } from "./pointsAdded";
 import { average } from "simple-statistics";
+import eventOprs from "../../fetchers/tba/eventOprs";
 
 export default async function calculateSimpleTeamData() {
   // Using Event Key, Fetch all the Participating Teams.
   const teams: number[] = await eventTeamsKeys();
+
+  const oprs = await eventOprs();
 
   let theMonstrosity: Monstrosity[] = [];
 
@@ -27,12 +30,13 @@ export default async function calculateSimpleTeamData() {
       sbteamYear,
       tbastatus,
     ]);
+    const opr = oprs.oprs[`frc${team}`];
 
-    const pointsAdded = calcPointsAdded(teamStandForms)
-    const avePA = average(pointsAdded)
+    const pointsAdded = calcPointsAdded(teamStandForms);
+    const avePA = average(pointsAdded);
 
     const insights = getInsights({ teamStandForms, avePA });
-    const breakdown = getBreakdown({ teamStandForms, pointsAdded, team });
+    const breakdown = getBreakdown({ teamStandForms, pointsAdded, sb_teamYear, opr });
     const data = getData();
     const sos = getSOS();
 

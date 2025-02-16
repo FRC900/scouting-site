@@ -5,13 +5,15 @@ import { calcAutoPointsAdded, calcEndgamePointsAdded, calcTeleopAlgae, calcTeleo
 interface BreakdownProps {
   teamStandForms: StandForm[];
   pointsAdded: number[];
-  team: number;
+  sb_teamYear: any; // type should be added to definitions (too lazy rn)
+  opr: number;
 }
 
 export default function getBreakdown({
   teamStandForms,
   pointsAdded,
-  team,
+  sb_teamYear,
+  opr
 }: BreakdownProps) {
   const autoPointsAdded = calcAutoPointsAdded(teamStandForms);
   const teleopCoral = calcTeleopCoral(teamStandForms);
@@ -24,8 +26,8 @@ export default function getBreakdown({
     autoMax: max(autoPointsAdded),
     coralMax: max(teleopCoral),
     algaeMax: max(teleopAlgae),
-    tba_opr: 0,
-    sb_epa: 0,
+    tba_opr: Math.round(opr* 10) / 10,
+    sb_epa: sb_teamYear.epa.total_points.mean,
   };
 
   return breakdown;

@@ -1,8 +1,3 @@
-// import { StandFormSchema } from "./constants";
-// import { z } from "zod";
-
-// export type StandForm = z.infer<typeof StandFormSchema>
-
 export type StandForm = {
   match: number;
   slot: string;
@@ -274,6 +269,14 @@ export type TBATeamEventStatus = {
   overall_status_str: string;
   next_match_key: string;
   last_match_key: string;
+};
+
+export type TBAEventOprs = {
+  oprs: {
+    [key: string]: number,
+  };
+  dprs: {};
+  ccwms: {};
 };
 
 // SQL Tables
