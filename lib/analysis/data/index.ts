@@ -59,11 +59,11 @@ export default async function calculateSimpleTeamData() {
 
     const statboticsData = teamYear(team);
     const [statbotics] = await Promise.all([statboticsData]);
-    
-    const avePA = averagePA(teamStandForms)
 
-    const insights = getInsights()
-    const breakdown = getBreakdown()
+    const avePA = averagePA(teamStandForms);
+
+    const insights = getInsights({ teamStandForms, avePA });
+    const breakdown = getBreakdown();
     const data = getData();
     const sos = getSOS();
 
@@ -73,18 +73,18 @@ export default async function calculateSimpleTeamData() {
       rank: 0,
       avePA: avePA,
       insights: {
-        ...insights
+        ...insights,
       },
       breakdown: {
-        ...breakdown
+        ...breakdown,
       },
       data: {
-        ...data
+        ...data,
       },
       sos: {
-        ...sos
+        ...sos,
       },
-    }
+    };
 
     theMonstrosity.push(teamData);
   });
