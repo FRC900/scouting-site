@@ -6,6 +6,7 @@ import getInsights from "./insights";
 import getBreakdown from "./breakdown";
 import getData from "./data";
 import getSOS from "./sos";
+import teamEventStatus from "../../fetchers/tba/teamEventStatus";
 
 const averagePA = (forms: StandForm[]) => {
   const totalPA = forms
@@ -57,8 +58,9 @@ export default async function calculateSimpleTeamData() {
     const teamStandForms: StandForm[] = await fetchStandFormsByTeam(team);
     if (teamStandForms.length === 0) return;
 
-    const statboticsData = teamYear(team);
-    const [statbotics] = await Promise.all([statboticsData]);
+    const sbteamYear = teamYear(team);
+    const tbastatus = teamEventStatus(team);
+    const [sb_teamYear, tba_status] = await Promise.all([sbteamYear, tbastatus]);
 
     const avePA = averagePA(teamStandForms);
 
@@ -69,8 +71,8 @@ export default async function calculateSimpleTeamData() {
 
     const teamData: Monstrosity = {
       team: team,
-      name: statbotics.name,
-      rank: 0,
+      name: sb_teamYear.name,
+      rank: tba_status.qual.ranking.rank,
       avePA: avePA,
       insights: {
         ...insights,
