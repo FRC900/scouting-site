@@ -83,10 +83,12 @@ export type Monstrosity = Overview & {
     defence: number | string;
   };
   breakdown: {
-    maxPA: number;
-    maxAutoPA: number;
-    maxTeleopPA: number;
-    maxEndgamePA: number;
+    med: number;
+    max: number;
+    autoMed: number;
+    autoMax: number;
+    coralMax: number;
+    algaeMax: number;
     tba_opr: number;
     sb_epa: number;
   };
@@ -133,10 +135,12 @@ export type OnlyInsights = {
 export type Insights = Overview & OnlyInsights;
 
 export type OnlyBreakdown = {
-  maxPA: number;
-  maxAutoPA: number;
-  maxTeleopPA: number;
-  maxEndgamePA: number;
+  med: number;
+  max: number;
+  autoMed: number;
+  autoMax: number;
+  coralMax: number;
+  algaeMax: number;
   tba_opr: number;
   sb_epa: number;
 };
@@ -219,60 +223,58 @@ export type TBAMatchSimple = {
 
 export type TBATeamEventStatus = {
   qual: {
-    num_teams: number,
+    num_teams: number;
     ranking: {
-      matches_played: number,
-      qual_average: number,
-      sort_orders: [
-        number
-      ],
+      matches_played: number;
+      qual_average: number;
+      sort_orders: [number];
       record: {
-        losses: number,
-        wins: number,
-        ties: number
-      },
-      rank: number,
-      dq: number,
-      team_key: string,
-    },
+        losses: number;
+        wins: number;
+        ties: number;
+      };
+      rank: number;
+      dq: number;
+      team_key: string;
+    };
     sort_order_info: [
       {
-        precision: number,
-        name: string,
+        precision: number;
+        name: string;
       }
-    ],
-    status: string,
-  },
+    ];
+    status: string;
+  };
   alliance: {
-    name: string,
-    number: number,
+    name: string;
+    number: number;
     backup: {
-      out: string,
-      in: string
-    },
-    pick: number
-  },
+      out: string;
+      in: string;
+    };
+    pick: number;
+  };
   playoff: {
-    level: ["qm", "sf", "f"],
+    level: ["qm", "sf", "f"];
     current_level_record: {
-      losses: number,
-      wins: number,
-      ties: number
-    },
+      losses: number;
+      wins: number;
+      ties: number;
+    };
     record: {
-      losses: number,
-      wins: number,
-      ties: number
-    },
-    status: string,
-    playoff_average: number
-  },
-  alliance_status_str: string,
-  playoff_status_str: string,
-  overall_status_str: string,
-  next_match_key: string,
-  last_match_key: string
-}
+      losses: number;
+      wins: number;
+      ties: number;
+    };
+    status: string;
+    playoff_average: number;
+  };
+  alliance_status_str: string;
+  playoff_status_str: string;
+  overall_status_str: string;
+  next_match_key: string;
+  last_match_key: string;
+};
 
 // SQL Tables
 

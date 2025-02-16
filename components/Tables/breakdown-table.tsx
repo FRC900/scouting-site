@@ -61,10 +61,12 @@ export default function BreakdownTable({ data }: Props) {
         <Table.Td><Anchor component={Link} href={`/data/${form.team}`} fz="md">{form.name}</Anchor></Table.Td>
         <Table.Td>{form.rank}</Table.Td>
         <Table.Td>{form.avePA}</Table.Td>
-        <Table.Td>{form.maxPA}</Table.Td>
-        <Table.Td>{form.maxAutoPA}</Table.Td>
-        <Table.Td>{form.maxTeleopPA}</Table.Td>
-        <Table.Td>{form.maxEndgamePA}</Table.Td>
+        <Table.Td>{form.med}</Table.Td>
+        <Table.Td>{form.max}</Table.Td>
+        <Table.Td>{form.autoMed}</Table.Td>
+        <Table.Td>{form.autoMax}</Table.Td>
+        <Table.Td>{form.coralMax}</Table.Td>
+        <Table.Td>{form.algaeMax}</Table.Td>
         <Table.Td>{form.tba_opr}</Table.Td>
         <Table.Td>{form.sb_epa}</Table.Td>
       </Table.Tr>

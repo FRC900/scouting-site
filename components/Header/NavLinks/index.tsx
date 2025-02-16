@@ -72,8 +72,8 @@ const links = [
 				perm: "member",
 			},
 			{
-				link: "/qual",
-				label: "Qual Matches",
+				link: "/matches",
+				label: "Matches",
 				icon: (
 					<IconChartArrowsVertical
 						style={{ width: rem(14), height: rem(14) }}

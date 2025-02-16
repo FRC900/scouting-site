@@ -2,7 +2,7 @@
 
 import { Title, useMantineTheme, Tabs, rem, Container } from "@mantine/core";
 import {
-  IconChartArcs,
+  IconChartDonutFilled,
   IconChartCandleFilled,
   IconClipboardData,
   IconSos,
@@ -15,7 +15,6 @@ import {
   SOS,
 } from "../../lib/definitions";
 import InsightsTable from "../Tables/insights-table";
-import { useEffect } from "react";
 import BreakdownTable from "../Tables/breakdown-table";
 import DataTable from "../Tables/data-table";
 import SOSTable from "../Tables/sos-table";
@@ -93,7 +92,7 @@ export default function DataTabs({ teamData }: DataTabsProps) {
           <Tabs.Tab
             value="breakdown"
             leftSection={
-              <IconChartArcs style={{ width: rem(14), height: rem(14) }} />
+              <IconChartDonutFilled style={{ width: rem(14), height: rem(14) }} />
             }
           >
             Breakdown

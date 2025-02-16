@@ -7,45 +7,8 @@ import getBreakdown from "./breakdown";
 import getData from "./data";
 import getSOS from "./sos";
 import teamEventStatus from "../../fetchers/tba/teamEventStatus";
-
-const averagePA = (forms: StandForm[]) => {
-  const totalPA = forms
-    .map((form: StandForm) => {
-      let endgame = 0;
-      switch (form.endgame) {
-        case "Parked": {
-          endgame = 2;
-        }
-        case "Shallow": {
-          endgame = 6;
-        }
-        case "Deep": {
-          endgame = 12;
-        }
-      }
-      let startingZone = 0;
-      if (form.startingZone === true) {
-        startingZone = 3;
-      }
-      const matchPA =
-        form.autoL1 * 3 +
-        form.autoL2 * 4 +
-        form.autoL3 * 6 +
-        form.autoL4 * 7 +
-        form.teleopL1 * 2 +
-        form.teleopL2 * 3 +
-        form.teleopL3 * 4 +
-        form.teleopL4 * 5 +
-        form.teleopProcessor * 6 +
-        form.teleopNet * 4 +
-        endgame +
-        startingZone;
-
-      return matchPA;
-    })
-    .reduce((a, b) => a + b, 0);
-  return totalPA / forms.length;
-};
+import { calcPointsAdded } from "./pointsAdded";
+import { average } from "simple-statistics";
 
 export default async function calculateSimpleTeamData() {
   // Using Event Key, Fetch all the Participating Teams.
@@ -60,12 +23,16 @@ export default async function calculateSimpleTeamData() {
 
     const sbteamYear = teamYear(team);
     const tbastatus = teamEventStatus(team);
-    const [sb_teamYear, tba_status] = await Promise.all([sbteamYear, tbastatus]);
+    const [sb_teamYear, tba_status] = await Promise.all([
+      sbteamYear,
+      tbastatus,
+    ]);
 
-    const avePA = averagePA(teamStandForms);
+    const pointsAdded = calcPointsAdded(teamStandForms)
+    const avePA = average(pointsAdded)
 
     const insights = getInsights({ teamStandForms, avePA });
-    const breakdown = getBreakdown();
+    const breakdown = getBreakdown({ teamStandForms, pointsAdded, team });
     const data = getData();
     const sos = getSOS();
 
