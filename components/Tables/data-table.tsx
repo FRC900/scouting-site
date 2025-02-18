@@ -79,8 +79,8 @@ export default function DataTable({ data }: Props) {
         <Table.Td><Anchor component={Link} href={`/data/${form.team}`} fz="md">{form.name}</Anchor></Table.Td>
         <Table.Td>{form.rank}</Table.Td>
         <Table.Td>{form.avePA}</Table.Td>
-        <Table.Td>{form.preloaded}</Table.Td>
-        <Table.Td>{form.startingZone}</Table.Td>
+        <Table.Td>{form.preloaded}%</Table.Td>
+        <Table.Td>{form.startingZone}%</Table.Td>
         <Table.Td>
           <Group justify="space-between">
             <Text fz="sm" c="#5474B4" fw={700}>

@@ -37,7 +37,7 @@ export default async function calculateSimpleTeamData() {
 
     const insights = getInsights({ teamStandForms, avePA });
     const breakdown = getBreakdown({ teamStandForms, pointsAdded, sb_teamYear, opr });
-    const data = getData();
+    const data = getData(teamStandForms);
     const sos = getSOS();
 
     const teamData: Monstrosity = {

@@ -1,67 +1,90 @@
-import { type OnlyData } from "../../definitions";
+import { average } from "simple-statistics";
+import { StandForm, type OnlyData } from "../../definitions";
 
-  // const aveL1 =
-  //   teamStandForms
-  //     .map((form) => {
-  //       return form.autoL1 + form.teleopL1;
-  //     })
-  //     .reduce((a, b) => a + b, 0) / teamStandForms.length;
+export default function getData(teamStandForms: StandForm[]) {
+  const preloaded =
+    (teamStandForms.filter((form) => form.preloaded === true).length /
+      teamStandForms.length) *
+    100;
 
-  // const aveL2 =
-  //   teamStandForms
-  //     .map((form) => {
-  //       return form.autoL2 + form.teleopL2;
-  //     })
-  //     .reduce((a, b) => a + b, 0) / teamStandForms.length;
+  const startingZone =
+    (teamStandForms.filter((form) => form.startingZone === true).length /
+      teamStandForms.length) *
+    100;
 
-  // const aveL3 =
-  //   teamStandForms
-  //     .map((form) => {
-  //       return form.autoL3 + form.teleopL3;
-  //     })
-  //     .reduce((a, b) => a + b, 0) / teamStandForms.length;
+  const nothing = teamStandForms.filter(
+    (form) => form.endgame === "Nothing"
+  ).length;
+  const parked = teamStandForms.filter(
+    (form) => form.endgame === "Parked"
+  ).length;
+  const shallow = teamStandForms.filter(
+    (form) => form.endgame === "Shallow"
+  ).length;
+  const deep = teamStandForms.filter((form) => form.endgame === "Deep").length;
 
-  // const aveL4 =
-  //   teamStandForms
-  //     .map((form) => {
-  //       return form.autoL4 + form.teleopL4;
-  //     })
-  //     .reduce((a, b) => a + b, 0) / teamStandForms.length;
-
-  // const nothing = teamStandForms.filter(
-  //   (form) => form.endgame === "Nothing"
-  // ).length;
-  // const parked = teamStandForms.filter(
-  //   (form) => form.endgame === "Parked"
-  // ).length;
-  // const shallow = teamStandForms.filter(
-  //   (form) => form.endgame === "Shallow"
-  // ).length;
-  // const deep = teamStandForms.filter((form) => form.endgame === "Deep").length;
-
-export default function getData() {
   const data: OnlyData = {
-    preloaded: 0,
-    startingZone: 0,
+    preloaded: preloaded,
+    startingZone: startingZone,
     auto: {
-      l1: 0,
-      l2: 0,
-      l3: 0,
-      l4: 0,
+      l1: average(
+        teamStandForms.map((form) => {
+          return form.autoL1;
+        })
+      ),
+      l2: average(
+        teamStandForms.map((form) => {
+          return form.autoL2;
+        })
+      ),
+      l3: average(
+        teamStandForms.map((form) => {
+          return form.autoL3;
+        })
+      ),
+      l4: average(
+        teamStandForms.map((form) => {
+          return form.autoL4;
+        })
+      ),
     },
     teleop: {
-      l1: 0,
-      l2: 0,
-      l3: 0,
-      l4: 0,
+      l1: average(
+        teamStandForms.map((form) => {
+          return form.teleopL1;
+        })
+      ),
+      l2: average(
+        teamStandForms.map((form) => {
+          return form.teleopL2;
+        })
+      ),
+      l3: average(
+        teamStandForms.map((form) => {
+          return form.teleopL3;
+        })
+      ),
+      l4: average(
+        teamStandForms.map((form) => {
+          return form.teleopL4;
+        })
+      ),
     },
-    processor: 0,
-    net: 0,
+    processor: average(
+      teamStandForms.map((form) => {
+        return form.teleopProcessor;
+      })
+    ),
+    net: average(
+      teamStandForms.map((form) => {
+        return form.teleopNet;
+      })
+    ),
     climb: {
-      nothing: 0,
-      parked: 0,
-      shallow: 0,
-      deep: 0,
+      nothing: nothing,
+      parked: parked,
+      shallow: shallow,
+      deep: deep,
     },
   };
 
