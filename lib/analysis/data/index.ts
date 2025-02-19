@@ -7,7 +7,7 @@ import getBreakdown from "./breakdown";
 import getData from "./data";
 import getSOS from "./sos";
 import teamEventStatus from "../../fetchers/tba/teamEventStatus";
-import { calcPointsAdded } from "./pointsAdded";
+import { calcPointsAdded } from "../pointsAdded";
 import { average } from "simple-statistics";
 import eventOprs from "../../fetchers/tba/eventOprs";
 

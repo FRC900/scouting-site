@@ -10,8 +10,9 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
-    "@mantine/core": "^7.13.2",
-    "@mantine/hooks": "^7.13.2",
+    "@mantine/charts": "^7.17.0",
+    "@mantine/core": "^7.17.0",
+    "@mantine/hooks": "^7.17.0",
     "@tabler/core": "1.0.0-beta21",
     "@tabler/icons-react": "^3.19.0",
     "@vercel/postgres": "^0.10.0",
@@ -23,8 +24,10 @@
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-hook-form": "^7.53.0",
+    "recharts": "2",
     "simple-statistics": "^7.8.7",
     "swr": "^2.2.5",
+    "webpack": "^5.98.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {

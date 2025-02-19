@@ -1,6 +1,6 @@
 import { max, quantile } from "simple-statistics";
 import { StandForm, type OnlyBreakdown } from "../../definitions";
-import { calcAutoPointsAdded, calcEndgamePointsAdded, calcTeleopAlgae, calcTeleopCoral } from "./pointsAdded";
+import { calcAutoPointsAdded, calcEndgamePointsAdded, calcTeleopAlgae, calcTeleopCoral } from "../pointsAdded";
 
 interface BreakdownProps {
   teamStandForms: StandForm[];

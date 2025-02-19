@@ -1,4 +1,4 @@
-import { StandForm } from "../../definitions";
+import { StandForm } from "../definitions";
 
 export const calcPointsAdded = (forms: StandForm[]) => {
   const pointsAdded = forms.map((form: StandForm) => {

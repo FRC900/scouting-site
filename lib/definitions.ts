@@ -176,8 +176,19 @@ export type OnlySOS = {
 
 export type SOS = Overview & OnlySOS;
 
+export type Note = {
+  note: string,
+  user: string,
+  status: string,
+}
+
 export type FullTeamData = {
   name: string;
+  pa: number[];
+  autoPA: number[];
+  teleopPA: number[];
+  endgamePA: number[];
+  notes: Note[];
 };
 
 export type TBATeamSimple = {

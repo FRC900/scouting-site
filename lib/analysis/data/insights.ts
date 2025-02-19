@@ -1,5 +1,5 @@
 import { type OnlyInsights, StandForm } from "../../definitions";
-import { calcAutoPointsAdded, calcEndgamePointsAdded } from "./pointsAdded";
+import { calcAutoPointsAdded, calcEndgamePointsAdded } from "../pointsAdded";
 import { average } from "simple-statistics";
 
 interface InsightsProps {
