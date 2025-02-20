@@ -54,7 +54,7 @@ export async function GET(request: NextRequest) {
     };
 
     createStandForm(data).then(() => console.log("success, had enough information"));
-    return NextResponse.redirect(new URL('/data', request.url));
+    return NextResponse.redirect(new URL('/', request.url));
   } else {
     console.log("failed, wrong amount of info provided :(");
   }
