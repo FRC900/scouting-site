@@ -6,13 +6,13 @@ ZebraScouting is a powerful new scouting site application for recording and proc
 
 ### Priority (Big Stuff):
 
-* team report page
 * qr code route
 * implment specific access requirements (auth)
 * Add image submission to pit forms.
 
 ### Lesser Priority:
 
+* more detailed team report page
 * dashboard (home page)
 * Matches
   * Qual Matches
@@ -42,3 +42,4 @@ ZebraScouting is a powerful new scouting site application for recording and proc
   * Insights
   * Breakdown
   * Data
+* team report page
