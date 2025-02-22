@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createStandForm } from "../../../lib/actions";
-import { StandForm } from "../../../lib/definitions";
+import { createStandForm } from "../../../../lib/actions";
+import { StandForm } from "../../../../lib/definitions";
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;

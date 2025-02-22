@@ -2,7 +2,6 @@ import "@mantine/core/styles.css";
 import React from "react";
 import { MantineProvider, ColorSchemeScript, Stack } from "@mantine/core";
 import { theme } from "../theme";
-import Header from "../components/Header";
 import { Roboto } from "next/font/google";
 import '@mantine/charts/styles.css';
 
@@ -31,10 +30,7 @@ export default function RootLayout({ children }: { children: any }) {
       <body>
           <MantineProvider theme={theme} defaultColorScheme="dark">
             <Stack align="stretch" justify="flex-start" gap="xs" pb="md">
-              <Header />
-              <Stack align="center" gap="xs" pt="1rem">
-                {children}
-              </Stack>
+              {children}
             </Stack>
           </MantineProvider>
       </body>

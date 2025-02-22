@@ -1,6 +1,6 @@
 import { Breadcrumbs, Title } from "@mantine/core";
-import { fetchPitFormById } from "../../../../../lib/data";
-import PitForm from "../../../../../components/Forms/pit"
+import { fetchPitFormById } from "../../../../../../lib/data";
+import PitForm from "../../../../../../components/Forms/pit"
 
 const items = [
   { title: 'Pit Form' },
