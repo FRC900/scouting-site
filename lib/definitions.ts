@@ -111,10 +111,6 @@ export type Monstrosity = Overview & {
       deep: number;
     };
   };
-  sos: {
-    score: number;
-    sb_composite: number;
-  };
 };
 
 export type OnlyInsights = {

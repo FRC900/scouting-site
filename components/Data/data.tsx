@@ -17,7 +17,7 @@ import {
 import InsightsTable from "../Tables/insights-table";
 import BreakdownTable from "../Tables/breakdown-table";
 import DataTable from "../Tables/data-table";
-import SOSTable from "../Tables/sos-table";
+// import SOSTable from "../Tables/sos-table";
 
 interface DataTabsProps {
   teamData: Monstrosity[];
@@ -59,16 +59,16 @@ export default function DataTabs({ teamData }: DataTabsProps) {
     return data;
   });
 
-  const sos: SOS[] = teamData.map((row) => {
-    const sos: SOS = {
-      team: row.team,
-      name: row.name,
-      rank: row.rank,
-      avePA: row.avePA,
-      ...row.sos,
-    };
-    return sos;
-  });
+  // const sos: SOS[] = teamData.map((row) => {
+  //   const sos: SOS = {
+  //     team: row.team,
+  //     name: row.name,
+  //     rank: row.rank,
+  //     avePA: row.avePA,
+  //     ...row.sos,
+  //   };
+  //   return sos;
+  // });
 
   return (
     <>
@@ -105,14 +105,14 @@ export default function DataTabs({ teamData }: DataTabsProps) {
           >
             Data
           </Tabs.Tab>
-          <Tabs.Tab
+          {/* <Tabs.Tab
             value="sos"
             leftSection={
               <IconSos style={{ width: rem(14), height: rem(14) }} />
             }
           >
             Strength of Schedule
-          </Tabs.Tab>
+          </Tabs.Tab> */}
         </Tabs.List>
         <Tabs.Panel value="insights">
           {Array.isArray(insights) ? (
@@ -135,13 +135,13 @@ export default function DataTabs({ teamData }: DataTabsProps) {
             <p>Error: Data is not an array</p>
           )}
         </Tabs.Panel>
-        <Tabs.Panel value="sos">
+        {/* <Tabs.Panel value="sos">
           {Array.isArray(sos) ? (
             <SOSTable data={sos} />
           ) : (
             <p>Error: Data is not an array</p>
           )}
-        </Tabs.Panel>
+        </Tabs.Panel> */}
       </Tabs>
     </>
   );

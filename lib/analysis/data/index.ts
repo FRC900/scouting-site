@@ -5,7 +5,6 @@ import teamYear from "../../fetchers/sb/teamYear";
 import getInsights from "./insights";
 import getBreakdown from "./breakdown";
 import getData from "./data";
-import getSOS from "./sos";
 import teamEventStatus from "../../fetchers/tba/teamEventStatus";
 import { calcPointsAdded } from "../pointsAdded";
 import { average } from "simple-statistics";
@@ -38,7 +37,6 @@ export default async function calculateSimpleTeamData() {
     const insights = getInsights({ teamStandForms, avePA });
     const breakdown = getBreakdown({ teamStandForms, pointsAdded, sb_teamYear, opr });
     const data = getData(teamStandForms);
-    const sos = getSOS();
 
     const teamData: Monstrosity = {
       team: team,
@@ -53,9 +51,6 @@ export default async function calculateSimpleTeamData() {
       },
       data: {
         ...data,
-      },
-      sos: {
-        ...sos,
       },
     };
 
