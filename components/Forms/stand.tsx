@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useOnlineStatus } from "../../lib/hooks/useOnlineStatus";
 import { createStandForm, deleteStandForm, updateStandForm } from "../../lib/actions";
 import { useDisclosure } from "@mantine/hooks";
+import { Incrementor } from "./inputs/Incrementor";
 
 interface Props {
 	create: boolean;
@@ -97,64 +98,64 @@ export default function StandForm({ create, defaultForm, id }: Props) {
 						color={theme.colors.milkshake[4]}
 						label="Left Starting Zone?"
 					/>
-					<NumberInput
+					<Incrementor
 						name="autoL1"
 						control={control}
-						label="Level 1"
+						title="Level 1"
 					/>
-					<NumberInput
+					<Incrementor
 						name="autoL2"
 						control={control}
-						label="Level 2"
+						title="Level 2"
 					/>
-					<NumberInput
+					<Incrementor
 						name="autoL3"
 						control={control}
-						label="Level 3"
+						title="Level 3"
 					/>
-					<NumberInput
+					<Incrementor
 						name="autoL4"
 						control={control}
-						label="Level 4"
+						title="Level 4"
 					/>
 				</Stack>
 				<Stack>
 					<Text fw={700}>TeleOp</Text>
-					<NumberInput
+					<Incrementor
 						name="teleopL1"
 						control={control}
-						label="Level 1"
+						title="Level 1"
 					/>
-					<NumberInput
+					<Incrementor
 						name="teleopL2"
 						control={control}
-						label="Level 2"
+						title="Level 2"
 					/>
-					<NumberInput
+					<Incrementor
 						name="teleopL3"
 						control={control}
-						label="Level 3"
+						title="Level 3"
 					/>
-					<NumberInput
+					<Incrementor
 						name="teleopL4"
 						control={control}
-						label="Level 4"
+						title="Level 4"
 					/>
-					<NumberInput
+					<Incrementor
 						name="teleopProcessor"
 						control={control}
-						label="Processor"
+						title="Processor"
 					/>
-					<NumberInput
+					<Incrementor
 						name="teleopNet"
 						control={control}
-						label="Net"
+						title="Net"
 					/>
 				</Stack>
 				<Stack>
 					<Text fw={700}>Penalties</Text>
-					<NumberInput name="fouls" control={control} label="Fouls" />
-					<NumberInput name="techfouls" control={control} label="Tech Fouls" />
+					<Incrementor name="fouls" control={control} title="Minor Fouls" />
+					<Incrementor name="techfouls" control={control} title="Major Fouls" />
 				</Stack>
 				<Stack>
 					<Text fw={700}>Misc.</Text>
