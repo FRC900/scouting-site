@@ -52,14 +52,16 @@ export default function Page() {
 					>
 						Users
 					</Button>
-					{/* <Button
+					<Button
+						component={Link}
+						href="/records/verify"
 						variant="filled"
 						color={theme.colors.milkshake[4]}
 						size="md"
 						leftSection={<IconRosetteDiscountCheckFilled size={16} />}
 					>
 						Verify
-					</Button> */}
+					</Button>
 				</SimpleGrid>
 			</Group>
 		</>

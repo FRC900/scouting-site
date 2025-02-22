@@ -6,11 +6,11 @@ import {
 	IconCalendarEvent,
 	IconChartArcs,
 	IconChartArrowsVertical,
-	IconChartDots3,
 	IconChevronDown,
 	IconClipboardData,
 	IconFileFilled,
 	IconForms,
+	IconRosetteDiscountCheckFilled,
 	IconUserFilled,
 } from "@tabler/icons-react";
 import classes from "../Header.module.css";
@@ -60,6 +60,12 @@ const links = [
 				icon: <IconUserFilled style={{ width: rem(14), height: rem(14) }} />,
 				perm: "admin",
 			},
+			{
+				link: "/records/verify",
+				label: "Verify",
+				icon: <IconRosetteDiscountCheckFilled style={{ width: rem(14), height: rem(14) }} />,
+				perm: "lead"
+			}
 		],
 	},
 	{

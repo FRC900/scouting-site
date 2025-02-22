@@ -187,6 +187,18 @@ export type FullTeamData = {
   notes: Note[];
 };
 
+export type VerificationErrors = {
+  key: string;
+  teams: {
+    number: number;
+    form: string;
+  }[];
+  errors: {
+    type: string;
+    magnitude: number;
+  }[];
+};
+
 export type TBATeamSimple = {
   key: string;
   team_number: number;
