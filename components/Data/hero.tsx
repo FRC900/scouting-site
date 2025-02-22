@@ -2,7 +2,7 @@
 
 import { AreaChart, RadarChart } from "@mantine/charts";
 import { Stack, Group, useMantineTheme } from "@mantine/core";
-import { AreaChartData } from "../../app/data/[id]/page";
+import { AreaChartData } from "../../app/(header)/data/[id]/page";
 
 interface HeroProps {
   pa: AreaChartData;

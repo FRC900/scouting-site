@@ -1,8 +1,8 @@
 import { Stack, Title, Center } from "@mantine/core";
-import calculateTeam from "../../../lib/analysis/calculateTeamReport";
+import calculateTeam from "../../../../lib/analysis/calculateTeamReport";
 import { unstable_cache } from "next/cache";
-import Hero from "../../../components/Data/hero";
-import Notes from "../../../components/Data/notes";
+import Hero from "../../../../components/Data/hero";
+import Notes from "../../../../components/Data/notes";
 
 const getTeam = unstable_cache(
   async (team) => {

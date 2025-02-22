@@ -1,5 +1,5 @@
 import { Group, Title } from "@mantine/core";
-import StandForm from "../../components/Forms/stand";
+import StandForm from "../../../components/Forms/stand";
 
 export default function Page() {
   return(

@@ -1,7 +1,7 @@
 export type StandForm = {
   match: number;
   slot: string;
-  team: number;
+  // team: number;
   preloaded: boolean;
   startingZone: boolean;
   autoL1: number;
@@ -110,10 +110,6 @@ export type Monstrosity = Overview & {
       shallow: number;
       deep: number;
     };
-  };
-  sos: {
-    score: number;
-    sb_composite: number;
   };
 };
 

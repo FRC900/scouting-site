@@ -1,7 +1,7 @@
 import { unstable_cache } from "next/cache";
-import calculateSimpleTeamData from "../../lib/analysis/data";
-import { Monstrosity } from "../../lib/definitions";
-import DataTabs from "../../components/Data/data";
+import calculateSimpleTeamData from "../../../lib/analysis/data";
+import { Monstrosity } from "../../../lib/definitions";
+import DataTabs from "../../../components/Data/data";
 import { Suspense } from "react";
 
 const team = unstable_cache(
