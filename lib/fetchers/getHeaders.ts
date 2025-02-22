@@ -8,6 +8,6 @@ export function getTBAHeaders() {
 export function getSBHeaders() {
 	const headers = new Headers();
 	// headers.append("Authorization", `Bearer ${process.env.NEXT_PUBLIC_SB_SECRET}`);
-	headers.append("accept", "application/json");
+	headers.append("Accept", "application/json");
 	return headers;
 }
