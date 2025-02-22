@@ -18,7 +18,7 @@ export type AreaChartData = {
 }[];
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const team = await calculateTeam(+params.id);
+  const team = await getTeam(params.id);
 
   const pa: AreaChartData = team.pa.map((num, index) => {
     return {
