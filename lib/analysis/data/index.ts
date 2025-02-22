@@ -9,6 +9,7 @@ import teamEventStatus from "../../fetchers/tba/teamEventStatus";
 import { calcPointsAdded } from "../pointsAdded";
 import { average } from "simple-statistics";
 import eventOprs from "../../fetchers/tba/eventOprs";
+import teamSimple from "../../fetchers/tba/teamSimple";
 
 export default async function calculateSimpleTeamData() {
   // Using Event Key, Fetch all the Participating Teams.
@@ -25,9 +26,11 @@ export default async function calculateSimpleTeamData() {
 
     const sbteamYear = teamYear(team);
     const tbastatus = teamEventStatus(team);
-    const [sb_teamYear, tba_status] = await Promise.all([
+    const tbateamSimple = teamSimple(team);
+    const [sb_teamYear, tba_status, tba_teamSimple] = await Promise.all([
       sbteamYear,
       tbastatus,
+      tbateamSimple
     ]);
     const opr = oprs.oprs[`frc${team}`];
 
@@ -40,7 +43,7 @@ export default async function calculateSimpleTeamData() {
 
     const teamData: Monstrosity = {
       team: team,
-      name: sb_teamYear.name,
+      name: tba_teamSimple.nickname,
       rank: tba_status.qual.ranking.rank,
       avePA: avePA,
       insights: {
