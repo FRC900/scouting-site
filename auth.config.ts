@@ -11,7 +11,8 @@ export const authConfig = {
       const isOnPitForm = nextUrl.pathname.startsWith('/pit-form');
       const isOnRecords = nextUrl.pathname.startsWith('/records');
       const isOnData = nextUrl.pathname.startsWith('/data')
-      if (isOnStandForm || isOnPitForm || isOnRecords || isOnData) {
+      const isOnMatches = nextUrl.pathname.startsWith('/matches')
+      if (isOnStandForm || isOnPitForm || isOnRecords || isOnData || isOnMatches) {
         if (isLoggedIn) return true;
         return false; // Redirect unauthenticated users to login page
       } else if (isLoggedIn) {
