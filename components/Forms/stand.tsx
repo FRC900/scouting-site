@@ -14,6 +14,7 @@ import { useOnlineStatus } from "../../lib/hooks/useOnlineStatus";
 import { createStandForm, deleteStandForm, updateStandForm } from "../../lib/actions";
 import { useDisclosure } from "@mantine/hooks";
 import { Incrementor } from "./inputs/Incrementor";
+import { TextInput } from "./inputs/TextInput";
 
 interface Props {
 	create: boolean;
@@ -32,6 +33,7 @@ export default function StandForm({ create, defaultForm, id }: Props) {
 		defaultValues: {
 			match: undefined,
 			slot: undefined,
+			username: "",
 			preloaded: true,
 			startingZone: false,
 			autoL1: 0,
@@ -53,7 +55,6 @@ export default function StandForm({ create, defaultForm, id }: Props) {
 			...defaultForm,
 		},
 	});
-	``;
 
 	const submit = (data: StandForm, create: boolean, id: string) => {
 		if (isOnline) {	
@@ -82,6 +83,12 @@ export default function StandForm({ create, defaultForm, id }: Props) {
 						label="Slot"
 						placeholder="Select"
 						data={["Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"]}
+					/>
+					<TextInput
+						name="username"
+						control={control}
+						label="Scouter"
+						placeholder="Your Name"
 					/>
 				</Stack>
 				<Stack>

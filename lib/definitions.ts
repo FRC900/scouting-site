@@ -1,7 +1,7 @@
 export type StandForm = {
   match: number;
   slot: string;
-  // team: number;
+  username: string;
   preloaded: boolean;
   startingZone: boolean;
   autoL1: number;
@@ -24,7 +24,6 @@ export type StandForm = {
 
 export type StandFormDatabase = StandForm & {
   team: number;
-  username: string;
   date: string;
 };
 
