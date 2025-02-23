@@ -6,35 +6,25 @@ ZebraScouting is a powerful new scouting site application for recording and proc
 
 ### Priority (Big Stuff):
 
-* qr code route
-* implment specific access requirements (auth)
-* Add image submission to pit forms.
+* **Add image submission to pit forms.**
+* more detailed team report page
+* Tabs - stand form
 
 ### Lesser Priority:
 
-* more detailed team report page
-* dashboard (home page)
 * Matches
   * Qual Matches
   * Alliances
   * Elim Matches
 * Pit form display for showing what teams have not been pit scouted.
 * Automatically delete and replace pit form when duplicate is created
-* Strength of Schedule
-* ability to manually input team number (stand form)
-* stand form upgrades:
-  * big add/sub buttons
-  * Tabs
-  * Save / Caching
 
 ### Not until competition:
 
 * Blue alliance verification
-* Admin Dashboard
-  * Switch Match Key
 * Ability to factor in the influence of previous competitions
 
-## Completed!!
+## Completed
 
 * Backend for logging in, logging out, registering.
 * Enable authentication
@@ -43,3 +33,6 @@ ZebraScouting is a powerful new scouting site application for recording and proc
   * Breakdown
   * Data
 * team report page
+* qr code route
+* implment specific access requirements (auth)
+* Incrementor - stand form
