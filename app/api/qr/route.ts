@@ -9,8 +9,6 @@ export async function GET(request: NextRequest) {
 
   const formArray = form?.split(",");
 
-  if (formArray) console.log(formArray.length);
-
   if (
     formArray &&
     formArray.length === 21
@@ -55,7 +53,7 @@ export async function GET(request: NextRequest) {
     };
 
     createStandForm(data).then(() => console.log("success, had enough information"));
-    return NextResponse.redirect(new URL('/', request.url));
+    return NextResponse.redirect(new URL(`/api/qr/${form}`, request.url));
   } else {
     console.log("failed, wrong amount of info provided :(");
   }
