@@ -64,7 +64,7 @@ export default function PitForm({ create, defaultForm, id }: Props) {
   return (
     <Form
       control={control}
-      onSubmit={({ data }) => submit(data, create, id, file)}
+      onSubmit={({ data }) => submit(data, create, id)}
       onError={(e) => console.log(e)}
     >
       <Stack>
