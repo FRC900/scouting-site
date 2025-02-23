@@ -71,7 +71,7 @@ export function Incrementor<T extends FieldValues>({
           handlersRef={handlersRef}
           step={1}
           min={0}
-          w={45}
+          w={100}
         />
         <Button
           variant="default"
