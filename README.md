@@ -6,9 +6,8 @@ ZebraScouting is a powerful new scouting site application for recording and proc
 
 ### Priority (Big Stuff):
 
-* Add image submission to pit forms.
+* Add image submission to pit forms
 * more detailed team report page
-* end repeating decimals
 
 ### Lesser Priority:
 
@@ -38,3 +37,4 @@ ZebraScouting is a powerful new scouting site application for recording and proc
 * implment specific access requirements (auth)
 * Incrementor - stand form
 * Tabs - stand form
+* end repeating decimals

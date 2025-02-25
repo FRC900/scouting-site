@@ -26,7 +26,7 @@ export default function getBreakdown({
     autoMax: max(autoPointsAdded),
     coralMax: max(teleopCoral),
     algaeMax: max(teleopAlgae),
-    tba_opr: Math.round(opr* 10) / 10,
+    tba_opr: Math.round(opr * 10) / 10,
     sb_epa: sb_teamYear.epa.total_points.mean,
   };
 

@@ -45,7 +45,7 @@ export default async function calculateSimpleTeamData() {
       team: team,
       name: tba_teamSimple.nickname,
       rank: tba_status.qual.ranking.rank,
-      avePA: avePA,
+      avePA: Math.round(avePA * 10) / 10,
       insights: {
         ...insights,
       },
