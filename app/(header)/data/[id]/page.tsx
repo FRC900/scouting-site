@@ -73,6 +73,10 @@ export default async function Page({ params }: { params: { id: string } }) {
           autoPA={autoPA}
           teleopPA={teleopPA}
           endgamePA={endgamePA}
+          avePA={team.avePA}
+          aveAutoPA={team.aveAutoPA}
+          aveTeleopPA={team.aveTeleopPA}
+          aveEndgamePA={team.aveEndgamePA}
         />  
 
         <Notes notes={team.notes} />

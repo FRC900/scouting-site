@@ -1,7 +1,7 @@
 "use client";
 
-import { AreaChart, RadarChart } from "@mantine/charts";
-import { Stack, Group, useMantineTheme } from "@mantine/core";
+import { AreaChart } from "@mantine/charts";
+import { Stack, Group, useMantineTheme, Text, Container } from "@mantine/core";
 import { AreaChartData } from "../../app/(header)/data/[id]/page";
 
 interface HeroProps {
@@ -9,45 +9,80 @@ interface HeroProps {
   autoPA: AreaChartData;
   teleopPA: AreaChartData;
   endgamePA: AreaChartData;
+  avePA: number;
+  aveAutoPA: number;
+  aveTeleopPA: number;
+  aveEndgamePA: number;
 }
 
-export default function Hero({ pa, autoPA, teleopPA, endgamePA }: HeroProps) {
+export default function Hero({
+  pa,
+  autoPA,
+  teleopPA,
+  endgamePA,
+  avePA,
+  aveAutoPA,
+  aveTeleopPA,
+  aveEndgamePA,
+}: HeroProps) {
   const theme = useMantineTheme();
 
   return (
-    <Stack>
+    <Container>
       <Group>
-        <AreaChart
-          h={300}
-          w={600}
-          data={pa}
-          dataKey="product"
-          series={[{ name: "points", color: theme.colors.milkshake[4] }]}
-        />
-        <AreaChart
-          h={300}
-          w={600}
-          data={autoPA}
-          dataKey="product"
-          series={[{ name: "points", color: theme.colors.milkshake[4] }]}
-        />
+        <Stack>
+          <Text ta="center">Total Points Added</Text>
+          <AreaChart
+            h={300}
+            w={450}
+            data={pa}
+            dataKey="product"
+            referenceLines={[
+              { y: avePA, label: `Mean: ${avePA}`, color: theme.colors.pillow[2] },
+            ]}
+            series={[{ name: "points", color: theme.colors.pillow[1] }]}
+            withPointLabels
+          />
+          <Text ta="center">Auto Points Added</Text>
+          <AreaChart
+            h={300}
+            w={450}
+            data={autoPA}
+            dataKey="product"
+            referenceLines={[
+              { y: aveAutoPA, label: `Mean: ${aveAutoPA}`, color: theme.colors.pillow[2] },
+            ]}
+            series={[{ name: "points", color: theme.colors.pillow[1] }]}
+            withPointLabels
+          />
+        </Stack>
+        <Stack>
+          <Text ta="center">TeleOp Points Added</Text>
+          <AreaChart
+            h={300}
+            w={450}
+            data={teleopPA}
+            dataKey="product"
+            referenceLines={[
+              { y: aveTeleopPA, label: `Mean: ${aveTeleopPA}`, color: theme.colors.pillow[2] },
+            ]}
+            series={[{ name: "points", color: theme.colors.pillow[1] }]}
+            withPointLabels
+          />
+          <Text ta="center">Endgame Points Added</Text>
+          <AreaChart
+            h={300}
+            w={450}
+            data={endgamePA}
+            dataKey="product"
+            referenceLines={[
+              { y: aveEndgamePA, label: `Mean: ${aveEndgamePA}`, color: theme.colors.pillow[2] },
+            ]}
+            series={[{ name: "points", color: theme.colors.pillow[1] }]}
+            withPointLabels
+          />
+        </Stack>
       </Group>
-      <Group>
-        <AreaChart
-          h={300}
-          w={600}
-          data={teleopPA}
-          dataKey="product"
-          series={[{ name: "points", color: theme.colors.milkshake[4] }]}
-        />
-        <AreaChart
-          h={300}
-          w={600}
-          data={endgamePA}
-          dataKey="product"
-          series={[{ name: "points", color: theme.colors.milkshake[4] }]}
-        />
-      </Group>
-    </Stack>
+    </Container>
   );
 }

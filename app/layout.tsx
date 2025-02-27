@@ -1,9 +1,9 @@
 import "@mantine/core/styles.css";
+import '@mantine/charts/styles.css';
 import React from "react";
 import { MantineProvider, ColorSchemeScript, Stack } from "@mantine/core";
 import { theme } from "../theme";
 import { Roboto } from "next/font/google";
-import '@mantine/charts/styles.css';
 
 const roboto = Roboto({
   weight: "400",

@@ -1,3 +1,5 @@
+import { NumberInputStylesNames } from "@mantine/core";
+
 export type StandForm = {
   match: number;
   slot: string;
@@ -174,7 +176,7 @@ export type SOS = Overview & OnlySOS;
 export type Note = {
   note: string,
   user: string,
-  status: string,
+  status: number,
 }
 
 export type FullTeamData = {
@@ -183,6 +185,10 @@ export type FullTeamData = {
   autoPA: number[];
   teleopPA: number[];
   endgamePA: number[];
+  avePA: number;
+  aveAutoPA: number;
+  aveTeleopPA: number;
+  aveEndgamePA: number;
   notes: Note[];
 };
 

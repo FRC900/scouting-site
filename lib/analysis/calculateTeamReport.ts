@@ -1,3 +1,4 @@
+import { average } from "simple-statistics";
 import { fetchStandFormsByTeam, fetchPitFormByTeam } from "../data";
 import { FullTeamData, Note } from "../definitions";
 import teamYear from "../fetchers/sb/teamYear";
@@ -26,16 +27,25 @@ export default async function calculateTeam(teamNumber: number) {
         return({
             note: form.notes,
             user: form.username,
-            status: form.status,
+            status: +form.status,
         })
     })
+
+    const pa = calcPointsAdded(standRecords);
+    const autoPA = calcAutoPointsAdded(standRecords);
+    const teleopPA = calcTeleopPointsAdded(standRecords);
+    const endgamePA = calcEndgamePointsAdded(standRecords);
     
     const teamData: FullTeamData = {
         name: team_simple.nickname,
-        pa: calcPointsAdded(standRecords),
-        autoPA: calcAutoPointsAdded(standRecords),
-        teleopPA: calcTeleopPointsAdded(standRecords),
-        endgamePA: calcEndgamePointsAdded(standRecords),
+        pa: pa,
+        autoPA: autoPA,
+        teleopPA: teleopPA,
+        endgamePA: endgamePA,
+        avePA: Math.round(average(pa) * 10) / 10,
+        aveAutoPA: Math.round(average(autoPA) * 10) / 10,
+        aveTeleopPA: Math.round(average(teleopPA) * 10) / 10,
+        aveEndgamePA: Math.round(average(endgamePA) * 10) / 10,
         notes: notes,
     };
 
