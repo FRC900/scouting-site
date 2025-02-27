@@ -31,7 +31,7 @@ export default function Hero({
     <Container>
       <Group>
         <Stack>
-          <Text ta="center">Total Points Added</Text>
+          <Text ta="center" size='lg'>Total Points Added</Text>
           <AreaChart
             h={300}
             w={450}
@@ -43,7 +43,7 @@ export default function Hero({
             series={[{ name: "points", color: theme.colors.pillow[1] }]}
             withPointLabels
           />
-          <Text ta="center">Auto Points Added</Text>
+          <Text ta="center" size='lg'>Auto Points Added</Text>
           <AreaChart
             h={300}
             w={450}
@@ -57,7 +57,7 @@ export default function Hero({
           />
         </Stack>
         <Stack>
-          <Text ta="center">TeleOp Points Added</Text>
+          <Text ta="center" size='lg'>TeleOp Points Added</Text>
           <AreaChart
             h={300}
             w={450}
@@ -69,7 +69,7 @@ export default function Hero({
             series={[{ name: "points", color: theme.colors.pillow[1] }]}
             withPointLabels
           />
-          <Text ta="center">Endgame Points Added</Text>
+          <Text ta="center" size='lg'>Endgame Points Added</Text>
           <AreaChart
             h={300}
             w={450}

@@ -1,8 +1,11 @@
-import { Stack, Title, Center } from "@mantine/core";
+import { Stack, Title, Group, Button, rem } from "@mantine/core";
 import calculateTeam from "../../../../lib/analysis/calculateTeamReport";
 import { unstable_cache } from "next/cache";
 import Hero from "../../../../components/Data/hero";
 import Notes from "../../../../components/Data/notes";
+import Link from "next/link";
+import { IconExternalLink } from "@tabler/icons-react";
+import { year } from "../../../../lib/constants";
 
 const getTeam = unstable_cache(
   async (team) => {
@@ -48,25 +51,45 @@ export default async function Page({ params }: { params: { id: string } }) {
     };
   });
 
-  // Team Number and Name
   // Robot Picture
   // Link to The Blue Alliance and Statbotics
-  // Radar Chart
-
-  // What is their autos?
   // Penalties?
-  // Status
-  // Notes
   // Weight + Drive Train + Preferred Game Piece + Electrical + Bumpers
 
   return (
     <>
       <Stack>
-        <Center>
+        <Group justify="space-around">
           <Title>
             {params.id} / {team.name}
           </Title>
-        </Center>
+          <Group>
+            <Button
+              component={Link}
+              href={`https://thebluealliance.com/team/${params.id}`}
+              target="_blank"
+              variant="outline"
+              color="indigo"
+              rightSection={
+                <IconExternalLink style={{ width: rem(14), height: rem(14) }} />
+              }
+            >
+              TBA
+            </Button>
+            <Button
+              component={Link}
+              href={`https://statbotics.io/team/${params.id}/${year}`}
+              target="_blank"
+              variant="outline"
+              color="red"
+              rightSection={
+                <IconExternalLink style={{ width: rem(14), height: rem(14) }} />
+              }
+            >
+              Statbotics
+            </Button>
+          </Group>
+        </Group>
 
         <Hero
           pa={pa}
@@ -77,7 +100,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           aveAutoPA={team.aveAutoPA}
           aveTeleopPA={team.aveTeleopPA}
           aveEndgamePA={team.aveEndgamePA}
-        />  
+        />
 
         <Notes notes={team.notes} />
       </Stack>

@@ -1,11 +1,10 @@
 "use client";
 
-import { Title, useMantineTheme, Tabs, rem, Container } from "@mantine/core";
+import { Title, useMantineTheme, Tabs, rem, Container, Text } from "@mantine/core";
 import {
   IconChartDonutFilled,
   IconChartCandleFilled,
-  IconClipboardData,
-  IconSos,
+  IconClipboardDataFilled,
 } from "@tabler/icons-react";
 import {
   Breakdown,
@@ -83,27 +82,27 @@ export default function DataTabs({ teamData }: DataTabsProps) {
             value="insights"
             leftSection={
               <IconChartCandleFilled
-                style={{ width: rem(14), height: rem(14) }}
+                style={{ width: rem(16), height: rem(16) }}
               />
             }
           >
-            Insights
+            <Text size='md'>Insights</Text>
           </Tabs.Tab>
           <Tabs.Tab
             value="breakdown"
             leftSection={
-              <IconChartDonutFilled style={{ width: rem(14), height: rem(14) }} />
+              <IconChartDonutFilled style={{ width: rem(16), height: rem(16) }} />
             }
           >
-            Breakdown
+            <Text size='md'>Breakdown</Text>
           </Tabs.Tab>
           <Tabs.Tab
             value="data"
             leftSection={
-              <IconClipboardData style={{ width: rem(14), height: rem(14) }} />
+              <IconClipboardDataFilled style={{ width: rem(16), height: rem(16) }} />
             }
           >
-            Data
+            <Text size='md'>Data</Text>
           </Tabs.Tab>
           {/* <Tabs.Tab
             value="sos"
