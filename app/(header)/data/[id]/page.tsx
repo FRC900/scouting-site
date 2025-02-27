@@ -1,7 +1,7 @@
 import { Stack, Title, Group, Button, rem } from "@mantine/core";
 import calculateTeam from "../../../../lib/analysis/calculateTeamReport";
 import { unstable_cache } from "next/cache";
-import Hero from "../../../../components/Data/hero";
+import Charts from "../../../../components/Data/charts";
 import Notes from "../../../../components/Data/notes";
 import Link from "next/link";
 import { IconExternalLink } from "@tabler/icons-react";
@@ -51,9 +51,15 @@ export default async function Page({ params }: { params: { id: string } }) {
     };
   });
 
+  const penaltyPA: AreaChartData = team.penaltyPA.map((num, index) => {
+    return {
+      product: `Match ${index + 1}`,
+      points: num,
+    }
+  })
+
   // Robot Picture
   // Link to The Blue Alliance and Statbotics
-  // Penalties?
   // Weight + Drive Train + Preferred Game Piece + Electrical + Bumpers
 
   return (
@@ -91,15 +97,17 @@ export default async function Page({ params }: { params: { id: string } }) {
           </Group>
         </Group>
 
-        <Hero
+        <Charts
           pa={pa}
           autoPA={autoPA}
           teleopPA={teleopPA}
           endgamePA={endgamePA}
+          penaltyPA={penaltyPA}
           avePA={team.avePA}
           aveAutoPA={team.aveAutoPA}
           aveTeleopPA={team.aveTeleopPA}
           aveEndgamePA={team.aveEndgamePA}
+          avePenaltyPA={team.avePenaltyPA}
         />
 
         <Notes notes={team.notes} />

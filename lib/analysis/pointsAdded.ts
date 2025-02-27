@@ -105,3 +105,14 @@ export const calcEndgamePointsAdded = (forms: StandForm[]) => {
 
   return endgamePointsAdded;
 };
+
+export const calcPenaltyPointsAdded = (forms: StandForm[]) => {
+  const penaltyPointsAdded = forms.map((forms: StandForm) => {
+    return(
+      forms.fouls * 2 +
+      forms.techfouls * 6
+    );
+  })
+
+  return penaltyPointsAdded;
+}

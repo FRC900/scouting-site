@@ -185,10 +185,12 @@ export type FullTeamData = {
   autoPA: number[];
   teleopPA: number[];
   endgamePA: number[];
+  penaltyPA: number[];
   avePA: number;
   aveAutoPA: number;
   aveTeleopPA: number;
   aveEndgamePA: number;
+  avePenaltyPA: number;
   notes: Note[];
 };
 

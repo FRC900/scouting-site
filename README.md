@@ -8,6 +8,8 @@ ZebraScouting is a powerful new scouting site application for recording and proc
 
 * Add image submission to pit forms
 * more detailed team report page
+* mobile
+  * burger nav
 
 ### Lesser Priority:
 
