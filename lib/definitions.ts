@@ -1,5 +1,3 @@
-import { NumberInputStylesNames } from "@mantine/core";
-
 export type StandForm = {
   match: number;
   slot: string;
@@ -179,6 +177,14 @@ export type Note = {
   status: number,
 }
 
+export type PitDataProps = {
+  weight: number;
+  drive: string;
+  gamePiece: string;
+  electrical: number;
+  bumpers: number;
+}
+
 export type FullTeamData = {
   name: string;
   pa: number[];
@@ -192,6 +198,7 @@ export type FullTeamData = {
   aveEndgamePA: number;
   avePenaltyPA: number;
   notes: Note[];
+  pitform: PitDataProps;
 };
 
 export type VerificationErrors = {

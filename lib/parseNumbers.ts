@@ -56,10 +56,14 @@ export const parseStandFormNumbers = (data: any) => {
 export const parsePitFormNumbers = (data: any) => {
     const team = parseInt(data.team);
     const weight = parseInt(data.weight);
+    const electrical = parseInt(data.electrical);
+    const bumpers = parseInt(data.bumpers);
 
     return ({
         ...data,
         team,
-        weight
+        weight,
+        electrical,
+        bumpers,
     })
 }

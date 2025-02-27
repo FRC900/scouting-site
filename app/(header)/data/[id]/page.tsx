@@ -6,6 +6,7 @@ import Notes from "../../../../components/Data/notes";
 import Link from "next/link";
 import { IconExternalLink } from "@tabler/icons-react";
 import { year } from "../../../../lib/constants";
+import PitData from "../../../../components/Data/pit-data";
 
 const getTeam = unstable_cache(
   async (team) => {
@@ -65,7 +66,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <>
       <Stack>
-        <Group justify="space-around">
+        <Group justify="space-between">
           <Title>
             {params.id} / {team.name}
           </Title>
@@ -111,6 +112,8 @@ export default async function Page({ params }: { params: { id: string } }) {
         />
 
         <Notes notes={team.notes} />
+
+        <PitData  {...team.pitform} />
       </Stack>
     </>
   );

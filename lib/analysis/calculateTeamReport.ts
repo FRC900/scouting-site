@@ -50,6 +50,13 @@ export default async function calculateTeam(teamNumber: number) {
         aveEndgamePA: Math.round(average(endgamePA) * 10) / 10,
         avePenaltyPA: Math.round(average(penaltyPA) * 10) / 10,
         notes: notes,
+        pitform: {
+            weight: pitRecord.weight,
+            drive: pitRecord.drive,
+            gamePiece: pitRecord.preferredscoring,
+            electrical: pitRecord.electrical,
+            bumpers: pitRecord.bumpers,
+        }
     };
 
     return teamData;
