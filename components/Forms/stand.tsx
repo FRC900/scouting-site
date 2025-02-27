@@ -119,7 +119,7 @@ export default function StandForm({ create, defaultForm, id }: Props) {
               value="auto"
               leftSection={
                 <IconCodeCircle2Filled
-                  style={{ width: rem(14), height: rem(14) }}
+                  style={{ width: rem(16), height: rem(16) }}
                 />
               }
             >
@@ -128,7 +128,7 @@ export default function StandForm({ create, defaultForm, id }: Props) {
             <Tabs.Tab
               value="teleop"
               leftSection={
-                <IconWifi style={{ width: rem(14), height: rem(14) }} />
+                <IconWifi style={{ width: rem(16), height: rem(16) }} />
               }
             >
               TeleOp
@@ -137,7 +137,7 @@ export default function StandForm({ create, defaultForm, id }: Props) {
               value="misc"
               leftSection={
                 <IconClipboardTextFilled
-                  style={{ width: rem(14), height: rem(14) }}
+                  style={{ width: rem(16), height: rem(16) }}
                 />
               }
             >

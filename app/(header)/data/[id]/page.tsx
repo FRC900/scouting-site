@@ -71,7 +71,7 @@ export default async function Page({ params }: { params: { id: string } }) {
               variant="outline"
               color="indigo"
               rightSection={
-                <IconExternalLink style={{ width: rem(14), height: rem(14) }} />
+                <IconExternalLink style={{ width: rem(16), height: rem(16) }} />
               }
             >
               TBA
@@ -83,7 +83,7 @@ export default async function Page({ params }: { params: { id: string } }) {
               variant="outline"
               color="red"
               rightSection={
-                <IconExternalLink style={{ width: rem(14), height: rem(14) }} />
+                <IconExternalLink style={{ width: rem(16), height: rem(16) }} />
               }
             >
               Statbotics
