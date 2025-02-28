@@ -183,6 +183,7 @@ export type PitDataProps = {
   gamePiece: string;
   electrical: number;
   bumpers: number;
+  note: string;
 }
 
 export type FullTeamData = {

@@ -2,13 +2,15 @@
 
 import {
   Badge,
-  Container,
+  Blockquote,
+  Stack,
   Group,
   NumberInputStylesNames,
   Text,
   useMantineTheme,
 } from "@mantine/core";
 import { PitDataProps } from "../../lib/definitions";
+import { IconPencil } from "@tabler/icons-react";
 
 export default function PitData({
   weight,
@@ -16,13 +18,18 @@ export default function PitData({
   gamePiece,
   electrical,
   bumpers,
+  note,
 }: PitDataProps) {
   const theme = useMantineTheme();
 
+  console.log(note)
+
   return (
-    <Container>
-      <Text ta="center" size="xl">Pit Form Response:</Text>
-      <Group>
+    <Stack align="center" gap={30}>
+      <Text ta="center" size="xl">
+        Pit Form Response:
+      </Text>
+      <Group justify="center">
         <Badge color={theme.colors.amethyst[3]} size="xl" radius="md">
           {weight} lbs.
         </Badge>
@@ -39,6 +46,7 @@ export default function PitData({
           Bumpers: {bumpers}
         </Badge>
       </Group>
-    </Container>
+      <Blockquote color={theme.colors.pillow[2]} icon={<IconPencil />}>{note}</Blockquote>
+    </Stack>
   );
 }

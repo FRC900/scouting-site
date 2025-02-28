@@ -56,6 +56,7 @@ export default async function calculateTeam(teamNumber: number) {
             gamePiece: pitRecord?.preferredscoring ?? '',
             electrical: pitRecord?.electrical ?? 0,
             bumpers: pitRecord?.bumpers ?? 0,
+            note: pitRecord?.notes ?? '',
         }
     };
 
