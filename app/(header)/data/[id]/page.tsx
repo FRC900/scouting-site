@@ -1,4 +1,4 @@
-import { Stack, Title, Group, Button, rem } from "@mantine/core";
+import { Stack, Title, Group, Button, rem, Text } from "@mantine/core";
 import calculateTeam from "../../../../lib/analysis/calculateTeamReport";
 import { unstable_cache } from "next/cache";
 import Charts from "../../../../components/Data/charts";
@@ -56,8 +56,8 @@ export default async function Page({ params }: { params: { id: string } }) {
     return {
       product: `Match ${index + 1}`,
       points: num,
-    }
-  })
+    };
+  });
 
   // Robot Picture
   // Link to The Blue Alliance and Statbotics
@@ -112,8 +112,11 @@ export default async function Page({ params }: { params: { id: string } }) {
         />
 
         <Notes notes={team.notes} />
-
-        <PitData  {...team.pitform} />
+        {team.pitform.weight == 0 ? (
+          <Text size="xl" ta="center">No Pit Form Submitted :(</Text>
+        ) : (
+          <PitData {...team.pitform} />
+        )}
       </Stack>
     </>
   );

@@ -35,7 +35,7 @@ export default async function calculateTeam(teamNumber: number) {
     const autoPA = calcAutoPointsAdded(standRecords);
     const teleopPA = calcTeleopPointsAdded(standRecords);
     const endgamePA = calcEndgamePointsAdded(standRecords);
-    const penaltyPA = calcPenaltyPointsAdded(standRecords);
+    const penaltyPA = calcPenaltyPointsAdded(standRecords); 
     
     const teamData: FullTeamData = {
         name: team_simple.nickname,
@@ -51,11 +51,11 @@ export default async function calculateTeam(teamNumber: number) {
         avePenaltyPA: Math.round(average(penaltyPA) * 10) / 10,
         notes: notes,
         pitform: {
-            weight: pitRecord.weight,
-            drive: pitRecord.drive,
-            gamePiece: pitRecord.preferredscoring,
-            electrical: pitRecord.electrical,
-            bumpers: pitRecord.bumpers,
+            weight: pitRecord?.weight ?? 0,
+            drive: pitRecord?.drive ?? '',
+            gamePiece: pitRecord?.preferredscoring ?? '',
+            electrical: pitRecord?.electrical ?? 0,
+            bumpers: pitRecord?.bumpers ?? 0,
         }
     };
 
