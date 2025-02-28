@@ -17,7 +17,7 @@ import Link from "next/link";
 import { serverSignOut } from "../../lib/actions";
 
 export default function Header() {
-  const [opened, { open, close, toggle }] = useDisclosure(false);
+  const [opened, { close, toggle }] = useDisclosure(false);
 
   const items = NavLinks();
   const mobileItems = MobileNavLinks(close);
@@ -57,7 +57,8 @@ export default function Header() {
             opened={opened}
             onClose={close}
             title="Navigation"
-            position="right"
+            position="left"
+            size="xs"
           >
             {mobileItems}
           </Drawer>
