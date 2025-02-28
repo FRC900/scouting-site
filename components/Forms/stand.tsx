@@ -51,7 +51,7 @@ export default function StandForm({ create, defaultForm, id }: Props) {
     defaultValues: {
       match: undefined,
       slot: undefined,
-      username: "",
+      username: undefined,
       preloaded: true,
       startingZone: false,
       autoL1: 0,

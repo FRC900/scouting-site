@@ -43,10 +43,10 @@ export default function PitForm({ create, defaultForm, id }: Props) {
       drive: undefined,
       weight: undefined,
       preferredscoring: undefined,
-      electrical: undefined,
-      bumpers: undefined,
       notes: "",
       ...defaultForm,
+      electrical: defaultForm?.electrical.toString() || undefined,
+      bumpers: defaultForm?.bumpers.toString() || undefined,
     },
   });
 

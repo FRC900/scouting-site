@@ -48,3 +48,4 @@ When mantine adds support for React 19 update update NextJS to v15 and everythin
 * Incrementor - stand form
 * Tabs - stand form
 * end repeating decimals
+* fix defaultForm population when updating pit form
