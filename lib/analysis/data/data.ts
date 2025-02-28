@@ -27,59 +27,89 @@ export default function getData(teamStandForms: StandForm[]) {
     preloaded: preloaded,
     startingZone: startingZone,
     auto: {
-      l1: average(
-        teamStandForms.map((form) => {
-          return form.autoL1;
-        })
-      ),
-      l2: average(
-        teamStandForms.map((form) => {
-          return form.autoL2;
-        })
-      ),
-      l3: average(
-        teamStandForms.map((form) => {
-          return form.autoL3;
-        })
-      ),
-      l4: average(
-        teamStandForms.map((form) => {
-          return form.autoL4;
-        })
-      ),
+      l1:
+        Math.round(
+          average(
+            teamStandForms.map((form) => {
+              return form.autoL1;
+            })
+          ) * 10
+        ) / 10,
+      l2:
+        Math.round(
+          average(
+            teamStandForms.map((form) => {
+              return form.autoL2;
+            })
+          ) * 10
+        ) / 10,
+      l3:
+        Math.round(
+          average(
+            teamStandForms.map((form) => {
+              return form.autoL3;
+            })
+          ) * 10
+        ) / 10,
+      l4:
+        Math.round(
+          average(
+            teamStandForms.map((form) => {
+              return form.autoL4;
+            })
+          ) * 10
+        ) / 10,
     },
     teleop: {
-      l1: average(
-        teamStandForms.map((form) => {
-          return form.teleopL1;
-        })
-      ),
-      l2: average(
-        teamStandForms.map((form) => {
-          return form.teleopL2;
-        })
-      ),
-      l3: average(
-        teamStandForms.map((form) => {
-          return form.teleopL3;
-        })
-      ),
-      l4: average(
-        teamStandForms.map((form) => {
-          return form.teleopL4;
-        })
-      ),
+      l1:
+        Math.round(
+          average(
+            teamStandForms.map((form) => {
+              return form.teleopL1;
+            })
+          ) * 10
+        ) / 10,
+      l2:
+        Math.round(
+          average(
+            teamStandForms.map((form) => {
+              return form.teleopL2;
+            })
+          ) * 10
+        ) / 10,
+      l3:
+        Math.round(
+          average(
+            teamStandForms.map((form) => {
+              return form.teleopL3;
+            })
+          ) * 10
+        ) / 10,
+      l4:
+        Math.round(
+          average(
+            teamStandForms.map((form) => {
+              return form.teleopL4;
+            })
+          ) * 10
+        ) / 10,
     },
-    processor: average(
-      teamStandForms.map((form) => {
-        return form.teleopProcessor;
-      })
-    ),
-    net: average(
-      teamStandForms.map((form) => {
-        return form.teleopNet;
-      })
-    ),
+    processor:
+      Math.round(
+        average(
+          teamStandForms.map((form) => {
+            return form.teleopProcessor;
+          })
+        ) * 10
+      ) / 10,
+    net:
+      Math.round(
+        average(
+          teamStandForms.map((form) => {
+            return form.teleopNet;
+          })
+        ) * 10
+      ) / 10,
     climb: {
       nothing: nothing,
       parked: parked,

@@ -6,11 +6,11 @@ import {
 	IconCalendarEvent,
 	IconChartArcs,
 	IconChartArrowsVertical,
-	IconChartDots3,
 	IconChevronDown,
 	IconClipboardData,
 	IconFileFilled,
 	IconForms,
+	IconRosetteDiscountCheckFilled,
 	IconUserFilled,
 } from "@tabler/icons-react";
 import classes from "../Header.module.css";
@@ -22,19 +22,19 @@ const links = [
 			{
 				link: "/stand-form",
 				label: "Stand Form",
-				icon: <IconForms style={{ width: rem(14), height: rem(14) }} />,
+				icon: <IconForms style={{ width: rem(16), height: rem(16) }} />,
 				perm: "member",
 			},
 			{
 				link: "/pit-form",
 				label: "Pit Form",
-				icon: <IconForms style={{ width: rem(14), height: rem(14) }} />,
+				icon: <IconForms style={{ width: rem(16), height: rem(16) }} />,
 				perm: "member",
 			},
 			{
 				link: "/schedule",
 				label: "Schedule",
-				icon: <IconCalendarEvent style={{ width: rem(14), height: rem(14) }} />,
+				icon: <IconCalendarEvent style={{ width: rem(16), height: rem(16) }} />,
 				perm: "member",
 			},
 		],
@@ -45,21 +45,27 @@ const links = [
 			{
 				link: "/records/stand-forms",
 				label: "Stand Forms",
-				icon: <IconFileFilled style={{ width: rem(14), height: rem(14) }} />,
+				icon: <IconFileFilled style={{ width: rem(16), height: rem(16) }} />,
 				perm: "member",
 			},
 			{
 				link: "/records/pit-forms",
 				label: "Pit Forms",
-				icon: <IconFileFilled style={{ width: rem(14), height: rem(14) }} />,
+				icon: <IconFileFilled style={{ width: rem(16), height: rem(16) }} />,
 				perm: "member",
 			},
 			{
 				link: "/records/users",
 				label: "Users",
-				icon: <IconUserFilled style={{ width: rem(14), height: rem(14) }} />,
+				icon: <IconUserFilled style={{ width: rem(16), height: rem(16) }} />,
 				perm: "admin",
 			},
+			{
+				link: "/records/verify",
+				label: "Verify",
+				icon: <IconRosetteDiscountCheckFilled style={{ width: rem(16), height: rem(16) }} />,
+				perm: "lead"
+			}
 		],
 	},
 	{
@@ -68,7 +74,7 @@ const links = [
 			{
 				link: "/data",
 				label: "Team Data",
-				icon: <IconClipboardData style={{ width: rem(14), height: rem(14) }} />,
+				icon: <IconClipboardData style={{ width: rem(16), height: rem(16) }} />,
 				perm: "member",
 			},
 			{
@@ -76,7 +82,7 @@ const links = [
 				label: "Matches",
 				icon: (
 					<IconChartArrowsVertical
-						style={{ width: rem(14), height: rem(14) }}
+						style={{ width: rem(16), height: rem(16) }}
 					/>
 				),
 				perm: "member",
@@ -84,7 +90,7 @@ const links = [
 			{
 				link: "/simulation",
 				label: "Simulation",
-				icon: <IconChartArcs style={{ width: rem(14), height: rem(14) }} />,
+				icon: <IconChartArcs style={{ width: rem(16), height: rem(16) }} />,
 				perm: "member",
 			},
 		],

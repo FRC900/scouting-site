@@ -52,13 +52,13 @@ export default function getInsights({ teamStandForms, avePA }: InsightsProps) {
       .reduce((a, b) => a + b, 0) / count;
 
   const insights: OnlyInsights = {
-    aveAutoPA: aveAutoPA,
-    aveTeleopPA: aveTeleopPA,
-    aveEndgamePA: aveEndgamePA,
-    aveCoral: aveCoral,
-    aveAlgae: aveAlgae,
-    avePenalties: avePenalties,
-    defence: defenceRating,
+    aveAutoPA: Math.round(aveAutoPA * 10) / 10,
+    aveTeleopPA: Math.round(aveTeleopPA * 10) / 10,
+    aveEndgamePA: Math.round(aveEndgamePA * 10) / 10,
+    aveCoral: Math.round(aveCoral * 10) / 10,
+    aveAlgae: Math.round(aveAlgae * 10) / 10,
+    avePenalties: Math.round(avePenalties * 10) / 10,
+    defence: Math.round(defenceRating * 10) / 10,
   };
 
   return insights;

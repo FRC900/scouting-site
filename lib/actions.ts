@@ -12,7 +12,6 @@ import bcrypt from 'bcrypt'
 
 const CreateStandForm = StandFormDatabaseSchema.omit({
 	team: true,
-	username: true,
 	date: true,
 });
 
@@ -21,7 +20,7 @@ export async function createStandForm(data: StandForm) {
 	const {
 		match,
 		slot,
-		// team,
+		username,
 		preloaded,
 		startingZone,
 		autoL1,
@@ -45,7 +44,6 @@ export async function createStandForm(data: StandForm) {
 	});
 
 	const team = await findTeamNumber(match, slot);
-	const username = "temp";
 	const date = new Date().toISOString().split(".")[0];
 
 	try {

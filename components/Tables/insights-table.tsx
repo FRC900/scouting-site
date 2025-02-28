@@ -4,7 +4,6 @@ import { type Insights } from "../../lib/definitions";
 import { Th } from "./stand-form-table";
 import { ScrollArea, Table, Text, keys, Anchor } from "@mantine/core";
 import { useState } from "react";
-import classes from "./Table.module.css";
 import capitalize from "../../lib/capitalize";
 import Link from "next/link";
 

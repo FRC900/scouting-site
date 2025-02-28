@@ -95,7 +95,7 @@ export async function fetchPitFormByTeam(team: Number) {
       ...parsePitFormNumbers(form),
     }));
 
-    return form;
+    return form[0];
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch pit form data');

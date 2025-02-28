@@ -172,7 +172,7 @@ export const theme = createTheme({
 
   fontSizes: {
     xs: rem(10),
-    sm: rem(11),
+    sm: rem(14),
     md: rem(14),
     lg: rem(16),
     xl: rem(20),

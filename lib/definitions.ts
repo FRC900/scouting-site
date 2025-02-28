@@ -1,7 +1,7 @@
 export type StandForm = {
   match: number;
   slot: string;
-  // team: number;
+  username: string;
   preloaded: boolean;
   startingZone: boolean;
   autoL1: number;
@@ -24,7 +24,6 @@ export type StandForm = {
 
 export type StandFormDatabase = StandForm & {
   team: number;
-  username: string;
   date: string;
 };
 
@@ -175,7 +174,16 @@ export type SOS = Overview & OnlySOS;
 export type Note = {
   note: string,
   user: string,
-  status: string,
+  status: number,
+}
+
+export type PitDataProps = {
+  weight: number;
+  drive: string;
+  gamePiece: string;
+  electrical: number;
+  bumpers: number;
+  note: string;
 }
 
 export type FullTeamData = {
@@ -184,7 +192,26 @@ export type FullTeamData = {
   autoPA: number[];
   teleopPA: number[];
   endgamePA: number[];
+  penaltyPA: number[];
+  avePA: number;
+  aveAutoPA: number;
+  aveTeleopPA: number;
+  aveEndgamePA: number;
+  avePenaltyPA: number;
   notes: Note[];
+  pitform: PitDataProps;
+};
+
+export type VerificationErrors = {
+  key: string;
+  teams: {
+    number: number;
+    form: string;
+  }[];
+  errors: {
+    type: string;
+    magnitude: number;
+  }[];
 };
 
 export type TBATeamSimple = {

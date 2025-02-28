@@ -6,7 +6,7 @@ export const year = 2024;
 export const StandFormSchema = z.object({
   match: z.number().min(1),
   slot: z.string(),
-  // team: z.number(),
+  username: z.string(),
   preloaded: z.boolean(),
   startingZone: z.boolean(),
   autoL1: z.number().min(0),
