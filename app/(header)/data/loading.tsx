@@ -1,5 +1,9 @@
-import { Text } from "@mantine/core";
+"use client";
+
+import { Loader, useMantineTheme } from "@mantine/core";
 
 export default function Loading() {
-  return <Text size="xl">Loading...</Text>;
+  const theme = useMantineTheme()
+
+  return <Loader color={theme.colors.milkshake[4]} />;
 }

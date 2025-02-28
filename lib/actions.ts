@@ -57,6 +57,7 @@ export async function createStandForm(data: StandForm) {
 
 	revalidatePath("/stand-form");
 	revalidateTag('stand');
+	revalidateTag(`${team}`);
 	redirect("/stand-form");
 }
 
@@ -81,6 +82,7 @@ export async function createPitForm(data: PitForm) {
 
 	revalidatePath("/pit-form");
 	revalidateTag('pit');
+	revalidateTag(`${team}`);
 	redirect("/pit-form");
 }
 
@@ -100,6 +102,7 @@ export async function updatePitForm(data: PitForm, id: string) {
 
 	revalidatePath("/records/pit-forms");
 	revalidateTag('pit');
+	revalidateTag(`${team}`);
 	redirect("/records/pit-forms");
 }
 
@@ -143,6 +146,7 @@ export async function updateStandForm(data: StandForm, id: string) {
 
 	revalidatePath("/records/stand-forms");
 	revalidateTag('stand');
+	revalidateTag(`${team}`);
 	redirect("/records/stand-forms");
 }
 
@@ -151,6 +155,7 @@ export async function deletePitForm(id: string) {
 
 	revalidatePath("/records/pit-forms");
 	revalidateTag('pit');
+	revalidateTag('delete');
 	redirect("/records/pit-forms");
 }
 
@@ -159,6 +164,7 @@ export async function deleteStandForm(id: string) {
 
 	revalidatePath("/records/stand-forms");
 	revalidateTag('stand'); 	
+	revalidateTag('delete');
 	redirect("/records/stand-forms");
 }
 

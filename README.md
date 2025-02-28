@@ -6,12 +6,11 @@ ZebraScouting is a powerful new scouting site application for recording and proc
 
 ### Priority (Big Stuff):
 
-* Add image submission to pit forms
-* mobile
-  * burger nav
+(done!)
 
 ### Lesser Priority:
 
+* simulation
 * Matches
   * Qual Matches
   * Alliances
@@ -20,6 +19,7 @@ ZebraScouting is a powerful new scouting site application for recording and proc
 * Automatically delete and replace pit form when duplicate is created
 * 404 notice
 * Tell you which team you are scouting apon inputing match+slot
+* mobile could prob be better?
 
 ### Not until competition:
 
@@ -49,3 +49,9 @@ When mantine adds support for React 19 update update NextJS to v15 and everythin
 * end repeating decimals
 * fix defaultForm population when updating pit form
 * more detailed team report page
+* mobile
+  * burger nav
+
+## Cut Features :(
+
+* image submission to pit forms

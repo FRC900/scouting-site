@@ -2,12 +2,10 @@ import { Group, Title } from "@mantine/core";
 import StandForm from "../../../components/Forms/stand";
 
 export default function Page() {
-  return(
+  return (
     <>
-      <Group justify="start">
-        <Title>Stand Form</Title>
-      </Group>
-      <StandForm create={true} id=""/>
+      <Title>Stand Form</Title>
+      <StandForm create={true} id="" />
     </>
-  )
+  );
 }

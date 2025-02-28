@@ -8,13 +8,17 @@ import { IconExternalLink } from "@tabler/icons-react";
 import { year } from "../../../../lib/constants";
 import PitData from "../../../../components/Data/pit-data";
 
-const getTeam = unstable_cache(
-  async (team) => {
-    return await calculateTeam(+team);
-  },
-  ["stand", "pit"],
-  { revalidate: 3600, tags: ["stand", "pit"] }
-);
+const getTeam = (team: number) => {
+  const data = unstable_cache(
+    async () => {
+      return await calculateTeam(team);
+    },
+    [`${team}`, "delete"],
+    { revalidate: 3600, tags: [`${team}`, "delete"] }
+  ); 
+  
+  return data();
+}
 
 export type AreaChartData = {
   product: string;
@@ -22,7 +26,7 @@ export type AreaChartData = {
 }[];
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const team = await getTeam(params.id);
+  const team = await getTeam(+params.id);
 
   const pa: AreaChartData = team.pa.map((num, index) => {
     return {
@@ -58,10 +62,6 @@ export default async function Page({ params }: { params: { id: string } }) {
       points: num,
     };
   });
-
-  // Robot Picture
-  // Link to The Blue Alliance and Statbotics
-  // Weight + Drive Train + Preferred Game Piece + Electrical + Bumpers
 
   return (
     <>
@@ -112,8 +112,11 @@ export default async function Page({ params }: { params: { id: string } }) {
         />
 
         <Notes notes={team.notes} />
+
         {team.pitform.weight == 0 ? (
-          <Text size="xl" ta="center">No Pit Form Submitted :(</Text>
+          <Text size="xl" ta="center">
+            No Pit Form Submitted :(
+          </Text>
         ) : (
           <PitData {...team.pitform} />
         )}

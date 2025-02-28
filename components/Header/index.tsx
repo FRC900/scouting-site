@@ -1,16 +1,26 @@
 "use client";
 
-import { Burger, Container, Group, Title, Box, Center, Button } from "@mantine/core";
+import {
+  Burger,
+  Container,
+  Group,
+  Title,
+  Box,
+  Center,
+  Button,
+  Drawer,
+} from "@mantine/core";
 import classes from "./Header.module.css";
-import NavLinks from "./NavLinks";
+import NavLinks, { MobileNavLinks } from "./NavLinks";
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
 import { serverSignOut } from "../../lib/actions";
 
 export default function Header() {
-  const [opened, { toggle }] = useDisclosure(false);
+  const [opened, { close, toggle }] = useDisclosure(false);
 
   const items = NavLinks();
+  const mobileItems = MobileNavLinks(close);
 
   return (
     <header className={classes.header}>
@@ -27,12 +37,12 @@ export default function Header() {
               }}
             >
               <Button
-								variant="subtle"
-								color="gray"
-								radius="md"
-								fw="500"
-								size="compact-md"
-								className={classes.link}
+                variant="subtle"
+                color="gray"
+                radius="md"
+                fw="500"
+                size="compact-md"
+                className={classes.link}
                 type="submit"
               >
                 <Center>
@@ -41,6 +51,17 @@ export default function Header() {
               </Button>
             </form>
           </Group>
+          <Drawer
+            offset={8}
+            radius="md"
+            opened={opened}
+            onClose={close}
+            title="Navigation"
+            position="left"
+            size="xs"
+          >
+            {mobileItems}
+          </Drawer>
           <Burger opened={opened} onClick={toggle} size="sm" hiddenFrom="sm" />
         </div>
       </Container>
