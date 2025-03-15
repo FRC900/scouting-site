@@ -40,7 +40,8 @@ export default function RegisterForm({ toggle = () => {} }) {
         onError={(e) => console.log(e)}
       >
         <Stack>
-          <TextInput
+          <p>registering disabled sorry</p>
+          {/* <TextInput
             name="name"
             control={control}
             label="First Name"
@@ -63,7 +64,7 @@ export default function RegisterForm({ toggle = () => {} }) {
             control={control}
             label="Confirm Password"
             placeholder="Your Password"
-          />
+          /> */}
           <Group justify="space-between">
             <Button
               variant="subtle"
