@@ -18,7 +18,7 @@ import {
   Tabs,
   rem,
 } from "@mantine/core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useOnlineStatus } from "../../lib/hooks/useOnlineStatus";
 import {
   createStandForm,
@@ -33,6 +33,7 @@ import {
   IconWifi,
   IconClipboardTextFilled,
 } from "@tabler/icons-react";
+import { useRouter } from "next/navigation";
 
 interface Props {
   create: boolean;
@@ -45,8 +46,9 @@ export default function StandForm({ create, defaultForm, id }: Props) {
   const isOnline = useOnlineStatus();
   const [opened, { toggle }] = useDisclosure(false);
   const theme = useMantineTheme();
+  const router = useRouter();
 
-  const { control } = useForm<StandForm>({
+  const { control, reset } = useForm<StandForm>({
     resolver: zodResolver(StandFormSchema),
     defaultValues: {
       match: undefined,
@@ -78,12 +80,43 @@ export default function StandForm({ create, defaultForm, id }: Props) {
     if (isOnline) {
       setSubmitting("fetching");
       if (create) {
-        createStandForm(data).then(() => setSubmitting("done"));
+        createStandForm(data).then(() => {
+          setSubmitting("done");
+          router.push("/stand-form");
+        });
       } else {
         updateStandForm(data, id).then(() => setSubmitting("done"));
       }
     }
   };
+
+  useEffect(() => {
+    if (submitting === "done") {
+      reset({
+        match: undefined,
+        slot: undefined,
+        username: undefined,
+        preloaded: true,
+        startingZone: false,
+        autoL1: 0,
+        autoL2: 0,
+        autoL3: 0,
+        autoL4: 0,
+        teleopL1: 0,
+        teleopL2: 0,
+        teleopL3: 0,
+        teleopL4: 0,
+        teleopProcessor: 0,
+        teleopNet: 0,
+        fouls: 0,
+        techfouls: 0,
+        endgame: undefined,
+        defence: undefined,
+        status: undefined,
+        notes: "",
+      });
+    }
+  }, [submitting, reset]);
 
   return (
     <Form
