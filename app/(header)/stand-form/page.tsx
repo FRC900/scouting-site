@@ -1,4 +1,4 @@
-import { Group, Title } from "@mantine/core";
+import { Title } from "@mantine/core";
 import StandForm from "../../../components/Forms/stand";
 
 export default function Page() {

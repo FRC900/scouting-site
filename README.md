@@ -26,6 +26,10 @@ ZebraScouting is a powerful new scouting site application for recording and proc
 * Blue alliance verification
 * Ability to factor in the influence of previous competitions
 
+### Bugs
+
+* stand form does not revalidate
+
 ### Package Updates
 
 When mantine adds support for React 19 update update NextJS to v15 and everything along with it.
@@ -52,6 +56,6 @@ When mantine adds support for React 19 update update NextJS to v15 and everythin
 * mobile
   * burger nav
 
-## Cut Features :(
+## Cut Features :( (at least for now)
 
 * image submission to pit forms
