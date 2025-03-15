@@ -1,7 +1,7 @@
 import { z } from "zod";
 
-export const tbaEventKey = "2024nccmp";
-export const year = 2024;
+export const tbaEventKey = "2025ncwak";
+export const year = 2025;
 
 export const StandFormSchema = z.object({
   match: z.number().min(1),
