@@ -11,9 +11,16 @@ import { average } from "simple-statistics";
 import eventOprs from "../../fetchers/tba/eventOprs";
 import teamSimple from "../../fetchers/tba/teamSimple";
 
-export default async function calculateSimpleTeamData() {
+interface Props {
+  from: number;
+  to: number;
+}
+
+export default async function calculateSimpleTeamData({ from, to }: Props) {
   // Using Event Key, Fetch all the Participating Teams.
-  const teams: number[] = await eventTeamsKeys();
+  const allTeams: number[] = await eventTeamsKeys();
+  allTeams.sort((a, b) => a - b);
+  const teams = allTeams.slice(from, to);
 
   const oprs = await eventOprs();
 
