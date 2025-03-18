@@ -1,5 +1,9 @@
+import { NextResponse } from "next/server";
+
 // avoid error?
-export async function GET(request: Request) {}
+export async function GET(request: Request) {
+  NextResponse.redirect("/");
+}
 
 
 // import { db } from "@vercel/postgres";
