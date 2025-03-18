@@ -1,3 +1,7 @@
+// avoid error?
+export async function GET(request: Request) {}
+
+
 // import { db } from "@vercel/postgres";
 // import { standforms } from "../../../lib/data-importing";
 // import capitalize from "../../../lib/capitalize";
