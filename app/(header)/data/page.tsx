@@ -3,9 +3,8 @@ import calculateSimpleTeamData from "../../../lib/analysis/data";
 import { Monstrosity } from "../../../lib/definitions";
 import DataTabs from "../../../components/Data/data";
 import { Suspense } from "react";
-import { Button } from "@mantine/core";
 
-const team = unstable_cache(
+export const team = unstable_cache(
   async (step) => {
     return await calculateSimpleTeamData(step);
   },
@@ -19,7 +18,6 @@ export default async function Page() {
   return (
     <Suspense fallback={<p>Loading Tabs...</p>}>
       <DataTabs teamData={monstrosity} />
-      <Button color='indigo'>Load More Teams</Button>
     </Suspense>
   );
 }

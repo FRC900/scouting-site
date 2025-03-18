@@ -33,17 +33,27 @@ function sortData(
 
   return filterData(
     [...data].sort((a, b) => {
-      if (payload.reversed) {
-        return b[sortBy].toString().localeCompare(a[sortBy].toString());
+      const aValue = parseFloat(a[sortBy].toString());
+      const bValue = parseFloat(b[sortBy].toString());
+
+      if (isNaN(aValue) || isNaN(bValue)) {
+        if (payload.reversed) {
+          return b[sortBy].toString().localeCompare(a[sortBy].toString());
+        }
+        return a[sortBy].toString().localeCompare(b[sortBy].toString());
       }
-      return a[sortBy].toString().localeCompare(b[sortBy].toString());
+
+      if (payload.reversed) {
+        return bValue - aValue;
+      }
+      return aValue - bValue;
     })
   );
 }
 
 export default function DataTable({ data }: Props) {
-  const [sortedData, setSortedData] = useState(data);
-  const [sortBy, setSortBy] = useState<keyof Data | null>(null);
+  const [sortedData, setSortedData] = useState(() => sortData(data, { sortBy: 'avePA', reversed: true }));
+  const [sortBy, setSortBy] = useState<keyof Data | null>('avePA');
   const [reverseSortDirection, setReverseSortDirection] = useState(false);
 
   const setSorting = (field: keyof Data) => {
@@ -56,16 +66,16 @@ export default function DataTable({ data }: Props) {
   const rows = sortedData.map((form) => {
 
     const totalAutoCoral = form.auto.l1 + form.auto.l2 + form.auto.l3 + form.auto.l4;
-    const l1Auto = (form.auto.l1 / totalAutoCoral) * 100;
-    const l2Auto = (form.auto.l2 / totalAutoCoral) * 100;
-    const l3Auto = (form.auto.l3 / totalAutoCoral) * 100;
-    const l4Auto = (form.auto.l4 / totalAutoCoral) * 100;
+    const l1Auto = Math.round((form.auto.l1 / totalAutoCoral) * 1000) / 10;
+    const l2Auto = Math.round((form.auto.l2 / totalAutoCoral) * 1000) / 10;
+    const l3Auto = Math.round((form.auto.l3 / totalAutoCoral) * 1000) / 10;
+    const l4Auto = Math.round((form.auto.l4 / totalAutoCoral) * 1000) / 10;
 
     const totalTeleopCoral = form.teleop.l1 + form.teleop.l2 + form.teleop.l3 + form.teleop.l4;
-    const l1Teleop = (form.teleop.l1 / totalTeleopCoral) * 100;
-    const l2Teleop = (form.teleop.l2 / totalTeleopCoral) * 100;
-    const l3Teleop = (form.teleop.l3 / totalTeleopCoral) * 100;
-    const l4Teleop = (form.teleop.l4 / totalTeleopCoral) * 100;
+    const l1Teleop = Math.round((form.teleop.l1 / totalTeleopCoral) * 1000) / 10;
+    const l2Teleop = Math.round((form.teleop.l2 / totalTeleopCoral) * 1000) / 10;
+    const l3Teleop = Math.round((form.teleop.l3 / totalTeleopCoral) * 1000) / 10;
+    const l4Teleop = Math.round((form.teleop.l4 / totalTeleopCoral) * 1000) / 10;
 
     const totalMatches = form.climb.nothing + form.climb.parked + form.climb.shallow + form.climb.deep;
     const nothingPercent = (form.climb.nothing / totalMatches) * 100;

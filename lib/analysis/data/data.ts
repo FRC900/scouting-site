@@ -25,7 +25,7 @@ export default function getData(teamStandForms: StandForm[]) {
 
   const data: OnlyData = {
     preloaded: preloaded,
-    startingZone: startingZone,
+    startingZone: Math.round(startingZone * 10) / 10,
     auto: {
       l1:
         Math.round(

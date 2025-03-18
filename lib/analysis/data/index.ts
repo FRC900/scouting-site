@@ -14,13 +14,18 @@ import teamSimple from "../../fetchers/tba/teamSimple";
 export default async function calculateSimpleTeamData(step: number) {
   // Using Event Key, Fetch all the Participating Teams.
   const allTeams: number[] = await eventTeamsKeys();
+  let teams;
 
-  allTeams.sort((a, b) => a - b);
-  let to = step * 10 - 1
-  if (to > allTeams.length) to = allTeams.length;
-  const from = step * 10 - 10
-  console.log(from + '-' + to)
-  const teams = allTeams.slice(from, to);
+  if (step != 0) {
+    allTeams.sort((a, b) => a - b);
+    let to = step * 20;
+    if (to > allTeams.length) to = allTeams.length - 1;
+    const from = step * 20 - 20;
+    console.log(from + "-" + to);
+    teams = allTeams.slice(from, to);
+  } else {
+    teams = allTeams;
+  }
 
   const oprs = await eventOprs();
 
@@ -37,7 +42,7 @@ export default async function calculateSimpleTeamData(step: number) {
     const [sb_teamYear, tba_status, tba_teamSimple] = await Promise.all([
       sbteamYear,
       tbastatus,
-      tbateamSimple
+      tbateamSimple,
     ]);
     const opr = oprs.oprs[`frc${team}`];
 
@@ -45,7 +50,12 @@ export default async function calculateSimpleTeamData(step: number) {
     const avePA = average(pointsAdded);
 
     const insights = getInsights({ teamStandForms, avePA });
-    const breakdown = getBreakdown({ teamStandForms, pointsAdded, sb_teamYear, opr });
+    const breakdown = getBreakdown({
+      teamStandForms,
+      pointsAdded,
+      sb_teamYear,
+      opr,
+    });
     const data = getData(teamStandForms);
 
     const teamData: Monstrosity = {

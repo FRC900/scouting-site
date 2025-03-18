@@ -37,7 +37,7 @@ export default function VerifyAccordian({ errors }: { errors: VerificationErrors
   ));
 
   return (
-    <Accordion variant="filled" radius="md">
+    <Accordion multiple variant="filled" radius="md">
       {items}
     </Accordion>
   );
