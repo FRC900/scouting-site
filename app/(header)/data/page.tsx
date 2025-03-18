@@ -4,7 +4,7 @@ import { Monstrosity } from "../../../lib/definitions";
 import DataTabs from "../../../components/Data/data";
 import { Suspense } from "react";
 
-export const team = unstable_cache(
+const team = unstable_cache(
   async (step) => {
     return await calculateSimpleTeamData(step);
   },
