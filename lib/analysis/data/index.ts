@@ -21,7 +21,6 @@ export default async function calculateSimpleTeamData(step: number) {
     let to = step * 20;
     if (to > allTeams.length) to = allTeams.length - 1;
     const from = step * 20 - 20;
-    console.log(from + "-" + to);
     teams = allTeams.slice(from, to);
   } else {
     teams = allTeams;

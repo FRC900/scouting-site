@@ -93,7 +93,7 @@ export default function InsightsTable({ data }: Props) {
                 reversed={reverseSortDirection}
                 onSort={() => setSorting(key as keyof Insights)}
               >
-                {capitalize(key)}
+                {key.substring(0, 3) == "ave" ? capitalize(key.substring(3)) : capitalize(key)}
               </Th>
             ))}
           </Table.Tr>
