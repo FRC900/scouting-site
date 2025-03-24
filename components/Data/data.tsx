@@ -1,21 +1,26 @@
 "use client";
 
-import { Title, useMantineTheme, Tabs, rem, Container, Text, Group, Button } from "@mantine/core";
+import {
+  Title,
+  useMantineTheme,
+  Tabs,
+  rem,
+  Container,
+  Text,
+  Group,
+  Button,
+} from "@mantine/core";
 import {
   IconChartDonutFilled,
   IconChartCandleFilled,
   IconClipboardDataFilled,
 } from "@tabler/icons-react";
-import {
-  Breakdown,
-  Data,
-  Insights,
-  Monstrosity,
-  SOS,
-} from "../../lib/definitions";
+import { Breakdown, Data, Insights, Monstrosity } from "../../lib/definitions";
 import InsightsTable from "../Tables/insights-table";
 import BreakdownTable from "../Tables/breakdown-table";
 import DataTable from "../Tables/data-table";
+import { usePathname, useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 interface DataTabsProps {
   teamData: Monstrosity[];
@@ -23,6 +28,17 @@ interface DataTabsProps {
 
 export default function DataTabs({ teamData }: DataTabsProps) {
   const theme = useMantineTheme();
+
+  // const pathname = usePathname();
+  // const searchParams = useSearchParams();
+  // const currentPage = Number(searchParams.get("query")) || 1;
+
+  // const createPageURL = (pageNumber: number | string) => {
+  //   const params = new URLSearchParams(searchParams);
+  //   params.set("query", pageNumber.toString());
+  //   return `${pathname}?${params.toString()}`;
+  // };
+
   // const [step, setStep] = useState(1);
 
   // useEffect(() => {
@@ -86,23 +102,27 @@ export default function DataTabs({ teamData }: DataTabsProps) {
               />
             }
           >
-            <Text size='md'>Insights</Text>
+            <Text size="md">Insights</Text>
           </Tabs.Tab>
           <Tabs.Tab
             value="breakdown"
             leftSection={
-              <IconChartDonutFilled style={{ width: rem(16), height: rem(16) }} />
+              <IconChartDonutFilled
+                style={{ width: rem(16), height: rem(16) }}
+              />
             }
           >
-            <Text size='md'>Breakdown</Text>
+            <Text size="md">Breakdown</Text>
           </Tabs.Tab>
           <Tabs.Tab
             value="data"
             leftSection={
-              <IconClipboardDataFilled style={{ width: rem(16), height: rem(16) }} />
+              <IconClipboardDataFilled
+                style={{ width: rem(16), height: rem(16) }}
+              />
             }
           >
-            <Text size='md'>Data</Text>
+            <Text size="md">Data</Text>
           </Tabs.Tab>
         </Tabs.List>
         <Tabs.Panel value="insights">
@@ -128,7 +148,13 @@ export default function DataTabs({ teamData }: DataTabsProps) {
         </Tabs.Panel>
       </Tabs>
       {/* <Group>
-        <Button onClick={() => setStep(step + 1)} color='indigo'>Load More Teams</Button>
+        <Button
+          component={Link}
+          href={createPageURL(currentPage + 1)}
+          color="indigo"
+        >
+          Load More Teams
+        </Button>
       </Group> */}
     </>
   );
