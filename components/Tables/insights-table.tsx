@@ -32,17 +32,27 @@ function sortData(
 
   return filterData(
     [...data].sort((a, b) => {
-      if (payload.reversed) {
-        return b[sortBy].toString().localeCompare(a[sortBy].toString());
+      const aValue = parseFloat(a[sortBy].toString());
+      const bValue = parseFloat(b[sortBy].toString());
+
+      if (isNaN(aValue) || isNaN(bValue)) {
+        if (payload.reversed) {
+          return b[sortBy].toString().localeCompare(a[sortBy].toString());
+        }
+        return a[sortBy].toString().localeCompare(b[sortBy].toString());
       }
-      return a[sortBy].toString().localeCompare(b[sortBy].toString());
+
+      if (payload.reversed) {
+        return bValue - aValue;
+      }
+      return aValue - bValue;
     })
   );
 }
 
 export default function InsightsTable({ data }: Props) {
-  const [sortedData, setSortedData] = useState(data);
-  const [sortBy, setSortBy] = useState<keyof Insights | null>(null);
+  const [sortedData, setSortedData] = useState(() => sortData(data, { sortBy: 'avePA', reversed: true }));
+  const [sortBy, setSortBy] = useState<keyof Insights>('avePA');
   const [reverseSortDirection, setReverseSortDirection] = useState(false);
 
   const setSorting = (field: keyof Insights) => {
@@ -83,7 +93,7 @@ export default function InsightsTable({ data }: Props) {
                 reversed={reverseSortDirection}
                 onSort={() => setSorting(key as keyof Insights)}
               >
-                {capitalize(key)}
+                {key.substring(0, 3) == "ave" ? capitalize(key.substring(3)) : capitalize(key)}
               </Th>
             ))}
           </Table.Tr>

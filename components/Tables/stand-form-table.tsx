@@ -91,10 +91,20 @@ function sortData(
 
 	return filterData(
 		[...data].sort((a, b) => {
-			if (payload.reversed) {
-				return b[sortBy].toString().localeCompare(a[sortBy].toString());
+			const aValue = parseFloat(a[sortBy].toString());
+			const bValue = parseFloat(b[sortBy].toString());
+
+			if (isNaN(aValue) || isNaN(bValue)) {
+				if (payload.reversed) {
+					return b[sortBy].toString().localeCompare(a[sortBy].toString());
+				}
+				return a[sortBy].toString().localeCompare(b[sortBy].toString());
 			}
-			return a[sortBy].toString().localeCompare(b[sortBy].toString());
+
+			if (payload.reversed) {
+				return bValue - aValue;
+			}
+			return aValue - bValue;
 		}),
 
 		payload.search

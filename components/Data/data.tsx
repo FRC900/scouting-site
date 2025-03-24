@@ -1,6 +1,6 @@
 "use client";
 
-import { Title, useMantineTheme, Tabs, rem, Container, Text } from "@mantine/core";
+import { Title, useMantineTheme, Tabs, rem, Container, Text, Group, Button } from "@mantine/core";
 import {
   IconChartDonutFilled,
   IconChartCandleFilled,
@@ -16,7 +16,6 @@ import {
 import InsightsTable from "../Tables/insights-table";
 import BreakdownTable from "../Tables/breakdown-table";
 import DataTable from "../Tables/data-table";
-// import SOSTable from "../Tables/sos-table";
 
 interface DataTabsProps {
   teamData: Monstrosity[];
@@ -24,6 +23,18 @@ interface DataTabsProps {
 
 export default function DataTabs({ teamData }: DataTabsProps) {
   const theme = useMantineTheme();
+  // const [step, setStep] = useState(1);
+
+  // useEffect(() => {
+  //   const fetchMoreTeams = async () => {
+  //     const moreTeams = await team(step);
+  //     teamData.push(...moreTeams);
+  //     console.log(teamData);
+  //   };
+  //   if (step > 1) {
+  //     fetchMoreTeams();
+  //   }
+  // }, [step, teamData])
 
   const insights: Insights[] = teamData.map((row) => {
     const insight: Insights = {
@@ -57,17 +68,6 @@ export default function DataTabs({ teamData }: DataTabsProps) {
     };
     return data;
   });
-
-  // const sos: SOS[] = teamData.map((row) => {
-  //   const sos: SOS = {
-  //     team: row.team,
-  //     name: row.name,
-  //     rank: row.rank,
-  //     avePA: row.avePA,
-  //     ...row.sos,
-  //   };
-  //   return sos;
-  // });
 
   return (
     <>
@@ -104,14 +104,6 @@ export default function DataTabs({ teamData }: DataTabsProps) {
           >
             <Text size='md'>Data</Text>
           </Tabs.Tab>
-          {/* <Tabs.Tab
-            value="sos"
-            leftSection={
-              <IconSos style={{ width: rem(14), height: rem(14) }} />
-            }
-          >
-            Strength of Schedule
-          </Tabs.Tab> */}
         </Tabs.List>
         <Tabs.Panel value="insights">
           {Array.isArray(insights) ? (
@@ -134,14 +126,10 @@ export default function DataTabs({ teamData }: DataTabsProps) {
             <p>Error: Data is not an array</p>
           )}
         </Tabs.Panel>
-        {/* <Tabs.Panel value="sos">
-          {Array.isArray(sos) ? (
-            <SOSTable data={sos} />
-          ) : (
-            <p>Error: Data is not an array</p>
-          )}
-        </Tabs.Panel> */}
       </Tabs>
+      {/* <Group>
+        <Button onClick={() => setStep(step + 1)} color='indigo'>Load More Teams</Button>
+      </Group> */}
     </>
   );
 }

@@ -54,6 +54,33 @@ const errors: VerificationErrors[] = [
       },
     ],
   },
+  {
+    key: "3-Blue",
+    teams: [
+      {
+        number: 900,
+        form: "id",
+      },
+      {
+        number: 9000,
+        form: "id",
+      },
+      {
+        number: 9496,
+        form: "id",
+      },
+    ],
+    errors: [
+      {
+        type: "autol1",
+        magnitude: 1,
+      },
+      {
+        type: "autol2",
+        magnitude: 2,
+      },
+    ],
+  },
 ];
 
 export default function Page() {
