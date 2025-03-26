@@ -15,13 +15,13 @@ export default async function calculateSimpleTeamData(step: number) {
   // Using Event Key, Fetch all the Participating Teams.
   const allTeams: number[] = await eventTeamsKeys();
   let teams;
+  allTeams.sort((a, b) => a - b);
+  const half = allTeams.length / 2;
 
-  if (step != 0) {
-    allTeams.sort((a, b) => a - b);
-    let to = step * 20;
-    if (to > allTeams.length) to = allTeams.length - 1;
-    const from = step * 20 - 20;
-    teams = allTeams.slice(from, to);
+  if (step === 1) {
+    teams = allTeams.slice(0, half);
+  } else if (step === 2) {  
+    teams = allTeams.slice(half + 1, allTeams.length);
   } else {
     teams = allTeams;
   }

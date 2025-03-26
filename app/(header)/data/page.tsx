@@ -3,11 +3,12 @@ import calculateSimpleTeamData from "../../../lib/analysis/data";
 import { Monstrosity } from "../../../lib/definitions";
 import DataTabs from "../../../components/Data/data";
 import { Suspense } from "react";
+import { Button, Text } from "@mantine/core";
+import Link from "next/link";
 
 const teamOne = unstable_cache(
   async () => {
-    const data: Monstrosity[] = await calculateSimpleTeamData(1);
-    return { data, cachedtemp: true };
+    return await calculateSimpleTeamData(1);
   },
   ["stand"],
   { revalidate: 3600, tags: ["stand"] }
@@ -21,38 +22,38 @@ const teamTwo = unstable_cache(
   { revalidate: 3600, tags: ["stand"] }
 );
 
-let cached = false;
-
-const compileData = async (query: number) => {
+const compileData = async () => {
   let monstrosity: Monstrosity[] = [];
-  
-  if (cached) {
-    // console.log("calling cached")
-    const { data } = await teamOne();
-    const data2 = await teamTwo();
-    monstrosity.push(...data, ...data2);
-  } else {
-    // console.log("not cached")
-    const { data, cachedtemp } = await teamOne();
-    cached = cachedtemp;
-    monstrosity.push(...data);
+  let cached = false;
+
+  const before = Date.now();
+
+  const data = await teamOne();
+  monstrosity.push(...data);
+
+  const after = Date.now();
+
+  const totalTime = (after - before) / 1000;
+
+  if (totalTime < 0.1) {
+    const dataTwo = await teamTwo();
+    monstrosity.push(...dataTwo);
+    cached = true;
   }
 
-  return monstrosity;
+  return { monstrosity, cached };
 };
 
-export default async function Page(props: {
-  searchParams?: Promise<{
-    query?: string;
-  }>;
-}) {
-  const searchParams = await props.searchParams;
-  const query = Number(searchParams?.query) || 1;
+export default async function Page() {
+  const { monstrosity, cached } = await compileData();
 
-  const monstrosity: Monstrosity[] = await compileData(query);
+  console.log(cached);
 
   return (
     <Suspense fallback={<p>Loading Tabs...</p>}>
+      {cached ? null : (
+        <Text size="lg">Please referesh to load more teams.</Text>
+      )}
       <DataTabs teamData={monstrosity} />
     </Suspense>
   );

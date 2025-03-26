@@ -21,6 +21,7 @@ import BreakdownTable from "../Tables/breakdown-table";
 import DataTable from "../Tables/data-table";
 import { usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { useRef } from "react";
 
 interface DataTabsProps {
   teamData: Monstrosity[];
@@ -28,29 +29,7 @@ interface DataTabsProps {
 
 export default function DataTabs({ teamData }: DataTabsProps) {
   const theme = useMantineTheme();
-
-  // const pathname = usePathname();
-  // const searchParams = useSearchParams();
-  // const currentPage = Number(searchParams.get("query")) || 1;
-
-  // const createPageURL = (pageNumber: number | string) => {
-  //   const params = new URLSearchParams(searchParams);
-  //   params.set("query", pageNumber.toString());
-  //   return `${pathname}?${params.toString()}`;
-  // };
-
-  // const [step, setStep] = useState(1);
-
-  // useEffect(() => {
-  //   const fetchMoreTeams = async () => {
-  //     const moreTeams = await team(step);
-  //     teamData.push(...moreTeams);
-  //     console.log(teamData);
-  //   };
-  //   if (step > 1) {
-  //     fetchMoreTeams();
-  //   }
-  // }, [step, teamData])
+  const pathname = usePathname();
 
   const insights: Insights[] = teamData.map((row) => {
     const insight: Insights = {
@@ -147,15 +126,6 @@ export default function DataTabs({ teamData }: DataTabsProps) {
           )}
         </Tabs.Panel>
       </Tabs>
-      {/* <Group>
-        <Button
-          component={Link}
-          href={createPageURL(currentPage + 1)}
-          color="indigo"
-        >
-          Load More Teams
-        </Button>
-      </Group> */}
     </>
   );
 }
