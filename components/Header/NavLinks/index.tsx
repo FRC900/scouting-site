@@ -32,7 +32,7 @@ const links = [
         perm: "member",
       },
       {
-        link: "/schedule",
+        link: "https://docs.google.com/spreadsheets/d/1o3Zq0R6JktLXxcCSOGEzkoghX8Ohov_7OLkTfa1uthg/edit?usp=sharing",
         label: "Schedule",
         icon: <IconCalendarEvent style={{ width: rem(16), height: rem(16) }} />,
         perm: "member",

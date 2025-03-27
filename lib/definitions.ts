@@ -186,21 +186,30 @@ export type PitDataProps = {
   note: string;
 }
 
-export type FullTeamData = {
-  name: string;
-  pa: number[];
-  autoPA: number[];
-  teleopPA: number[];
-  endgamePA: number[];
-  penaltyPA: number[];
+export type AreaChartData = {
+  qual: string;
+  slot: string;
+  points: number;
+}[];
+
+export type ChartsData = {
+  pa: AreaChartData;
+  autoPA: AreaChartData;
+  teleopPA: AreaChartData;
+  endgamePA: AreaChartData;
+  penaltyPA: AreaChartData;
   avePA: number;
   aveAutoPA: number;
   aveTeleopPA: number;
   aveEndgamePA: number;
   avePenaltyPA: number;
+}
+
+export type FullTeamData = {
+  name: string;
   notes: Note[];
   pitform: PitDataProps;
-};
+} & ChartsData;
 
 export type VerificationErrors = {
   key: string;
