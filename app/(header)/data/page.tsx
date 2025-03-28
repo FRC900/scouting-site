@@ -37,7 +37,7 @@ const compileData = async () => {
 
   console.log(totalTime);
 
-  if (totalTime < 0.1) {
+  if (totalTime < 1) {
     const dataTwo = await teamTwo();
     monstrosity.push(...dataTwo);
     cached = true;
