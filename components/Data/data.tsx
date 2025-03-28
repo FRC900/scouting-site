@@ -10,6 +10,7 @@ import { Breakdown, Data, Insights, Monstrosity } from "../../lib/definitions";
 import InsightsTable from "../Tables/insights-table";
 import BreakdownTable from "../Tables/breakdown-table";
 import DataTable from "../Tables/data-table";
+import { useRouter } from "next/navigation";
 
 interface DataTabsProps {
   teamData: Monstrosity[];
@@ -18,6 +19,13 @@ interface DataTabsProps {
 
 export default function DataTabs({ teamData, cached }: DataTabsProps) {
   const theme = useMantineTheme();
+  const router = useRouter(); 
+
+  // const requestDataTwo = async () => {
+  //   const dataTwo = await addDataTwo();
+  //   teamData.push(...dataTwo)
+  //   window.location.reload()
+  // }
 
   const insights: Insights[] = teamData.map((row) => {
     const insight: Insights = {
@@ -54,11 +62,11 @@ export default function DataTabs({ teamData, cached }: DataTabsProps) {
 
   return (
     <>  
-      {cached ? null : (
-        <Button color={theme.colors.milkshake[4]} onClick={() => window.location.reload()}>
+      {/* {cached ? null : (
+        <Button color={theme.colors.milkshake[4]} onClick={() => requestDataTwo()}>
           Load More Teams
         </Button>
-      )}
+      )} */}
       <Title>Team Data</Title>
       <Tabs
         color={theme.colors.milkshake[4]}

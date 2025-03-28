@@ -3,8 +3,7 @@ import calculateSimpleTeamData from "../../../lib/analysis/data";
 import { Monstrosity } from "../../../lib/definitions";
 import DataTabs from "../../../components/Data/data";
 import { Suspense } from "react";
-import { Button, Text } from "@mantine/core";
-import Link from "next/link";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 
 const teamOne = unstable_cache(
   async () => {
@@ -14,7 +13,7 @@ const teamOne = unstable_cache(
   { revalidate: 3600, tags: ["stand"] }
 );
 
-const teamTwo = unstable_cache(
+export const teamTwo = unstable_cache(
   async () => {
     return await calculateSimpleTeamData(2);
   },
@@ -23,31 +22,39 @@ const teamTwo = unstable_cache(
 );
 
 const compileData = async () => {
-  let monstrosity: Monstrosity[] = [];
-  let cached = false;
+  let _cached = false;
+  let dataTwo: Monstrosity[] = [];
 
   const before = Date.now();
-
   const data = await teamOne();
-  monstrosity.push(...data);
-
   const after = Date.now();
-
   const totalTime = (after - before) / 1000;
 
   console.log(totalTime);
 
   if (totalTime < 1) {
-    const dataTwo = await teamTwo();
-    monstrosity.push(...dataTwo);
-    cached = true;
+    dataTwo = await teamTwo();
+    _cached = true;
   }
 
-  return { monstrosity, cached };
+  return { data, _cached };
 };
 
-export default async function Page() {
-  const { monstrosity, cached } = await compileData();
+export const getServerSideProps = (async () => {
+  const dataTwo = await teamTwo();
+
+  return { props: { dataTwo } };
+}) satisfies GetServerSideProps<{ dataTwo: Monstrosity[] }>;
+
+export default async function Page({
+  dataTwo,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const monstrosity = [];
+  let cached: boolean;
+
+  const { data, _cached } = await compileData();
+  monstrosity.push(...data, ...dataTwo);
+  cached = _cached;
 
   return (
     <Suspense fallback={<p>Loading Tabs...</p>}>
