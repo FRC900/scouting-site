@@ -33,7 +33,10 @@ export type PitForm = {
   weight: number;
   preferredscoring: string;
   electrical: string;
+  connection: "solder" | "crimp" | "pinch" | "tape" | "other"[];
   bumpers: string;
+  reversible: boolean;
+  bumpernotes: string;
   notes: string;
 };
 
@@ -172,35 +175,47 @@ export type OnlySOS = {
 export type SOS = Overview & OnlySOS;
 
 export type Note = {
-  note: string,
-  user: string,
-  status: number,
-}
+  note: string;
+  user: string;
+  status: number;
+};
 
 export type PitDataProps = {
   weight: number;
   drive: string;
   gamePiece: string;
   electrical: number;
+  connection: ("solder" | "crimp" | "pinch" | "tape" | "other")[];
   bumpers: number;
+  reversible: boolean;
+  bumpernotes: string;
   note: string;
-}
+};
 
-export type FullTeamData = {
-  name: string;
-  pa: number[];
-  autoPA: number[];
-  teleopPA: number[];
-  endgamePA: number[];
-  penaltyPA: number[];
+export type AreaChartData = {
+  qual: string;
+  slot: string;
+  points: number;
+}[];
+
+export type ChartsData = {
+  pa: AreaChartData;
+  autoPA: AreaChartData;
+  teleopPA: AreaChartData;
+  endgamePA: AreaChartData;
+  penaltyPA: AreaChartData;
   avePA: number;
   aveAutoPA: number;
   aveTeleopPA: number;
   aveEndgamePA: number;
   avePenaltyPA: number;
+};
+
+export type FullTeamData = {
+  name: string;
   notes: Note[];
   pitform: PitDataProps;
-};
+} & ChartsData;
 
 export type VerificationErrors = {
   key: string;
@@ -307,7 +322,7 @@ export type TBATeamEventStatus = {
 
 export type TBAEventOprs = {
   oprs: {
-    [key: string]: number,
+    [key: string]: number;
   };
   dprs: {};
   ccwms: {};

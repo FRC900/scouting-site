@@ -2,7 +2,7 @@
 
 import { AreaChart } from "@mantine/charts";
 import { Stack, Group, useMantineTheme, Text, Container } from "@mantine/core";
-import { AreaChartData } from "../../app/(header)/data/[id]/page";
+import { AreaChartData } from "../../lib/definitions";
 
 interface ChartsProps {
   pa: AreaChartData;
@@ -42,7 +42,7 @@ export default function Charts({
             h={300}
             w={450}
             data={pa}
-            dataKey="product"
+            dataKey="qual"
             referenceLines={[
               {
                 y: avePA,
@@ -60,7 +60,7 @@ export default function Charts({
             h={300}
             w={450}
             data={autoPA}
-            dataKey="product"
+            dataKey="qual"
             referenceLines={[
               {
                 y: aveAutoPA,
@@ -80,7 +80,7 @@ export default function Charts({
             h={300}
             w={450}
             data={teleopPA}
-            dataKey="product"
+            dataKey="qual"
             referenceLines={[
               {
                 y: aveTeleopPA,
@@ -98,7 +98,7 @@ export default function Charts({
             h={300}
             w={450}
             data={endgamePA}
-            dataKey="product"
+            dataKey="qual"
             referenceLines={[
               {
                 y: aveEndgamePA,
@@ -118,7 +118,7 @@ export default function Charts({
             h={300}
             w={450}
             data={penaltyPA}
-            dataKey="product"
+            dataKey="qual"
             referenceLines={[
               {
                 y: avePenaltyPA,

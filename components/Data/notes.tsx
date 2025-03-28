@@ -4,7 +4,7 @@ import { Blockquote, Container, useMantineTheme, Group } from "@mantine/core";
 import {
   IconMoodConfuzed,
   IconMoodHappy,
-  IconMoodSmile,
+  IconMoodWrrr,
   IconPencil,
   IconPercentage0,
   IconWifiOff,
@@ -33,7 +33,7 @@ export default function Notes({ notes }: NotesProps) {
         color = theme.colors.rose[5];
         break;
       case 2:
-        icon = <IconMoodHappy />;
+        icon = <IconMoodWrrr />;
         color = theme.colors.sunflower[5];
         break;
       case 3:
@@ -41,7 +41,7 @@ export default function Notes({ notes }: NotesProps) {
         color = theme.colors.cornflower[7];
         break;
       case 4:
-        icon = <IconMoodSmile />;
+        icon = <IconMoodHappy />;
         color = theme.colors.amethyst[3];
         break;
       case 5:

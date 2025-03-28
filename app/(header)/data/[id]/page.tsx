@@ -7,6 +7,7 @@ import Link from "next/link";
 import { IconExternalLink } from "@tabler/icons-react";
 import { year } from "../../../../lib/constants";
 import PitData from "../../../../components/Data/pit-data";
+import { AreaChartData } from "../../../../lib/definitions";
 
 const getTeam = (team: number) => {
   const data = unstable_cache(
@@ -20,48 +21,53 @@ const getTeam = (team: number) => {
   return data();
 }
 
-export type AreaChartData = {
-  product: string;
-  points: number;
-}[];
-
 export default async function Page({ params }: { params: { id: string } }) {
   const team = await getTeam(+params.id);
 
-  const pa: AreaChartData = team.pa.map((num, index) => {
+  const pa: AreaChartData = team.pa.map((match) => {
     return {
-      product: `Match ${index + 1}`,
-      points: num,
+      qual: match.qual,
+      slot: match.slot,
+      points: match.points,
     };
   });
+  pa.sort((a, b) => parseInt(a.qual) - parseInt(b.qual));
 
-  const autoPA: AreaChartData = team.autoPA.map((num, index) => {
+  const autoPA: AreaChartData = team.autoPA.map((match) => {
     return {
-      product: `Match ${index + 1}`,
-      points: num,
+      qual: match.qual,
+      slot: match.slot,
+      points: match.points,
     };
   });
+  autoPA.sort((a, b) => parseInt(a.qual) - parseInt(b.qual));
 
-  const teleopPA: AreaChartData = team.teleopPA.map((num, index) => {
+  const teleopPA: AreaChartData = team.teleopPA.map((match) => {
     return {
-      product: `Match ${index + 1}`,
-      points: num,
+      qual: match.qual,
+      slot: match.slot,
+      points: match.points,
     };
   });
+  teleopPA.sort((a, b) => parseInt(a.qual) - parseInt(b.qual));
 
-  const endgamePA: AreaChartData = team.endgamePA.map((num, index) => {
+  const endgamePA: AreaChartData = team.endgamePA.map((match) => {
     return {
-      product: `Match ${index + 1}`,
-      points: num,
+      qual: match.qual,
+      slot: match.slot,
+      points: match.points,
     };
   });
+  endgamePA.sort((a, b) => parseInt(a.qual) - parseInt(b.qual));
 
-  const penaltyPA: AreaChartData = team.penaltyPA.map((num, index) => {
+  const penaltyPA: AreaChartData = team.penaltyPA.map((match) => {
     return {
-      product: `Match ${index + 1}`,
-      points: num,
+      qual: match.qual,
+      slot: match.slot,
+      points: match.points,
     };
   });
+  penaltyPA.sort((a, b) => parseInt(a.qual) - parseInt(b.qual));
 
   return (
     <>

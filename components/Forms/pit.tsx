@@ -1,15 +1,6 @@
 "use client";
 
-import {
-  Stack,
-  Button,
-  useMantineTheme,
-  Group,
-  Modal,
-  FileButton,
-  Text,
-  rem,
-} from "@mantine/core";
+import { Stack, Button, useMantineTheme, Group, Modal } from "@mantine/core";
 import { useForm, Form } from "react-hook-form";
 import { type PitForm } from "../../lib/definitions";
 import { PitFormSchema } from "../../lib/constants";
@@ -21,7 +12,8 @@ import { createPitForm, deletePitForm, updatePitForm } from "../../lib/actions";
 import { useState } from "react";
 import { useOnlineStatus } from "../../lib/hooks/useOnlineStatus";
 import { useDisclosure } from "@mantine/hooks";
-import { IconPhotoUp } from "@tabler/icons-react";
+import { MultiSelect } from "./inputs/MultiSelect";
+import { Checkbox } from "./inputs/Checkbox";
 
 interface Props {
   create: boolean;
@@ -43,6 +35,9 @@ export default function PitForm({ create, defaultForm, id }: Props) {
       drive: undefined,
       weight: undefined,
       preferredscoring: undefined,
+      connection: undefined,
+      reversible: false,
+      bumpernotes: "",
       notes: "",
       ...defaultForm,
       electrical: defaultForm?.electrical.toString() || undefined,
@@ -78,6 +73,7 @@ export default function PitForm({ create, defaultForm, id }: Props) {
             { label: "Swerve", value: "swerve" },
             { label: "Tank", value: "tank" },
             { label: "Mecanum", value: "mecanum" },
+            { label: "Other", value: "other" },
           ]}
         />
         <NumberInput
@@ -110,6 +106,20 @@ export default function PitForm({ create, defaultForm, id }: Props) {
             { label: "5 - Star Struck", value: "5" },
           ]}
         />
+        <MultiSelect
+          name="connection"
+          control={control}
+          label="Connectors Used"
+          placeholder="Select"
+          data={[
+            { label: "Solder + Heatshrink", value: "solder" },
+            { label: "Electrical Tape", value: "tape" },
+            { label: "Crimps", value: "crimp" },
+            { label: "Pinch Connectors", value: "pinch" },
+            { label: "Other", value: "other" },
+          ]}
+          w={225}
+        />
         <Select
           name="bumpers"
           control={control}
@@ -120,6 +130,18 @@ export default function PitForm({ create, defaultForm, id }: Props) {
             { label: "2 - Good", value: "2" },
             { label: "3 - Meg Approved", value: "3" },
           ]}
+        />
+        <Checkbox
+          name="reversible"
+          control={control}
+          label="Reversible Bumprers?"
+          color={theme.colors.milkshake[4]}
+        />
+        <TextInput
+          name="bumpernotes"
+          control={control}
+          label="Bumper Notes"
+          placeholder="Yap about bumpers"
         />
         <TextInput
           name="notes"
