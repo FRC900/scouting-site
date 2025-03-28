@@ -35,6 +35,8 @@ const compileData = async () => {
 
   const totalTime = (after - before) / 1000;
 
+  console.log(totalTime);
+
   if (totalTime < 0.1) {
     const dataTwo = await teamTwo();
     monstrosity.push(...dataTwo);
@@ -46,8 +48,6 @@ const compileData = async () => {
 
 export default async function Page() {
   const { monstrosity, cached } = await compileData();
-
-  console.log(cached);
 
   return (
     <Suspense fallback={<p>Loading Tabs...</p>}>

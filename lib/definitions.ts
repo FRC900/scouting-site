@@ -33,7 +33,10 @@ export type PitForm = {
   weight: number;
   preferredscoring: string;
   electrical: string;
+  connection: "solder" | "crimp" | "pinch" | "tape" | "other"[];
   bumpers: string;
+  reversible: boolean;
+  bumpernotes: string;
   notes: string;
 };
 
@@ -172,19 +175,22 @@ export type OnlySOS = {
 export type SOS = Overview & OnlySOS;
 
 export type Note = {
-  note: string,
-  user: string,
-  status: number,
-}
+  note: string;
+  user: string;
+  status: number;
+};
 
 export type PitDataProps = {
   weight: number;
   drive: string;
   gamePiece: string;
   electrical: number;
+  connection: ("solder" | "crimp" | "pinch" | "tape" | "other")[];
   bumpers: number;
+  reversible: boolean;
+  bumpernotes: string;
   note: string;
-}
+};
 
 export type AreaChartData = {
   qual: string;
@@ -203,7 +209,7 @@ export type ChartsData = {
   aveTeleopPA: number;
   aveEndgamePA: number;
   avePenaltyPA: number;
-}
+};
 
 export type FullTeamData = {
   name: string;
@@ -316,7 +322,7 @@ export type TBATeamEventStatus = {
 
 export type TBAEventOprs = {
   oprs: {
-    [key: string]: number,
+    [key: string]: number;
   };
   dprs: {};
   ccwms: {};

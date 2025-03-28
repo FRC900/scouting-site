@@ -49,7 +49,7 @@ const charts = async (standRecords: StandForm[]) => {
       points: autoPA[index],
     };
   });
-  
+
   const teleopChartData: AreaChartData = standRecords.map((form, index) => {
     return {
       qual: form.match.toString(),
@@ -141,7 +141,10 @@ export default async function calculateTeam(teamNumber: number) {
       drive: pitRecord?.drive ?? "",
       gamePiece: pitRecord?.preferredscoring ?? "",
       electrical: pitRecord?.electrical ?? 0,
+      connection: pitRecord?.connection ?? "",
       bumpers: pitRecord?.bumpers ?? 0,
+      reversible: pitRecord?.reversible ?? false,
+      bumpernotes: pitRecord?.bumpernotes ?? "",
       note: pitRecord?.notes ?? "",
     },
   };
