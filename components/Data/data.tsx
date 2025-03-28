@@ -1,15 +1,6 @@
 "use client";
 
-import {
-  Title,
-  useMantineTheme,
-  Tabs,
-  rem,
-  Container,
-  Text,
-  Group,
-  Button,
-} from "@mantine/core";
+import { Title, useMantineTheme, Tabs, rem, Text, Button } from "@mantine/core";
 import {
   IconChartDonutFilled,
   IconChartCandleFilled,
@@ -19,17 +10,14 @@ import { Breakdown, Data, Insights, Monstrosity } from "../../lib/definitions";
 import InsightsTable from "../Tables/insights-table";
 import BreakdownTable from "../Tables/breakdown-table";
 import DataTable from "../Tables/data-table";
-import { usePathname, useSearchParams } from "next/navigation";
-import Link from "next/link";
-import { useRef } from "react";
 
 interface DataTabsProps {
   teamData: Monstrosity[];
+  cached: boolean;
 }
 
-export default function DataTabs({ teamData }: DataTabsProps) {
+export default function DataTabs({ teamData, cached }: DataTabsProps) {
   const theme = useMantineTheme();
-  const pathname = usePathname();
 
   const insights: Insights[] = teamData.map((row) => {
     const insight: Insights = {
@@ -65,7 +53,12 @@ export default function DataTabs({ teamData }: DataTabsProps) {
   });
 
   return (
-    <>
+    <>  
+      {cached ? null : (
+        <Button color={theme.colors.milkshake[4]} onClick={() => window.location.reload()}>
+          Load More Teams
+        </Button>
+      )}
       <Title>Team Data</Title>
       <Tabs
         color={theme.colors.milkshake[4]}

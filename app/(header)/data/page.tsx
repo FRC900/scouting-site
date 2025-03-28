@@ -51,10 +51,7 @@ export default async function Page() {
 
   return (
     <Suspense fallback={<p>Loading Tabs...</p>}>
-      {cached ? null : (
-        <Text size="lg">Please referesh to load more teams.</Text>
-      )}
-      <DataTabs teamData={monstrosity} />
+      <DataTabs teamData={monstrosity} cached={cached} />
     </Suspense>
   );
 }
