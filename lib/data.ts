@@ -101,3 +101,16 @@ export async function fetchPitFormByTeam(team: Number) {
     throw new Error('Failed to fetch pit form data');
   }
 }
+
+export async function fetchStandFormIDByMatchTeam(team: string, match: number) {
+  noStore();
+
+  try {
+    const data = await sql`SELECT (id) FROM standforms WHERE standforms.team = ${team} AND standforms.match = ${match.toString()}`
+
+    return data.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch stand from id')
+  }
+}

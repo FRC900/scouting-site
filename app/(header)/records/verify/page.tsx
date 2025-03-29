@@ -1,12 +1,8 @@
-import {
-  Button,
-  Container,
-  Space,
-  Stack,
-} from "@mantine/core";
+import { Button, Container, Space, Stack } from "@mantine/core";
 import VerifyAccordian from "../../../../components/Verify/verify";
 import { VerificationErrors } from "../../../../lib/definitions";
 import verify from "../../../../lib/verify";
+import { unstable_cache } from "next/cache";
 
 /**
  * Level 0:
@@ -27,74 +23,24 @@ import verify from "../../../../lib/verify";
  * teleopnet, teleopprocessor
  */
 
-const errors: VerificationErrors[] = [
-  {
-    key: "3-Red",
-    teams: [
-      {
-        number: 900,
-        form: "id",
-      },
-      {
-        number: 9000,
-        form: "id",
-      },
-      {
-        number: 9496,
-        form: "id",
-      },
-    ],
-    errors: [
-      {
-        type: "autol1",
-        magnitude: 1,
-      },
-      {
-        type: "autol2",
-        magnitude: 2,
-      },
-    ],
+const cached_verify = unstable_cache(
+  async () => {
+    return await verify();
   },
-  {
-    key: "3-Blue",
-    teams: [
-      {
-        number: 900,
-        form: "id",
-      },
-      {
-        number: 9000,
-        form: "id",
-      },
-      {
-        number: 9496,
-        form: "id",
-      },
-    ],
-    errors: [
-      {
-        type: "autol1",
-        magnitude: 1,
-      },
-      {
-        type: "autol2",
-        magnitude: 2,
-      },
-    ],
-  },
-];
+  ["stand"],
+  { revalidate: 3600, tags: ["stand"] }
+);
 
 export default async function Page() {
-
-  await verify();
+  const errors = await cached_verify();
 
   return (
     <Container>
       <Stack>
-        <Button variant="filled" size="md">
+        {/* <Button variant="filled" size="md">
           Verify Against TBA
         </Button>
-        <Space h="xs" />
+        <Space h="xs" /> */}
         <VerifyAccordian errors={errors} />
       </Stack>
     </Container>

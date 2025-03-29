@@ -221,7 +221,7 @@ export type VerificationErrors = {
   key: string;
   teams: {
     number: number;
-    form: string;
+    form: String;
   }[];
   errors: {
     type: string;
