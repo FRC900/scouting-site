@@ -20,8 +20,9 @@ export default async function verify() {
   const errors_promise = matches.map(async (match) => {
     const red_teams: { number: number; form: String }[] = [];
     const red_push_promise = match.alliances.red.team_keys.map(async (key) => {
-      const number = key.slice(3, 7);
+      const number = key.split("c")[1]
       const id = await fetchStandFormIDByMatchTeam(number, match.match_number);
+      // console.log(number + "/" + match.match_number + ": " + id)
       id.map((i) => {
         const entry = {
           number: +number,
@@ -31,6 +32,7 @@ export default async function verify() {
       });
     });
     await Promise.all(red_push_promise)
+    // console.log(red_teams)
     const red_errors = [];
     if (red_teams.length != 3) {
       red_errors.push({
@@ -50,7 +52,7 @@ export default async function verify() {
     const blue_teams: { number: number; form: string }[] = [];
     const blue_push_promise = match.alliances.blue.team_keys.map(
       async (key) => {
-        const number = key.slice(3, 7);
+        const number = key.split("c")[1]
         const id = await fetchStandFormIDByMatchTeam(
           number,
           match.match_number
