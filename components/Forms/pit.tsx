@@ -9,7 +9,7 @@ import { NumberInput } from "./inputs/NumberInput";
 import { Select } from "./inputs/Select";
 import { TextInput } from "./inputs/TextInput";
 import { createPitForm, deletePitForm, updatePitForm } from "../../lib/actions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useOnlineStatus } from "../../lib/hooks/useOnlineStatus";
 import { useDisclosure } from "@mantine/hooks";
 import { MultiSelect } from "./inputs/MultiSelect";
@@ -55,6 +55,12 @@ export default function PitForm({ create, defaultForm, id }: Props) {
       }
     }
   };
+
+  useEffect(() => {
+      if (submitting === "done") {
+        window.location.reload()
+      }
+    }, [submitting]);
 
   return (
     <Form
@@ -128,7 +134,7 @@ export default function PitForm({ create, defaultForm, id }: Props) {
           data={[
             { label: "1 - Poor", value: "1" },
             { label: "2 - Good", value: "2" },
-            { label: "3 - Meg Approved", value: "3" },
+            { label: "3 - Excellent", value: "3" },
           ]}
         />
         <Checkbox
