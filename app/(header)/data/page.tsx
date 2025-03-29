@@ -3,8 +3,8 @@ import calculateSimpleTeamData from "../../../lib/analysis/data";
 import { Monstrosity } from "../../../lib/definitions";
 import DataTabs from "../../../components/Data/data";
 import { Suspense } from "react";
-import { Button, Text } from "@mantine/core";
-import Link from "next/link";
+
+export const dynamic = 'force-dynamic'
 
 const teamOne = unstable_cache(
   async () => {
@@ -23,31 +23,28 @@ const teamTwo = unstable_cache(
 );
 
 const compileData = async () => {
-  let monstrosity: Monstrosity[] = [];
-  let cached = false;
+  let dataTwo: Monstrosity[] = [];
 
   const before = Date.now();
-
   const data = await teamOne();
-  monstrosity.push(...data);
-
   const after = Date.now();
-
   const totalTime = (after - before) / 1000;
 
   console.log(totalTime);
 
   if (totalTime < 1) {
-    const dataTwo = await teamTwo();
-    monstrosity.push(...dataTwo);
-    cached = true;
+    dataTwo = await teamTwo();
   }
 
-  return { monstrosity, cached };
+  return { data, dataTwo };
 };
 
 export default async function Page() {
-  const { monstrosity, cached } = await compileData();
+  const monstrosity = [];
+
+  const { data, dataTwo } = await compileData();  
+  monstrosity.push(...data, ...dataTwo);
+  const cached = (dataTwo.length > 0);
 
   return (
     <Suspense fallback={<p>Loading Tabs...</p>}>
