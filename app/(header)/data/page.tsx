@@ -3,7 +3,8 @@ import calculateSimpleTeamData from "../../../lib/analysis/data";
 import { Monstrosity } from "../../../lib/definitions";
 import DataTabs from "../../../components/Data/data";
 import { Suspense } from "react";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+
+export const dynamic = 'force-dynamic'
 
 const teamOne = unstable_cache(
   async () => {
@@ -22,7 +23,6 @@ export const teamTwo = unstable_cache(
 );
 
 const compileData = async () => {
-  let _cached = false;
   let dataTwo: Monstrosity[] = [];
 
   const before = Date.now();
@@ -34,27 +34,17 @@ const compileData = async () => {
 
   if (totalTime < 1) {
     dataTwo = await teamTwo();
-    _cached = true;
   }
 
-  return { data, _cached };
+  return { data, dataTwo };
 };
 
-export const getServerSideProps = (async () => {
-  const dataTwo = await teamTwo();
-
-  return { props: { dataTwo } };
-}) satisfies GetServerSideProps<{ dataTwo: Monstrosity[] }>;
-
-export default async function Page({
-  dataTwo,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default async function Page() {
   const monstrosity = [];
-  let cached: boolean;
 
-  const { data, _cached } = await compileData();
+  const { data, dataTwo } = await compileData();  
   monstrosity.push(...data, ...dataTwo);
-  cached = _cached;
+  const cached = (dataTwo.length > 0);
 
   return (
     <Suspense fallback={<p>Loading Tabs...</p>}>
