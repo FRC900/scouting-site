@@ -221,7 +221,7 @@ export type VerificationErrors = {
   key: string;
   teams: {
     number: number;
-    form: string;
+    form: String;
   }[];
   errors: {
     type: string;
@@ -326,6 +326,95 @@ export type TBAEventOprs = {
   };
   dprs: {};
   ccwms: {};
+};
+
+export type TBAEventMatch = {
+  key: string;
+  comp_level: "qm" | "sf" | "f";
+  set_number: number;
+  match_number: number;
+  alliances: {
+    red: {
+      score: number;
+      team_keys: string[];
+      surrogate_team_keys: string[];
+      dq_team_keys: string[];
+    };
+    blue: {
+      score: number;
+      team_keys: string[];
+      surrogate_team_keys: string[];
+      dq_team_keys: string[];
+    };
+  };
+  winning_alliance: "red" | "blue";
+  event_key: string;
+  time: number;
+  actual_time: number | null;
+  predicted_time: number;
+  post_result_time: number | null;
+  score_breakdown: {
+    blue: {
+      auto_points: number;
+      teleop_points: number;
+      container_points: number;
+      tote_points: number;
+      litter_points: number;
+      foul_points: number;
+      adjust_points: number;
+      total_points: number;
+      foul_count: number;
+      tote_count_far: number;
+      tote_count_near: number;
+      tote_set: true;
+      tote_stack: true;
+      container_count_level1: number;
+      container_count_level2: number;
+      container_count_level3: number;
+      container_count_level4: number;
+      container_count_level5: number;
+      container_count_level6: number;
+      container_set: true;
+      litter_count_container: number;
+      litter_count_landfill: number;
+      litter_count_unprocessed: number;
+      robot_set: true;
+    };
+    red: {
+      auto_points: number;
+      teleop_points: number;
+      container_points: number;
+      tote_points: number;
+      litter_points: number;
+      foul_points: number;
+      adjust_points: number;
+      total_points: number;
+      foul_count: number;
+      tote_count_far: number;
+      tote_count_near: number;
+      tote_set: true;
+      tote_stack: true;
+      container_count_level1: number;
+      container_count_level2: number;
+      container_count_level3: number;
+      container_count_level4: number;
+      container_count_level5: number;
+      container_count_level6: number;
+      container_set: true;
+      litter_count_container: number;
+      litter_count_landfill: number;
+      litter_count_unprocessed: number;
+      robot_set: true;
+    };
+    coopertition: string;
+    coopertition_points: number;
+  } | null;
+  videos: [
+    {
+      type: string;
+      key: string;
+    }
+  ];
 };
 
 // SQL Tables
