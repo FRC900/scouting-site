@@ -14,7 +14,7 @@ const teamOne = unstable_cache(
   { revalidate: 3600, tags: ["stand"] }
 );
 
-export const teamTwo = unstable_cache(
+const teamTwo = unstable_cache(
   async () => {
     return await calculateSimpleTeamData(2);
   },
