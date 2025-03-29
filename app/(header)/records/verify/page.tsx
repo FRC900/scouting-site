@@ -33,6 +33,7 @@ const cached_verify = unstable_cache(
 
 export default async function Page() {
   const errors = await cached_verify();
+  errors.sort((a, b) => +a.key.slice(0,1) - +b.key.slice(0,1))
 
   return (
     <Container>
