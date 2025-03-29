@@ -57,10 +57,12 @@ export default function PitForm({ create, defaultForm, id }: Props) {
   };
 
   useEffect(() => {
-      if (submitting === "done") {
-        window.location.reload()
+      if (create) {
+        if (submitting === "done") {
+          window.location.reload()
+        }
       }
-    }, [submitting]);
+    }, [submitting, create]);
 
   return (
     <Form
