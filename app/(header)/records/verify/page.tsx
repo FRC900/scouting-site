@@ -6,6 +6,7 @@ import {
 } from "@mantine/core";
 import VerifyAccordian from "../../../../components/Verify/verify";
 import { VerificationErrors } from "../../../../lib/definitions";
+import verify from "../../../../lib/verify";
 
 /**
  * Level 0:
@@ -83,7 +84,9 @@ const errors: VerificationErrors[] = [
   },
 ];
 
-export default function Page() {
+export default async function Page() {
+
+  await verify();
 
   return (
     <Container>
