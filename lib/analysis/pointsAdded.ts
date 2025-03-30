@@ -3,16 +3,14 @@ import { StandForm } from "../definitions";
 export const calcPointsAdded = (forms: StandForm[]) => {
   const pointsAdded = forms.map((form: StandForm) => {
     let endgame = 0;
-    switch (form.endgame) {
-      case "Parked": {
-        endgame = 2;
-      }
-      case "Shallow": {
-        endgame = 6;
-      }
-      case "Deep": {
-        endgame = 12;
-      }
+    if (form.endgame === "Nothing") {
+      endgame = 0;
+    } else if (form.endgame === "Parked") {
+      endgame = 2;
+    } else if (form.endgame === "Shallow") {
+      endgame = 6;
+    } else if (form.endgame === "Deep") {
+      endgame = 12;
     }
     let startingZone = 0;
     if (form.startingZone === true) {
@@ -89,16 +87,14 @@ export const calcTeleopAlgae = (forms: StandForm[]) => {
 export const calcEndgamePointsAdded = (forms: StandForm[]) => {
   const endgamePointsAdded = forms.map((form: StandForm) => {
     let endgame = 0;
-    switch (form.endgame) {
-      case "Parked": {
-        endgame = 2;
-      }
-      case "Shallow": {
-        endgame = 6;
-      }
-      case "Deep": {
-        endgame = 12;
-      }
+    if (form.endgame === "Nothing") {
+      endgame = 0;
+    } else if (form.endgame === "Parked") {
+      endgame = 2;
+    } else if (form.endgame === "Shallow") {
+      endgame = 6;
+    } else if (form.endgame === "Deep") {
+      endgame = 12;
     }
     return endgame;
   });
