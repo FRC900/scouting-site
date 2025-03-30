@@ -25,6 +25,7 @@ export default async function calculateSimpleTeamData(step: number) {
   } else {
     teams = allTeams;
   }
+  // console.log(teams)
 
   const oprs = await eventOprs();
 

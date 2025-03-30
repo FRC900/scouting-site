@@ -1,4 +1,4 @@
-import {getTBAHeaders} from "../getHeaders";
+import { getTBAHeaders } from "../getHeaders";
 import { tbaEventKey } from "../../constants";
 
 export default async function eventTeamsKeys() {

@@ -30,8 +30,6 @@ const compileData = async () => {
   const after = Date.now();
   const totalTime = (after - before) / 1000;
 
-  console.log(totalTime);
-
   if (totalTime < 1) {
     dataTwo = await teamTwo();
   }
