@@ -4,6 +4,9 @@ export const calcPointsAdded = (forms: StandForm[]) => {
   const pointsAdded = forms.map((form: StandForm) => {
     let endgame = 0;
     switch (form.endgame) {
+      case "Nothing": {
+        endgame = 0;
+      }
       case "Parked": {
         endgame = 2;
       }
@@ -90,6 +93,9 @@ export const calcEndgamePointsAdded = (forms: StandForm[]) => {
   const endgamePointsAdded = forms.map((form: StandForm) => {
     let endgame = 0;
     switch (form.endgame) {
+      case "Nothing": {
+        endgame = 0;
+      }
       case "Parked": {
         endgame = 2;
       }
