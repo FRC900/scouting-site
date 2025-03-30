@@ -17,7 +17,7 @@ async function getForms(red_teams: string[], blue_teams: string[]) {
     form5promise,
     form6promise,
   ]);
-  console.log(typeof forms);
+
   return forms;
 }
 
@@ -78,10 +78,10 @@ export default async function verify() {
 
     if (all_red_forms && all_blue_forms) {
       // Get all forms
-      const forms = getForms(
-        [red_teams[0].form, red_teams[1].form, red_teams[2].form],
-        [blue_teams[0].form, blue_teams[1].form, blue_teams[2].form]
-      );
+      // const forms = getForms(
+      //   [red_teams[0].form, red_teams[1].form, red_teams[2].form],
+      //   [blue_teams[0].form, blue_teams[1].form, blue_teams[2].form]
+      // );
     }
 
     // Get Red Errors
