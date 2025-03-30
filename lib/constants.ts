@@ -80,6 +80,18 @@ export const PitFormDatabaseSchema = z.object({
   date: z.string(),
 });
 
+export const QualitativeFormSchema = z.object({
+  match: z.number(),
+  alliance: z.string(),
+  team: z.array(z.object({
+    notes: z.string(),
+    defence: z.string(),
+    defencenotes: z.string(),
+    status: z.string(),
+    hpnotes: z.string(),
+  }))
+})
+
 export const LoginFormSchema = z.object({
   email: z.string().email(),
   password: z.string(),

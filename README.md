@@ -8,6 +8,7 @@ ZebraScouting is a powerful new scouting site application for recording and proc
 
 * combinations / simulation
 * Tell you which team you are scouting apon inputing match+slot
+* Blue alliance verification
 
 ### Lesser Priority:
 
@@ -21,7 +22,6 @@ ZebraScouting is a powerful new scouting site application for recording and proc
 
 ### Not until competition:
 
-* Blue alliance verification
 * Ability to factor in the influence of previous competitions
 
 ### Bugs
