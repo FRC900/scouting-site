@@ -27,7 +27,7 @@ export const calcPointsAdded = (forms: StandForm[]) => {
       form.teleopL2 * 3 +
       form.teleopL3 * 4 +
       form.teleopL4 * 5 +
-      form.teleopProcessor * 6 +
+      form.teleopProcessor * 2 +
       form.teleopNet * 4 +
       endgame +
       startingZone;
