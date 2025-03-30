@@ -15,11 +15,13 @@ async function getForms(red_teams: string[], blue_teams: string[]) {
     form3promise,
     form4promise,
     form5promise,
-    form6promise
+    form6promise,
   ]);
-  console.log(typeof forms)
+  console.log(typeof forms);
   return forms;
 }
+
+
 
 export default async function verify() {
   // Which set of matches are we verifying? (All to start)
@@ -37,7 +39,6 @@ export default async function verify() {
   const errors: VerificationErrors[] = [];
 
   const errors_promise = matches.map(async (match) => {
-
     // Get Red Form Ids
     const red_teams: { number: number; form: string }[] = [];
     const red_push_promise = match.alliances.red.team_keys.map(async (key) => {
@@ -52,8 +53,6 @@ export default async function verify() {
       });
     });
     await Promise.all(red_push_promise);
-
-
 
     // Get Blue From Ids
     const blue_teams: { number: number; form: string }[] = [];
@@ -74,47 +73,45 @@ export default async function verify() {
     );
     await Promise.all(blue_push_promise);
 
-    // Get all forms
-    const forms = getForms([
-      red_teams[0].form,
-      red_teams[1].form,
-      red_teams[2].form,
-    ], [
-      blue_teams[0].form,
-      blue_teams[1].form,
-      blue_teams[2].form
-    ])
-    console.log(forms)
+    const all_red_forms = red_teams.length == 3;
+    const all_blue_forms = red_teams.length == 3;
+
+    if (all_red_forms && all_blue_forms) {
+      // Get all forms
+      const forms = getForms(
+        [red_teams[0].form, red_teams[1].form, red_teams[2].form],
+        [blue_teams[0].form, blue_teams[1].form, blue_teams[2].form]
+      );
+    }
 
     // Get Red Errors
     const red_errors = [];
-    if (red_teams.length != 3) {
+    if (!all_red_forms) {
       red_errors.push({
         type: `Incorrect number of forms`,
         magnitude: red_teams.length - 3,
       });
     } else {
-      // const errors = await verifyScoreBreakdown(match, [
-      //   red_teams[0].form,
-      //   red_teams[1].form,
-      //   red_teams[2].form,
-      // ], 'red');
-      // red_errors.push(...errors);
+
     }
+
+    // Get Blue Errors
+    const blue_errors = [];
+    if (!all_blue_forms) {
+      blue_errors.push({
+        type: `Incorrect number of forms`,
+        magnitude: blue_teams.length - 3,
+      });
+    } else {
+
+    }
+
+
     if (red_errors.length > 0) {
       errors.push({
         key: `${match.match_number}-Red`,
         teams: red_teams,
         errors: red_errors,
-      });
-    }
-
-    // Get Blue Errors
-    const blue_errors = [];
-    if (blue_teams.length != 3) {
-      blue_errors.push({
-        type: `Incorrect number of forms`,
-        magnitude: blue_teams.length - 3,
       });
     }
     if (blue_errors.length > 0) {
