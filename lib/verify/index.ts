@@ -107,7 +107,6 @@ export default async function verify() {
 
     }
 
-
     if (red_errors.length > 0) {
       errors.push({
         key: `${match.match_number}-Red`,
