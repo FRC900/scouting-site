@@ -42,7 +42,7 @@ export default async function verify() {
     // Get Red Form Ids
     const red_teams: { number: number; form: string }[] = [];
     const red_push_promise = match.alliances.red.team_keys.map(async (key) => {
-      const number = key.slice(3, 7);
+      const number = key.split("c")[1]
       const id = await fetchStandFormIDByMatchTeam(number, match.match_number);
       id.map((i) => {
         const entry = {
@@ -52,13 +52,12 @@ export default async function verify() {
         red_teams.push(entry);
       });
     });
-    await Promise.all(red_push_promise);
 
     // Get Blue From Ids
     const blue_teams: { number: number; form: string }[] = [];
     const blue_push_promise = match.alliances.blue.team_keys.map(
       async (key) => {
-        const number = key.slice(3, 7);
+        const number = key.split("c")[1]
         const id = await fetchStandFormIDByMatchTeam(
           number,
           match.match_number
@@ -71,10 +70,12 @@ export default async function verify() {
         });
       }
     );
+
+    await Promise.all(red_push_promise);
     await Promise.all(blue_push_promise);
 
-    const all_red_forms = red_teams.length == 3;
-    const all_blue_forms = red_teams.length == 3;
+    const all_red_forms = (red_teams.length == 3);
+    const all_blue_forms = (blue_teams.length == 3);
 
     if (all_red_forms && all_blue_forms) {
       // Get all forms
