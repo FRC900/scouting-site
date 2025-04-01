@@ -437,9 +437,9 @@ export type TBAEventMatch = {
       coopertitionCriteriaMet: boolean;
       coralBonusAchieved: boolean;
       endGameBargePoints: number;
-      endGameRobot1: "Parked";
-      endGameRobot2: "Parked";
-      endGameRobot3: "None";
+      endGameRobot1: string;
+      endGameRobot2: string;
+      endGameRobot3: string;
       foulCount: number;
       foulPoints: number;
       g206Penalty: boolean;
@@ -566,9 +566,9 @@ export type TBAEventMatch = {
       coopertitionCriteriaMet: boolean;
       coralBonusAchieved: boolean;
       endGameBargePoints: number;
-      endGameRobot1: "Parked";
-      endGameRobot2: "Parked";
-      endGameRobot3: "None";
+      endGameRobot1: string;
+      endGameRobot2: string;
+      endGameRobot3: string;
       foulCount: number;
       foulPoints: number;
       g206Penalty: boolean;

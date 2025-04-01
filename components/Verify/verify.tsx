@@ -10,7 +10,7 @@ export default function VerifyAccordian({ errors }: { errors: VerificationErrors
 
   const items = errors.map((error) => (
     <Card key={error.key}>
-      <Group mt="xs" mb="xs">
+      <Group justify="space-around" mt="xs" mb="xs">
           <Text fw={700}>Match {error.key.split('-')[0]}</Text>
           <Badge color={`${error.key.split('-')[1].toLowerCase()}`}>{error.key.split('-')[1]} Alliance</Badge>
       </Group>
@@ -28,7 +28,7 @@ export default function VerifyAccordian({ errors }: { errors: VerificationErrors
           ))}
         </Group>
         <Space h="sm" />
-        <Stack>
+        <Stack gap={1}>
           {error.errors.map((error, index) => (
             <Text size="md" key={index}>
               {capitalize(error.type)}: {error.magnitude}
