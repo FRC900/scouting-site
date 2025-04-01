@@ -16,17 +16,6 @@ import {
   calcTeleopPointsAdded,
 } from "./pointsAdded";
 
-type ArrayChartsData = [
-  AreaChartData[],
-  AreaChartData[],
-  AreaChartData[],
-  AreaChartData[],
-  number,
-  number,
-  number,
-  number
-];
-
 const charts = async (standRecords: StandForm[]) => {
   const pa = calcPointsAdded(standRecords);
   const autoPA = calcAutoPointsAdded(standRecords);

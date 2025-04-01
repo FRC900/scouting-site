@@ -10,6 +10,7 @@ import {
   IconClipboardData,
   IconFileFilled,
   IconForms,
+  IconNotes,
   IconRosetteDiscountCheckFilled,
   IconUserFilled,
 } from "@tabler/icons-react";
@@ -29,6 +30,12 @@ const links = [
         link: "/pit-form",
         label: "Pit Form",
         icon: <IconForms style={{ width: rem(16), height: rem(16) }} />,
+        perm: "member",
+      },
+      {
+        link: "/qualitative-form",
+        label: "Qualitative Form",
+        icon: <IconNotes style={{ width: rem(16), height: rem(16) }} />,
         perm: "member",
       },
       {

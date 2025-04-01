@@ -45,13 +45,21 @@ export type PitFormDatabase = PitForm & { date: string };
 export type QualitativeForm = {
   match: number;
   alliance: "Red" | "Blue";
-  team: {
-    notes: string;
-    defence: string;
-    defencenotes: string;
-    status: string;
-    hpnotes: string;
-  }[];
+  t1notes: string;
+  t1defence: string;
+  t1defencenotes: string;
+  t1status: string;
+  t1hpnotes: string;
+  t2notes: string;
+  t2defence: string;
+  t2defencenotes: string;
+  t2status: string;
+  t2hpnotes: string;
+  t3notes: string;
+  t3defence: string;
+  t3defencenotes: string;
+  t3status: string;
+  t3hpnotes: string;
  }
 
 export type User = {
