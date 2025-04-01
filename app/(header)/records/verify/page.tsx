@@ -1,6 +1,5 @@
-import { Button, Container, Space, Stack } from "@mantine/core";
-import VerifyAccordian from "../../../../components/Verify/verify";
-import { VerificationErrors } from "../../../../lib/definitions";
+import { Container, Stack, Title } from "@mantine/core";
+import VerifyCards from "../../../../components/Verify/verify";
 import verify from "../../../../lib/verify";
 import { unstable_cache } from "next/cache";
 
@@ -24,12 +23,9 @@ export default async function Page() {
 
   return (
     <Container>
-      <Stack>
-        {/* <Button variant="filled" size="md">
-          Verify Against TBA
-        </Button>
-        <Space h="xs" /> */}
-        <VerifyAccordian errors={errors} />
+      <Stack align="center">
+        <Title order={1}>Verification</Title>
+        <VerifyCards errors={errors} />
       </Stack>
     </Container>
   );

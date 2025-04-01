@@ -8,7 +8,6 @@ ZebraScouting is a powerful new scouting site application for recording and proc
 
 * combinations / simulation
 * Tell you which team you are scouting apon inputing match+slot
-* Blue alliance verification
 
 ### Lesser Priority:
 
@@ -58,3 +57,4 @@ When mantine adds support for React 19 update update NextJS to v15 and everythin
 ## Cut Features :( (at least for now)
 
 * image submission to pit forms
+* Blue alliance verification

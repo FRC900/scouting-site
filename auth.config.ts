@@ -13,13 +13,15 @@ export const authConfig = {
       const isOnRecords = nextUrl.pathname.startsWith("/records");
       const isOnData = nextUrl.pathname.startsWith("/data");
       const isOnMatches = nextUrl.pathname.startsWith("/matches");
+      const isOnSimulation = nextUrl.pathname.startsWith("/simulation");
       if (
         isOnStandForm ||
         isOnPitForm ||
         isOnQualitativeForm ||
         isOnRecords ||
         isOnData ||
-        isOnMatches
+        isOnMatches ||
+        isOnSimulation
       ) {
         if (isLoggedIn) return true;
         return false; // Redirect unauthenticated users to login page

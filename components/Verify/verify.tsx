@@ -5,7 +5,7 @@ import capitalize from "../../lib/capitalize";
 import Link from "next/link";
 import { VerificationErrors } from "../../lib/definitions";
 
-export default function VerifyAccordian({ errors }: { errors: VerificationErrors[] }) {
+export default function VerifyCards({ errors }: { errors: VerificationErrors[] }) {
   const theme = useMantineTheme();
 
   const items = errors.map((error) => (
@@ -39,7 +39,7 @@ export default function VerifyAccordian({ errors }: { errors: VerificationErrors
   ));
 
   return (
-    <Group>
+    <Group justify="center">
       {items}
     </Group>
   );
