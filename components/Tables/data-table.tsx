@@ -2,7 +2,15 @@
 
 import { type Data } from "../../lib/definitions";
 import { Th } from "./stand-form-table";
-import { ScrollArea, Table, Text, keys, Anchor, Group, Progress } from "@mantine/core";
+import {
+  ScrollArea,
+  Table,
+  Text,
+  keys,
+  Anchor,
+  Group,
+  Progress,
+} from "@mantine/core";
 import { useState } from "react";
 import classes from "./Table.module.css";
 import capitalize from "../../lib/capitalize";
@@ -52,8 +60,10 @@ function sortData(
 }
 
 export default function DataTable({ data }: Props) {
-  const [sortedData, setSortedData] = useState(() => sortData(data, { sortBy: 'avePA', reversed: true }));
-  const [sortBy, setSortBy] = useState<keyof Data | null>('avePA');
+  const [sortedData, setSortedData] = useState(() =>
+    sortData(data, { sortBy: "rank", reversed: false })
+  );
+  const [sortBy, setSortBy] = useState<keyof Data | null>("rank");
   const [reverseSortDirection, setReverseSortDirection] = useState(false);
 
   const setSorting = (field: keyof Data) => {
@@ -64,67 +74,62 @@ export default function DataTable({ data }: Props) {
   };
 
   const rows = sortedData.map((form) => {
+    const totalCoral =
+      form.coral.l1 + form.coral.l2 + form.coral.l3 + form.coral.l4;
+    const l1 = Math.round((form.coral.l1 / totalCoral) * 1000) / 10;
+    const l2 = Math.round((form.coral.l2 / totalCoral) * 1000) / 10;
+    const l3 = Math.round((form.coral.l3 / totalCoral) * 1000) / 10;
+    const l4 = Math.round((form.coral.l4 / totalCoral) * 1000) / 10;
 
-    const totalAutoCoral = form.auto.l1 + form.auto.l2 + form.auto.l3 + form.auto.l4;
-    const l1Auto = Math.round((form.auto.l1 / totalAutoCoral) * 1000) / 10;
-    const l2Auto = Math.round((form.auto.l2 / totalAutoCoral) * 1000) / 10;
-    const l3Auto = Math.round((form.auto.l3 / totalAutoCoral) * 1000) / 10;
-    const l4Auto = Math.round((form.auto.l4 / totalAutoCoral) * 1000) / 10;
+    const totalAlgae = form.algae.processor + form.algae.net;
+    const processor =
+      Math.round((form.algae.processor / totalAlgae) * 1000) / 10;
+    const net = Math.round((form.algae.net / totalAlgae) * 1000) / 10;
 
-    const totalTeleopCoral = form.teleop.l1 + form.teleop.l2 + form.teleop.l3 + form.teleop.l4;
-    const l1Teleop = Math.round((form.teleop.l1 / totalTeleopCoral) * 1000) / 10;
-    const l2Teleop = Math.round((form.teleop.l2 / totalTeleopCoral) * 1000) / 10;
-    const l3Teleop = Math.round((form.teleop.l3 / totalTeleopCoral) * 1000) / 10;
-    const l4Teleop = Math.round((form.teleop.l4 / totalTeleopCoral) * 1000) / 10;
-
-    const totalMatches = form.climb.nothing + form.climb.parked + form.climb.shallow + form.climb.deep;
-    const nothingPercent = (form.climb.nothing / totalMatches) * 100;
-    const parkedPercent = (form.climb.parked / totalMatches) * 100;
-    const shallowPercent = (form.climb.shallow / totalMatches) * 100;
-    const deepPercent = (form.climb.deep / totalMatches) * 100;
-    
     return (
       <Table.Tr key={form.team}>
         <Table.Td>{form.team}</Table.Td>
-        <Table.Td><Anchor component={Link} href={`/data/${form.team}`} fz="md">{form.name}</Anchor></Table.Td>
+        <Table.Td>
+          <Anchor component={Link} href={`/data/${form.team}`} fz="md">
+            {form.name}
+          </Anchor>
+        </Table.Td>
         <Table.Td>{form.rank}</Table.Td>
-        <Table.Td>{form.avePA}</Table.Td>
-        <Table.Td>{form.preloaded}%</Table.Td>
         <Table.Td>{form.startingZone}%</Table.Td>
         <Table.Td>
           <Group justify="space-between">
             <Text fz="sm" c="#5474B4" fw={700}>
-              {l1Auto.toFixed(0)}%
+              {form.coral.l1.toFixed(0)}
             </Text>
             <Text fz="sm" c="#4c5897" fw={700}>
-              {l2Auto.toFixed(0)}%
+              {form.coral.l2.toFixed(0)}
             </Text>
             <Text fz="sm" c="#6b31b2" fw={700}>
-              {l3Auto.toFixed(0)}%
+              {form.coral.l3.toFixed(0)}
             </Text>
             <Text fz="sm" c="#c91a52" fw={700}>
-              {l4Auto.toFixed(0)}%
+              {form.coral.l4.toFixed(0)}
             </Text>
           </Group>
           <Progress.Root>
             <Progress.Section
               className={classes.progressSection}
-              value={l1Auto}
+              value={l1}
               color="#5474B4"
             />
             <Progress.Section
               className={classes.progressSection}
-              value={l2Auto}
+              value={l2}
               color="#4c5897"
             />
             <Progress.Section
               className={classes.progressSection}
-              value={l3Auto}
+              value={l3}
               color="#6b31b2"
             />
             <Progress.Section
               className={classes.progressSection}
-              value={l4Auto}
+              value={l4}
               color="#c91a52"
             />
           </Progress.Root>
@@ -132,81 +137,26 @@ export default function DataTable({ data }: Props) {
         <Table.Td>
           <Group justify="space-between">
             <Text fz="sm" c="#5474B4" fw={700}>
-              {l1Teleop.toFixed(0)}%
+              {form.algae.processor.toFixed(0)}
             </Text>
             <Text fz="sm" c="#4c5897" fw={700}>
-              {l2Teleop.toFixed(0)}%
-            </Text>
-            <Text fz="sm" c="#6b31b2" fw={700}>
-              {l3Teleop.toFixed(0)}%
-            </Text>
-            <Text fz="sm" c="#c91a52" fw={700}>
-              {l4Teleop.toFixed(0)}%
+              {form.algae.net.toFixed(0)}
             </Text>
           </Group>
           <Progress.Root>
             <Progress.Section
               className={classes.progressSection}
-              value={l1Teleop}
+              value={processor}
               color="#5474B4"
             />
             <Progress.Section
               className={classes.progressSection}
-              value={l2Teleop}
+              value={net}
               color="#4c5897"
             />
-            <Progress.Section
-              className={classes.progressSection}
-              value={l3Teleop}
-              color="#6b31b2"
-            />
-            <Progress.Section
-              className={classes.progressSection}
-              value={l4Teleop}
-              color="#c91a52"
-            />
           </Progress.Root>
         </Table.Td>
-        <Table.Td>{form.processor}</Table.Td>
-        <Table.Td>{form.net}</Table.Td>
-        <Table.Td>
-          <Group justify="space-between">
-            <Text fz="sm" c="#fc8c0c" fw={700}>
-              {form.climb.nothing}
-            </Text>
-            <Text fz="sm" c="#ffab09" fw={700}>
-              {form.climb.parked}
-            </Text>
-            <Text fz="sm" c="#2f7f49" fw={700}>
-              {form.climb.shallow}
-            </Text>
-            <Text fz="sm" c="#0088e4" fw={700}>
-              {form.climb.deep}
-            </Text>
-          </Group>
-          <Progress.Root>
-            <Progress.Section
-              className={classes.progressSection}
-              value={nothingPercent}
-              color="#fc8c0c"
-            />
-            <Progress.Section
-              className={classes.progressSection}
-              value={parkedPercent}
-              color="#ffab09"
-            />
-            <Progress.Section
-              className={classes.progressSection}
-              value={shallowPercent}
-              color="#2f7f49"
-            />
-            <Progress.Section
-              className={classes.progressSection}
-              value={deepPercent}
-              color="#0088e4"
-            />
-          </Progress.Root>
-        </Table.Td>
+        <Table.Td>{form.climb}</Table.Td>
       </Table.Tr>
     );
   });

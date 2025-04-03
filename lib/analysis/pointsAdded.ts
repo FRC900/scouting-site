@@ -30,7 +30,10 @@ export const calcPointsAdded = (forms: StandForm[]) => {
       endgame +
       startingZone;
 
-    return matchPA;
+    return {
+      match: form.match,
+      points: matchPA,
+    };
   });
 
   return pointsAdded;
@@ -41,13 +44,17 @@ export const calcAutoPointsAdded = (forms: StandForm[]) => {
     let startingZone = 0;
     if (form.startingZone === true) startingZone = 3;
 
-    return (
+    const autoPoints =
       form.autoL1 * 3 +
       form.autoL2 * 4 +
       form.autoL3 * 6 +
       form.autoL4 * 7 +
-      startingZone
-    );
+      startingZone;
+
+    return {
+      match: form.match,
+      points: autoPoints,
+    };
   });
 
   return autoPointsAdded;
@@ -55,14 +62,18 @@ export const calcAutoPointsAdded = (forms: StandForm[]) => {
 
 export const calcTeleopPointsAdded = (forms: StandForm[]) => {
   const teleopPointsAdded = forms.map((form: StandForm) => {
-    return (
+    const teleopPoints =
       form.teleopL1 * 2 +
       form.teleopL2 * 3 +
       form.teleopL3 * 4 +
       form.teleopL4 * 5 +
       form.teleopProcessor * 2 +
-      form.teleopNet * 4
-    );
+      form.teleopNet * 4;
+
+    return {
+      match: form.match,
+      points: teleopPoints,
+    };
   });
 
   return teleopPointsAdded;
@@ -96,7 +107,11 @@ export const calcEndgamePointsAdded = (forms: StandForm[]) => {
     } else if (form.endgame === "Deep") {
       endgame = 12;
     }
-    return endgame;
+
+    return {
+      match: form.match,
+      points: endgame,
+    };
   });
 
   return endgamePointsAdded;
@@ -104,11 +119,13 @@ export const calcEndgamePointsAdded = (forms: StandForm[]) => {
 
 export const calcPenaltyPointsAdded = (forms: StandForm[]) => {
   const penaltyPointsAdded = forms.map((forms: StandForm) => {
-    return(
-      forms.fouls * 2 +
-      forms.techfouls * 6
-    );
-  })
+    const penaltyPoints = forms.fouls * 2 + forms.techfouls * 6;
+
+    return {
+      match: forms.match,
+      points: penaltyPoints,
+    };
+  });
 
   return penaltyPointsAdded;
-}
+};

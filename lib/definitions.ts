@@ -60,7 +60,7 @@ export type QualitativeForm = {
   t3defencenotes: string;
   t3status: string;
   t3hpnotes: string;
- }
+};
 
 export type User = {
   name: string;
@@ -86,103 +86,90 @@ type Overview = {
   team: number;
   name: string;
   rank: number;
-  avePA: number;
 };
 
 export type Monstrosity = Overview & {
   insights: {
-    aveAutoPA: number;
-    aveTeleopPA: number;
-    aveEndgamePA: number;
-    aveCoral: number;
-    aveAlgae: number;
-    avePenalties: number;
-    defence: number | string;
+    EPA: number;
+    MPA: number;
+    sbEPA: number;
+    SD: number;
+    autoMPA: number;
+    teleopMPA: number;
+    endgameMPA: number;
+    coral: number;
+    algae: number;
+    penalties: number;
   };
   breakdown: {
-    med: number;
-    max: number;
-    autoMed: number;
-    autoMax: number;
-    coralMax: number;
-    algaeMax: number;
-    tba_opr: number;
-    sb_epa: number;
+    APA: number;
+    q75PA: number;
+    autoAPA: number;
+    autoQ75PA: number;
+    teleopAPA: number;
+    teleopQ75PA: number;
+    q75coral: number;
+    q75algae: number;
+    OPR: number;
   };
   data: {
-    preloaded: number;
     startingZone: number;
-    auto: {
+    coral: {
       l1: number;
       l2: number;
       l3: number;
       l4: number;
     };
-    teleop: {
-      l1: number;
-      l2: number;
-      l3: number;
-      l4: number;
+    algae: {
+      processor: number;
+      net: number;
     };
-    processor: number;
-    net: number;
-    climb: {
-      nothing: number;
-      parked: number;
-      shallow: number;
-      deep: number;
-    };
+    climb: number;
   };
 };
 
 export type OnlyInsights = {
-  aveAutoPA: number;
-  aveTeleopPA: number;
-  aveEndgamePA: number;
-  aveCoral: number;
-  aveAlgae: number;
-  avePenalties: number;
-  defence: number | string;
+  EPA: number;
+  MPA: number;
+  sbEPA: number;
+  SD: number;
+  autoMPA: number;
+  teleopMPA: number;
+  endgameMPA: number;
+  coral: number;
+  algae: number;
+  penalties: number;
 };
 
 export type Insights = Overview & OnlyInsights;
 
 export type OnlyBreakdown = {
-  med: number;
-  max: number;
-  autoMed: number;
-  autoMax: number;
-  coralMax: number;
-  algaeMax: number;
-  tba_opr: number;
-  sb_epa: number;
+  APA: number;
+  q75PA: number;
+  autoAPA: number;
+  autoQ75PA: number;
+  teleopAPA: number;
+  teleopQ75PA: number;
+  q75coral: number;
+  q75algae: number;
+  OPR: number;
 };
 
 export type Breakdown = Overview & OnlyBreakdown;
 
 export type OnlyData = {
-  preloaded: number;
   startingZone: number;
-  auto: {
+  coral: {
     l1: number;
     l2: number;
     l3: number;
     l4: number;
   };
-  teleop: {
-    l1: number;
-    l2: number;
-    l3: number;
-    l4: number;
+  algae: {
+    processor: number;
+    net: number;
   };
-  processor: number;
-  net: number;
-  climb: {
-    nothing: number;
-    parked: number;
-    shallow: number;
-    deep: number;
-  };
+  climb: number;
 };
 
 export type Data = Overview & OnlyData;
@@ -214,7 +201,6 @@ export type PitDataProps = {
 
 export type AreaChartData = {
   qual: string;
-  slot: string;
   points: number;
 }[];
 

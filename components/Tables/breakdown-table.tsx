@@ -52,8 +52,10 @@ function sortData(
 }
 
 export default function BreakdownTable({ data }: Props) {
-  const [sortedData, setSortedData] = useState(() => sortData(data, { sortBy: 'avePA', reversed: true }));
-  const [sortBy, setSortBy] = useState<keyof Breakdown | null>('avePA');
+  const [sortedData, setSortedData] = useState(() =>
+    sortData(data, { sortBy: "rank", reversed: false })
+  );
+  const [sortBy, setSortBy] = useState<keyof Breakdown | null>("rank");
   const [reverseSortDirection, setReverseSortDirection] = useState(false);
 
   const setSorting = (field: keyof Breakdown) => {
@@ -64,21 +66,24 @@ export default function BreakdownTable({ data }: Props) {
   };
 
   const rows = sortedData.map((form) => {
-    
     return (
       <Table.Tr key={form.team}>
         <Table.Td>{form.team}</Table.Td>
-        <Table.Td><Anchor component={Link} href={`/data/${form.team}`} fz="md">{form.name}</Anchor></Table.Td>
+        <Table.Td>
+          <Anchor component={Link} href={`/data/${form.team}`} fz="md">
+            {form.name}
+          </Anchor>
+        </Table.Td>
         <Table.Td>{form.rank}</Table.Td>
-        <Table.Td>{form.avePA}</Table.Td>
-        <Table.Td>{form.med}</Table.Td>
-        <Table.Td>{form.max}</Table.Td>
-        <Table.Td>{form.autoMed}</Table.Td>
-        <Table.Td>{form.autoMax}</Table.Td>
-        <Table.Td>{form.coralMax}</Table.Td>
-        <Table.Td>{form.algaeMax}</Table.Td>
-        <Table.Td>{form.tba_opr}</Table.Td>
-        <Table.Td>{form.sb_epa}</Table.Td>
+        <Table.Td>{form.APA}</Table.Td>
+        <Table.Td>{form.q75PA}</Table.Td>
+        <Table.Td>{form.autoAPA}</Table.Td>
+        <Table.Td>{form.autoQ75PA}</Table.Td>
+        <Table.Td>{form.teleopAPA}</Table.Td>
+        <Table.Td>{form.teleopQ75PA}</Table.Td>
+        <Table.Td>{form.q75coral}</Table.Td>
+        <Table.Td>{form.q75algae}</Table.Td>
+        <Table.Td>{form.OPR}</Table.Td>
       </Table.Tr>
     );
   });

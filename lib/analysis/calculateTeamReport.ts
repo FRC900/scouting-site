@@ -5,7 +5,7 @@ import {
   ChartsData,
   FullTeamData,
   Note,
-  StandForm,
+  StandFormDatabase,
 } from "../definitions";
 import teamSimple from "../fetchers/tba/teamSimple";
 import {
@@ -16,62 +16,62 @@ import {
   calcTeleopPointsAdded,
 } from "./pointsAdded";
 
-const charts = async (standRecords: StandForm[]) => {
+const charts = async (standRecords: StandFormDatabase[]) => {
   const pa = calcPointsAdded(standRecords);
   const autoPA = calcAutoPointsAdded(standRecords);
   const teleopPA = calcTeleopPointsAdded(standRecords);
   const endgamePA = calcEndgamePointsAdded(standRecords);
   const penaltyPA = calcPenaltyPointsAdded(standRecords);
 
-  const chartData: AreaChartData = standRecords.map((form, index) => {
+  const chartData: AreaChartData = pa.map((points) => {
     return {
-      qual: form.match.toString(),
-      slot: form.slot,
-      points: pa[index],
+      qual: points.match.toString(),
+      points: points.points,
     };
   });
 
-  const autoChartData: AreaChartData = standRecords.map((form, index) => {
+  const autoChartData: AreaChartData = autoPA.map((points) => {
     return {
-      qual: form.match.toString(),
-      slot: form.slot,
-      points: autoPA[index],
+      qual: points.match.toString(),
+      points: points.points,
     };
   });
 
-  const teleopChartData: AreaChartData = standRecords.map((form, index) => {
+  const teleopChartData: AreaChartData = teleopPA.map((points) => {
     return {
-      qual: form.match.toString(),
-      slot: form.slot,
-      points: teleopPA[index],
+      qual: points.match.toString(),
+      points: points.points,
     };
   });
 
-  const endgameChartData: AreaChartData = standRecords.map((form, index) => {
+  const endgameChartData: AreaChartData = endgamePA.map((points) => {
     return {
-      qual: form.match.toString(),
-      slot: form.slot,
-      points: endgamePA[index],
+      qual: points.match.toString(),
+      points: points.points,
     };
   });
 
-  const penaltyChartData: AreaChartData = standRecords.map((form, index) => {
+  const penaltyChartData: AreaChartData = penaltyPA.map((points) => {
     return {
-      qual: form.match.toString(),
-      slot: form.slot,
-      points: penaltyPA[index],
+      qual: points.match.toString(),
+      points: points.points,
     };
   });
 
-  const chartAverage = Math.round(average(pa) * 10) / 10;
+  const chartAverage =
+    Math.round(average(pa.map((points) => points.points)) * 10) / 10;
 
-  const autoChartAverage = Math.round(average(autoPA) * 10) / 10;
+  const autoChartAverage =
+    Math.round(average(autoPA.map((points) => points.points)) * 10) / 10;
 
-  const teleopChartAverage = Math.round(average(teleopPA) * 10) / 10;
+  const teleopChartAverage =
+    Math.round(average(teleopPA.map((points) => points.points)) * 10) / 10;
 
-  const endgameChartAverage = Math.round(average(endgamePA) * 10) / 10;
+  const endgameChartAverage =
+    Math.round(average(endgamePA.map((points) => points.points)) * 10) / 10;
 
-  const penaltyChartAverage = Math.round(average(penaltyPA) * 10) / 10;
+  const penaltyChartAverage =
+    Math.round(average(penaltyPA.map((points) => points.points)) * 10) / 10;
 
   const charts: ChartsData = {
     pa: chartData,

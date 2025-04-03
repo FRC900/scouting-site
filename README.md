@@ -6,11 +6,18 @@ ZebraScouting is a powerful new scouting site application for recording and proc
 
 ### Priority (Big Stuff):
 
+* redo team data fields
 * combinations / simulation
-* Tell you which team you are scouting apon inputing match+slot
+* compare page will compare two teams.
+
+* remove preloaded, add dealgae
+
+* qualitative form submits notes
+* qualitative notes are displayed on team data
 
 ### Lesser Priority:
 
+* Tell you which team you are scouting apon inputing match+slot
 * Matches
   * Qual Matches
   * Alliances
