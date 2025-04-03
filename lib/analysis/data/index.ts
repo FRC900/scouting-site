@@ -1,13 +1,12 @@
 import eventTeamsKeys from "../../fetchers/tba/eventTeamsKeys";
 import { fetchStandFormsByTeam } from "../../data";
-import { StandForm, Monstrosity, StandFormDatabase } from "../../definitions";
+import { Monstrosity, StandFormDatabase } from "../../definitions";
 import teamYear from "../../fetchers/sb/teamYear";
 import getInsights from "./insights";
 import getBreakdown from "./breakdown";
 import getData from "./data";
 import teamEventStatus from "../../fetchers/tba/teamEventStatus";
 import { calcPointsAdded } from "../pointsAdded";
-import { average } from "simple-statistics";
 import eventOprs from "../../fetchers/tba/eventOprs";
 import teamSimple from "../../fetchers/tba/teamSimple";
 
@@ -36,11 +35,9 @@ export default async function calculateSimpleTeamData(step: number) {
     const teamStandForms: StandFormDatabase[] = await fetchStandFormsByTeam(team);
     if (teamStandForms.length === 0) return;
 
-    const sbteamYear = teamYear(team);
     const tbastatus = teamEventStatus(team);
     const tbateamSimple = teamSimple(team);
-    const [sb_teamYear, tba_status, tba_teamSimple] = await Promise.all([
-      sbteamYear,
+    const [tba_status, tba_teamSimple] = await Promise.all([
       tbastatus,
       tbateamSimple,
     ]);
@@ -48,7 +45,7 @@ export default async function calculateSimpleTeamData(step: number) {
 
     const pointsAdded = calcPointsAdded(teamStandForms);
 
-    const insights = getInsights({ teamStandForms, pointsAdded, sb_teamYear });
+    const insights = getInsights({ teamStandForms, pointsAdded });
     const breakdown = getBreakdown({
       teamStandForms,
       pointsAdded,

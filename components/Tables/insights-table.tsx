@@ -74,9 +74,7 @@ export default function InsightsTable({ data }: Props) {
           </Anchor>
         </Table.Td>
         <Table.Td>{form.rank}</Table.Td>
-        <Table.Td>{form.EPA}</Table.Td>
         <Table.Td>{form.MPA}</Table.Td>
-        <Table.Td>{form.sbEPA}</Table.Td>
         <Table.Td>{form.SD}</Table.Td>
         <Table.Td>{form.autoMPA}</Table.Td>
         <Table.Td>{form.teleopMPA}</Table.Td>

@@ -10,12 +10,9 @@ import { median, standardDeviation } from "simple-statistics";
 interface InsightsProps {
   teamStandForms: StandFormDatabase[];
   pointsAdded: { match: number; points: number }[];
-  sb_teamYear: any;
 }
 
-export default function getInsights({ teamStandForms, pointsAdded, sb_teamYear }: InsightsProps) {
-  const offensiveEPA = epa({ teamStandForms, pointsAdded });
-
+export default function getInsights({ teamStandForms, pointsAdded }: InsightsProps) {
   const medPA = median(
     pointsAdded.map((points) => points.points)
   );
@@ -69,9 +66,7 @@ export default function getInsights({ teamStandForms, pointsAdded, sb_teamYear }
   //     .reduce((a, b) => a + b, 0) / count;
 
   const insights: OnlyInsights = {
-    EPA: Math.round(offensiveEPA * 10) / 10,
     MPA: medPA,
-    sbEPA: sb_teamYear.epa?.total_points.mean || 0,
     SD: Math.round(sd * 10) / 10,
     autoMPA: Math.round(medAutoPA * 10) / 10,
     teleopMPA: Math.round(medTeleopPA * 10) / 10,

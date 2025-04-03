@@ -90,9 +90,7 @@ type Overview = {
 
 export type Monstrosity = Overview & {
   insights: {
-    EPA: number;
     MPA: number;
-    sbEPA: number;
     SD: number;
     autoMPA: number;
     teleopMPA: number;
@@ -129,9 +127,7 @@ export type Monstrosity = Overview & {
 };
 
 export type OnlyInsights = {
-  EPA: number;
   MPA: number;
-  sbEPA: number;
   SD: number;
   autoMPA: number;
   teleopMPA: number;
