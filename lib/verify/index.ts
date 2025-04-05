@@ -147,7 +147,7 @@ function verifyRedAgainstTBA(forms: StandFormDatabase[], match: TBAEventMatch) {
     match.score_breakdown.red.foulCount;
   if (minorfouls != 0) {
     errors.push({
-      type: "Minor Fouls",
+      type: "fouls",
       magnitude: minorfouls,
     });
   }
@@ -159,7 +159,7 @@ function verifyRedAgainstTBA(forms: StandFormDatabase[], match: TBAEventMatch) {
     match.score_breakdown.red.techFoulCount;
   if (majorfouls != 0) {
     errors.push({
-      type: "Major Fouls",
+      type: "techfouls",
       magnitude: majorfouls,
     });
   }
