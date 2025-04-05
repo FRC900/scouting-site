@@ -2,6 +2,7 @@ import { unstable_cache } from "next/cache"
 import epa from "../../../lib/analysis/epa"
 import { Suspense } from "react";
 import EpaTabs from "../../../components/Data/epa";
+import { epaData } from "../../../lib/definitions";
 
 // export const dyanimc = 'force-dynamic'
 
@@ -14,7 +15,7 @@ const teamEPAs = unstable_cache(
 );
 
 export default async function Page() {
-  const data = await teamEPAs();
+  const data: epaData[] = [] // await teamEPAs();
 
   console.log(data)
 
