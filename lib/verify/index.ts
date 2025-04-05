@@ -84,7 +84,8 @@ function verifyRedAgainstTBA(forms: StandFormDatabase[], match: TBAEventMatch) {
     forms[0].teleopL1 +
     forms[1].teleopL1 +
     forms[2].teleopL1 -
-    match.score_breakdown.red.teleopReef.trough;
+    match.score_breakdown.red.teleopReef.trough +
+    match.score_breakdown.red.autoReef.trough;
   if (teleopL1 != 0) {
     errors.push({
       type: "teleopL1",
@@ -96,7 +97,8 @@ function verifyRedAgainstTBA(forms: StandFormDatabase[], match: TBAEventMatch) {
     forms[0].teleopL2 +
     forms[1].teleopL2 +
     forms[2].teleopL2 -
-    match.score_breakdown.red.teleopReef.tba_botRowCount;
+    match.score_breakdown.red.teleopReef.tba_botRowCount +
+    match.score_breakdown.red.autoReef.tba_botRowCount;
   if (teleopL2 != 0) {
     errors.push({
       type: "teleopL2",
@@ -108,7 +110,8 @@ function verifyRedAgainstTBA(forms: StandFormDatabase[], match: TBAEventMatch) {
     forms[0].teleopL3 +
     forms[1].teleopL3 +
     forms[2].teleopL3 -
-    match.score_breakdown.red.teleopReef.tba_midRowCount;
+    match.score_breakdown.red.teleopReef.tba_midRowCount +
+    match.score_breakdown.red.autoReef.tba_midRowCount;
   if (teleopL3 != 0) {
     errors.push({
       type: "teleopL3",
@@ -120,7 +123,8 @@ function verifyRedAgainstTBA(forms: StandFormDatabase[], match: TBAEventMatch) {
     forms[0].teleopL4 +
     forms[1].teleopL4 +
     forms[2].teleopL4 -
-    match.score_breakdown.red.teleopReef.tba_topRowCount;
+    match.score_breakdown.red.teleopReef.tba_topRowCount +
+    match.score_breakdown.red.autoReef.tba_topRowCount;
   if (teleopL4 != 0) {
     errors.push({
       type: "teleopL4",
@@ -227,7 +231,8 @@ function verifyBlueAgainstTBA(
     forms[0].teleopL1 +
     forms[1].teleopL1 +
     forms[2].teleopL1 -
-    match.score_breakdown.blue.teleopReef.trough;
+    match.score_breakdown.blue.teleopReef.trough +
+    match.score_breakdown.blue.autoReef.trough;
   if (teleopL1 != 0) {
     errors.push({
       type: "teleopL1",
@@ -239,7 +244,8 @@ function verifyBlueAgainstTBA(
     forms[0].teleopL2 +
     forms[1].teleopL2 +
     forms[2].teleopL2 -
-    match.score_breakdown.blue.teleopReef.tba_botRowCount;
+    match.score_breakdown.blue.teleopReef.tba_botRowCount +
+    match.score_breakdown.blue.autoReef.tba_botRowCount;
   if (teleopL2 != 0) {
     errors.push({
       type: "teleopL2",
@@ -251,7 +257,8 @@ function verifyBlueAgainstTBA(
     forms[0].teleopL3 +
     forms[1].teleopL3 +
     forms[2].teleopL3 -
-    match.score_breakdown.blue.teleopReef.tba_midRowCount;
+    match.score_breakdown.blue.teleopReef.tba_midRowCount +
+    match.score_breakdown.blue.autoReef.tba_midRowCount;
   if (teleopL3 != 0) {
     errors.push({
       type: "teleopL3",
@@ -263,7 +270,8 @@ function verifyBlueAgainstTBA(
     forms[0].teleopL4 +
     forms[1].teleopL4 +
     forms[2].teleopL4 -
-    match.score_breakdown.blue.teleopReef.tba_topRowCount;
+    match.score_breakdown.blue.teleopReef.tba_topRowCount +
+    match.score_breakdown.blue.autoReef.tba_topRowCount;
   if (teleopL4 != 0) {
     errors.push({
       type: "teleopL4",
