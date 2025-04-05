@@ -1,11 +1,11 @@
 import {getTBAHeaders} from "../getHeaders";
 import { tbaEventKey } from "../../constants";
-import { TBAEventMatch, TBAEventOprs } from "../../definitions";
+import { TBAEventMatch } from "../../definitions";
 
 export default async function eventMatches() {
-    const oprs: TBAEventMatch[] = await getMatches();
+    const matches: TBAEventMatch[] = await getMatches();
 
-    return oprs;
+    return matches;
 }
 
 async function getMatches() {

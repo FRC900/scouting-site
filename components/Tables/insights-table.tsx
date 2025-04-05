@@ -51,8 +51,10 @@ function sortData(
 }
 
 export default function InsightsTable({ data }: Props) {
-  const [sortedData, setSortedData] = useState(() => sortData(data, { sortBy: 'avePA', reversed: true }));
-  const [sortBy, setSortBy] = useState<keyof Insights>('avePA');
+  const [sortedData, setSortedData] = useState(() =>
+    sortData(data, { sortBy: "rank", reversed: false })
+  );
+  const [sortBy, setSortBy] = useState<keyof Insights>("rank");
   const [reverseSortDirection, setReverseSortDirection] = useState(false);
 
   const setSorting = (field: keyof Insights) => {
@@ -63,20 +65,23 @@ export default function InsightsTable({ data }: Props) {
   };
 
   const rows = sortedData.map((form) => {
-    
     return (
       <Table.Tr key={form.team}>
         <Table.Td>{form.team}</Table.Td>
-        <Table.Td><Anchor component={Link} href={`/data/${form.team}`} fz="md">{form.name}</Anchor></Table.Td>
+        <Table.Td>
+          <Anchor component={Link} href={`/data/${form.team}`} fz="md">
+            {form.name}
+          </Anchor>
+        </Table.Td>
         <Table.Td>{form.rank}</Table.Td>
-        <Table.Td>{form.avePA}</Table.Td>
-        <Table.Td>{form.aveAutoPA}</Table.Td>
-        <Table.Td>{form.aveTeleopPA}</Table.Td>
-        <Table.Td>{form.aveEndgamePA}</Table.Td>
-        <Table.Td>{form.aveCoral}</Table.Td>
-        <Table.Td>{form.aveAlgae}</Table.Td>
-        <Table.Td>{form.avePenalties}</Table.Td>
-        <Table.Td>{form.defence}</Table.Td>
+        <Table.Td>{form.MPA}</Table.Td>
+        <Table.Td>{form.SD}</Table.Td>
+        <Table.Td>{form.autoMPA}</Table.Td>
+        <Table.Td>{form.teleopMPA}</Table.Td>
+        <Table.Td>{form.endgameMPA}</Table.Td>
+        <Table.Td>{form.coral}</Table.Td>
+        <Table.Td>{form.algae}</Table.Td>
+        <Table.Td>{form.penalties}</Table.Td>
       </Table.Tr>
     );
   });
@@ -93,7 +98,9 @@ export default function InsightsTable({ data }: Props) {
                 reversed={reverseSortDirection}
                 onSort={() => setSorting(key as keyof Insights)}
               >
-                {key.substring(0, 3) == "ave" ? capitalize(key.substring(3)) : capitalize(key)}
+                {key.substring(0, 3) == "ave"
+                  ? capitalize(key.substring(3))
+                  : capitalize(key)}
               </Th>
             ))}
           </Table.Tr>

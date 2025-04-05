@@ -1,13 +1,12 @@
 import eventTeamsKeys from "../../fetchers/tba/eventTeamsKeys";
 import { fetchStandFormsByTeam } from "../../data";
-import { StandForm, Monstrosity } from "../../definitions";
+import { Monstrosity, StandFormDatabase } from "../../definitions";
 import teamYear from "../../fetchers/sb/teamYear";
 import getInsights from "./insights";
 import getBreakdown from "./breakdown";
 import getData from "./data";
 import teamEventStatus from "../../fetchers/tba/teamEventStatus";
 import { calcPointsAdded } from "../pointsAdded";
-import { average } from "simple-statistics";
 import eventOprs from "../../fetchers/tba/eventOprs";
 import teamSimple from "../../fetchers/tba/teamSimple";
 
@@ -33,27 +32,23 @@ export default async function calculateSimpleTeamData(step: number) {
 
   const promises = teams.map(async (team: number) => {
     // Pull Data about specific team
-    const teamStandForms: StandForm[] = await fetchStandFormsByTeam(team);
+    const teamStandForms: StandFormDatabase[] = await fetchStandFormsByTeam(team);
     if (teamStandForms.length === 0) return;
 
-    const sbteamYear = teamYear(team);
     const tbastatus = teamEventStatus(team);
     const tbateamSimple = teamSimple(team);
-    const [sb_teamYear, tba_status, tba_teamSimple] = await Promise.all([
-      sbteamYear,
+    const [tba_status, tba_teamSimple] = await Promise.all([
       tbastatus,
       tbateamSimple,
     ]);
     const opr = oprs.oprs[`frc${team}`];
 
     const pointsAdded = calcPointsAdded(teamStandForms);
-    const avePA = average(pointsAdded);
 
-    const insights = getInsights({ teamStandForms, avePA });
+    const insights = getInsights({ teamStandForms, pointsAdded });
     const breakdown = getBreakdown({
       teamStandForms,
       pointsAdded,
-      sb_teamYear,
       opr,
     });
     const data = getData(teamStandForms);
@@ -62,7 +57,6 @@ export default async function calculateSimpleTeamData(step: number) {
       team: team,
       name: tba_teamSimple.nickname,
       rank: tba_status.qual.ranking.rank,
-      avePA: Math.round(avePA * 10) / 10,
       insights: {
         ...insights,
       },

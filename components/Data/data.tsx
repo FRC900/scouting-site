@@ -32,7 +32,6 @@ export default function DataTabs({ teamData, cached }: DataTabsProps) {
       team: row.team,
       name: row.name,
       rank: row.rank,
-      avePA: row.avePA,
       ...row.insights,
     };
     return insight;
@@ -43,7 +42,6 @@ export default function DataTabs({ teamData, cached }: DataTabsProps) {
       team: row.team,
       name: row.name,
       rank: row.rank,
-      avePA: row.avePA,
       ...row.breakdown,
     };
     return breakdown;
@@ -54,7 +52,6 @@ export default function DataTabs({ teamData, cached }: DataTabsProps) {
       team: row.team,
       name: row.name,
       rank: row.rank,
-      avePA: row.avePA,
       ...row.data,
     };
     return data;

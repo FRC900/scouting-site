@@ -42,6 +42,26 @@ export type PitForm = {
 
 export type PitFormDatabase = PitForm & { date: string };
 
+export type QualitativeForm = {
+  match: number;
+  alliance: "Red" | "Blue";
+  t1notes: string;
+  t1defence: string;
+  t1defencenotes: string;
+  t1status: string;
+  t1hpnotes: string;
+  t2notes: string;
+  t2defence: string;
+  t2defencenotes: string;
+  t2status: string;
+  t2hpnotes: string;
+  t3notes: string;
+  t3defence: string;
+  t3defencenotes: string;
+  t3status: string;
+  t3hpnotes: string;
+};
+
 export type User = {
   name: string;
   username: string;
@@ -66,103 +86,86 @@ type Overview = {
   team: number;
   name: string;
   rank: number;
-  avePA: number;
 };
 
 export type Monstrosity = Overview & {
   insights: {
-    aveAutoPA: number;
-    aveTeleopPA: number;
-    aveEndgamePA: number;
-    aveCoral: number;
-    aveAlgae: number;
-    avePenalties: number;
-    defence: number | string;
+    MPA: number;
+    SD: number;
+    autoMPA: number;
+    teleopMPA: number;
+    endgameMPA: number;
+    coral: number;
+    algae: number;
+    penalties: number;
   };
   breakdown: {
-    med: number;
-    max: number;
-    autoMed: number;
-    autoMax: number;
-    coralMax: number;
-    algaeMax: number;
-    tba_opr: number;
-    sb_epa: number;
+    APA: number;
+    q75PA: number;
+    autoAPA: number;
+    autoQ75PA: number;
+    teleopAPA: number;
+    teleopQ75PA: number;
+    q75coral: number;
+    q75algae: number;
+    OPR: number;
   };
   data: {
-    preloaded: number;
     startingZone: number;
-    auto: {
+    coral: {
       l1: number;
       l2: number;
       l3: number;
       l4: number;
     };
-    teleop: {
-      l1: number;
-      l2: number;
-      l3: number;
-      l4: number;
+    algae: {
+      processor: number;
+      net: number;
     };
-    processor: number;
-    net: number;
-    climb: {
-      nothing: number;
-      parked: number;
-      shallow: number;
-      deep: number;
-    };
+    climb: number;
   };
 };
 
 export type OnlyInsights = {
-  aveAutoPA: number;
-  aveTeleopPA: number;
-  aveEndgamePA: number;
-  aveCoral: number;
-  aveAlgae: number;
-  avePenalties: number;
-  defence: number | string;
+  MPA: number;
+  SD: number;
+  autoMPA: number;
+  teleopMPA: number;
+  endgameMPA: number;
+  coral: number;
+  algae: number;
+  penalties: number;
 };
 
 export type Insights = Overview & OnlyInsights;
 
 export type OnlyBreakdown = {
-  med: number;
-  max: number;
-  autoMed: number;
-  autoMax: number;
-  coralMax: number;
-  algaeMax: number;
-  tba_opr: number;
-  sb_epa: number;
+  APA: number;
+  q75PA: number;
+  autoAPA: number;
+  autoQ75PA: number;
+  teleopAPA: number;
+  teleopQ75PA: number;
+  q75coral: number;
+  q75algae: number;
+  OPR: number;
 };
 
 export type Breakdown = Overview & OnlyBreakdown;
 
 export type OnlyData = {
-  preloaded: number;
   startingZone: number;
-  auto: {
+  coral: {
     l1: number;
     l2: number;
     l3: number;
     l4: number;
   };
-  teleop: {
-    l1: number;
-    l2: number;
-    l3: number;
-    l4: number;
+  algae: {
+    processor: number;
+    net: number;
   };
-  processor: number;
-  net: number;
-  climb: {
-    nothing: number;
-    parked: number;
-    shallow: number;
-    deep: number;
-  };
+  climb: number;
 };
 
 export type Data = Overview & OnlyData;
@@ -192,9 +195,30 @@ export type PitDataProps = {
   note: string;
 };
 
+// export type epaChartData = {
+//   qual: string;
+//   epa: number;
+//   ci: number;
+// }[];
+
+// export type epaChart = {
+//   team: epaChartData;
+// }
+
+export type epaData = {
+  team: number;
+  EPA: number;
+  dEPA: number;
+  OffensiveEPA: number;
+  DefensiveEPA: number;
+  autoEPA: number;
+  teleopEPA: number;
+  endgameEPA: number;
+  sbEPA: number;
+}
+
 export type AreaChartData = {
   qual: string;
-  slot: string;
   points: number;
 }[];
 
@@ -417,9 +441,9 @@ export type TBAEventMatch = {
       coopertitionCriteriaMet: boolean;
       coralBonusAchieved: boolean;
       endGameBargePoints: number;
-      endGameRobot1: "Parked";
-      endGameRobot2: "Parked";
-      endGameRobot3: "None";
+      endGameRobot1: string;
+      endGameRobot2: string;
+      endGameRobot3: string;
       foulCount: number;
       foulPoints: number;
       g206Penalty: boolean;
@@ -546,9 +570,9 @@ export type TBAEventMatch = {
       coopertitionCriteriaMet: boolean;
       coralBonusAchieved: boolean;
       endGameBargePoints: number;
-      endGameRobot1: "Parked";
-      endGameRobot2: "Parked";
-      endGameRobot3: "None";
+      endGameRobot1: string;
+      endGameRobot2: string;
+      endGameRobot3: string;
       foulCount: number;
       foulPoints: number;
       g206Penalty: boolean;

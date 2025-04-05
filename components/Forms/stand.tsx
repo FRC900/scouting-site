@@ -34,6 +34,7 @@ import {
   IconClipboardTextFilled,
 } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
+import findTeamNumber from "../../lib/fetchers/tba/findTeamNumber";
 
 interface Props {
   create: boolean;
@@ -47,8 +48,9 @@ export default function StandForm({ create, defaultForm, id }: Props) {
   const [opened, { toggle }] = useDisclosure(false);
   const theme = useMantineTheme();
   const router = useRouter();
+  const [team, setTeam] = useState<number | null>(null);
 
-  const { control, reset } = useForm<StandForm>({
+  const { control, watch, reset } = useForm<StandForm>({
     resolver: zodResolver(StandFormSchema),
     defaultValues: {
       match: undefined,
@@ -82,6 +84,29 @@ export default function StandForm({ create, defaultForm, id }: Props) {
       if (create) {
         createStandForm(data).then(() => {
           setSubmitting("done");
+          reset({
+            match: data.match + 1,
+            slot: data.slot,
+            username: data.username,
+            preloaded: true,
+            startingZone: false,
+            autoL1: 0,
+            autoL2: 0,
+            autoL3: 0,
+            autoL4: 0,
+            teleopL1: 0,
+            teleopL2: 0,
+            teleopL3: 0,
+            teleopL4: 0,
+            teleopProcessor: 0,
+            teleopNet: 0,
+            fouls: 0,
+            techfouls: 0,
+            endgame: "Nothing",
+            defence: "0",
+            status: "4",
+            notes: "",
+          });
           router.push("/stand-form");
         });
       } else {
@@ -90,33 +115,23 @@ export default function StandForm({ create, defaultForm, id }: Props) {
     }
   };
 
+  const [match, slot] = watch(["match", "slot"]);
   useEffect(() => {
-    if (submitting === "done") {
-      reset({
-        match: undefined,
-        slot: undefined,
-        username: undefined,
-        preloaded: true,
-        startingZone: false,
-        autoL1: 0,
-        autoL2: 0,
-        autoL3: 0,
-        autoL4: 0,
-        teleopL1: 0,
-        teleopL2: 0,
-        teleopL3: 0,
-        teleopL4: 0,
-        teleopProcessor: 0,
-        teleopNet: 0,
-        fouls: 0,
-        techfouls: 0,
-        endgame: undefined,
-        defence: undefined,
-        status: undefined,
-        notes: "",
-      });
-    }
-  }, [submitting, reset]);
+    // (async () => {
+    //   if (match && slot) {
+    //     const team = await findTeamNumber(match, slot);
+    //     return team;
+    //   }
+    // })
+    const subscription = watch(async () => {
+      if (match != undefined && slot != undefined) {
+        console.log(match + " " + slot)
+        const team = await findTeamNumber(match, slot);
+        setTeam(team);
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, [match, slot, watch]);
 
   return (
     <Form
@@ -134,6 +149,7 @@ export default function StandForm({ create, defaultForm, id }: Props) {
             placeholder="Select"
             data={["Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"]}
           />
+          {team ? <Text>You are scouting team {team}</Text> : null}
           <TextInput
             name="username"
             control={control}

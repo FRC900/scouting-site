@@ -27,7 +27,6 @@ export default async function Page({ params }: { params: { id: string } }) {
   const pa: AreaChartData = team.pa.map((match) => {
     return {
       qual: match.qual,
-      slot: match.slot,
       points: match.points,
     };
   });
@@ -36,7 +35,6 @@ export default async function Page({ params }: { params: { id: string } }) {
   const autoPA: AreaChartData = team.autoPA.map((match) => {
     return {
       qual: match.qual,
-      slot: match.slot,
       points: match.points,
     };
   });
@@ -45,7 +43,6 @@ export default async function Page({ params }: { params: { id: string } }) {
   const teleopPA: AreaChartData = team.teleopPA.map((match) => {
     return {
       qual: match.qual,
-      slot: match.slot,
       points: match.points,
     };
   });
@@ -54,7 +51,6 @@ export default async function Page({ params }: { params: { id: string } }) {
   const endgamePA: AreaChartData = team.endgamePA.map((match) => {
     return {
       qual: match.qual,
-      slot: match.slot,
       points: match.points,
     };
   });
@@ -63,7 +59,6 @@ export default async function Page({ params }: { params: { id: string } }) {
   const penaltyPA: AreaChartData = team.penaltyPA.map((match) => {
     return {
       qual: match.qual,
-      slot: match.slot,
       points: match.points,
     };
   });
