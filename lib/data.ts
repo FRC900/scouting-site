@@ -9,23 +9,24 @@ export async function fetchStandFormsLimited() {
   noStore();
 
   try {
-    const data = await sql<StandRecordRow>`SELECT (id, match, team, username, date) FROM standforms`;
+    const data =
+      await sql<StandRecordRow>`SELECT (id, match, team, username, date) FROM standforms`;
     return data.rows;
   } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch stand form data');
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch stand form data");
   }
 }
 
 export async function fetchPitFormsLimited() {
   noStore();
 
-  try{
+  try {
     const data = await sql<PitRecordRow>`SELECT (id, team, date) FROM pitforms`;
     return data.rows;
   } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch pit form data');
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch pit form data");
   }
 }
 
@@ -43,10 +44,9 @@ export async function fetchPitFormById(id: string) {
 
     return parsePitFormNumbers(form[0]);
   } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch pit form.');
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch pit form.");
   }
-
 }
 
 export async function fetchStandFormById(id: string) {
@@ -63,8 +63,8 @@ export async function fetchStandFormById(id: string) {
 
     return parseStandFormNumbers(form[0]);
   } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch stand form.');
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch stand form.");
   }
 }
 
@@ -72,7 +72,8 @@ export async function fetchStandFormsByTeam(team: Number) {
   noStore();
 
   try {
-    const data = await sql<StandRecordRow>`SELECT * FROM standforms WHERE standforms.team = ${team.toString()}`;
+    const data =
+      await sql<StandRecordRow>`SELECT * FROM standforms WHERE standforms.team = ${team.toString()}`;
 
     const form = data.rows.map((form) => ({
       ...parseStandFormNumbers(form),
@@ -80,8 +81,8 @@ export async function fetchStandFormsByTeam(team: Number) {
 
     return form;
   } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch stand form data');
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch stand form data");
   }
 }
 
@@ -89,7 +90,8 @@ export async function fetchPitFormByTeam(team: Number) {
   noStore();
 
   try {
-    const data = await sql<PitRecordRow>`SELECT * FROM pitforms WHERE pitforms.team = ${team.toString()}`;
+    const data =
+      await sql<PitRecordRow>`SELECT * FROM pitforms WHERE pitforms.team = ${team.toString()}`;
 
     const form = data.rows.map((form) => ({
       ...parsePitFormNumbers(form),
@@ -97,8 +99,8 @@ export async function fetchPitFormByTeam(team: Number) {
 
     return form[0];
   } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch pit form data');
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch pit form data");
   }
 }
 
@@ -106,11 +108,30 @@ export async function fetchStandFormIDByMatchTeam(team: string, match: number) {
   noStore();
 
   try {
-    const data = await sql`SELECT (id) FROM standforms WHERE standforms.team = ${team} AND standforms.match = ${match.toString()}`
+    const data =
+      await sql`SELECT (id) FROM standforms WHERE standforms.team = ${team} AND standforms.match = ${match.toString()}`;
 
     return data.rows;
   } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch stand from id')
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch stand from id");
+  }
+}
+
+export async function fetchStandFormByMatchTeam(team: number, match: number) {
+  noStore();
+
+  try {
+    const data =
+      await sql`SELECT * FROM standforms WHERE standforms.team = ${team.toString()} AND standforms.match = ${match.toString()}`;
+
+    const form = data.rows.map((form) => ({
+      ...parseStandFormNumbers(form),
+    }));
+
+    return form[0];
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch stand form data");
   }
 }

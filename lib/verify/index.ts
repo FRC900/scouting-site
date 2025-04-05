@@ -21,10 +21,10 @@ async function getForms(red_teams: string[], blue_teams: string[]) {
   const blue_forms = await Promise.all([
     form4promise,
     form5promise,
-    form6promise
-  ])
+    form6promise,
+  ]);
 
-  return {red_forms, blue_forms};
+  return { red_forms, blue_forms };
 }
 
 function verifyRedAgainstTBA(forms: StandFormDatabase[], match: TBAEventMatch) {
@@ -381,7 +381,7 @@ export default async function verify() {
 
       const blue_tba_errors = verifyBlueAgainstTBA(forms.blue_forms, match);
       if (blue_tba_errors != false) {
-        blue_errors.push(...blue_tba_errors)
+        blue_errors.push(...blue_tba_errors);
       }
     }
 

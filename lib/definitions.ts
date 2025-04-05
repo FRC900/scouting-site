@@ -195,6 +195,28 @@ export type PitDataProps = {
   note: string;
 };
 
+// export type epaChartData = {
+//   qual: string;
+//   epa: number;
+//   ci: number;
+// }[];
+
+// export type epaChart = {
+//   team: epaChartData;
+// }
+
+export type epaData = {
+  team: number;
+  EPA: number;
+  dEPA: number;
+  OffensiveEPA: number;
+  DefensiveEPA: number;
+  autoEPA: number;
+  teleopEPA: number;
+  endgameEPA: number;
+  sbEPA: number;
+}
+
 export type AreaChartData = {
   qual: string;
   points: number;

@@ -12,6 +12,7 @@ export const authConfig = {
       const isOnQualitativeForm = nextUrl.pathname.startsWith("/qualitative-form");
       const isOnRecords = nextUrl.pathname.startsWith("/records");
       const isOnData = nextUrl.pathname.startsWith("/data");
+      const isOnEpa = nextUrl.pathname.startsWith("/epa");
       const isOnMatches = nextUrl.pathname.startsWith("/matches");
       const isOnSimulation = nextUrl.pathname.startsWith("/simulation");
       if (
@@ -20,6 +21,7 @@ export const authConfig = {
         isOnQualitativeForm ||
         isOnRecords ||
         isOnData ||
+        isOnEpa ||
         isOnMatches ||
         isOnSimulation
       ) {
