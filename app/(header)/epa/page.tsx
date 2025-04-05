@@ -3,7 +3,7 @@ import epa from "../../../lib/analysis/epa"
 import { Suspense } from "react";
 import EpaTabs from "../../../components/Data/epa";
 
-export const dyanimc = 'force-dynamic'
+// export const dyanimc = 'force-dynamic'
 
 const teamEPAs = unstable_cache(
   async () => {

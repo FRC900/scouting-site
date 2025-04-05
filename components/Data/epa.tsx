@@ -5,5 +5,5 @@ interface Props {
 }
 
 export default function EpaTabs({ data }: Props) {
-  return <></>
+  return <>{data}</>
 }
