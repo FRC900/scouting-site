@@ -60,7 +60,6 @@ export default function SOSTable({ data }: Props) {
         <Table.Td>{form.team}</Table.Td>
         <Table.Td><Anchor component={Link} href={`/data/${form.team}`} fz="md">{form.name}</Anchor></Table.Td>
         <Table.Td>{form.rank}</Table.Td>
-        <Table.Td>{form.avePA}</Table.Td>
         <Table.Td>{form.score}</Table.Td>
         <Table.Td>{form.sb_composite}</Table.Td>
       </Table.Tr>
