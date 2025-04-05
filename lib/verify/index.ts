@@ -132,7 +132,7 @@ function verifyRedAgainstTBA(forms: StandFormDatabase[], match: TBAEventMatch) {
     forms[0].teleopProcessor +
     forms[1].teleopProcessor +
     forms[2].teleopProcessor -
-    match.score_breakdown.red.netAlgaeCount;
+    match.score_breakdown.red.wallAlgaeCount;
   if (teleopProcessor != 0) {
     errors.push({
       type: "teleopProcessor",
@@ -275,7 +275,7 @@ function verifyBlueAgainstTBA(
     forms[0].teleopProcessor +
     forms[1].teleopProcessor +
     forms[2].teleopProcessor -
-    match.score_breakdown.blue.netAlgaeCount;
+    match.score_breakdown.blue.wallAlgaeCount;
   if (teleopProcessor != 0) {
     errors.push({
       type: "teleopProcessor",
