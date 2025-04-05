@@ -74,8 +74,10 @@ function sortData(
 
 export default function PitFormsTable({ data }: Props) {
 	const [search, setSearch] = useState("");
-	const [sortedData, setSortedData] = useState(data);
-	const [sortBy, setSortBy] = useState<keyof PitRecord | null>(null);
+	const [sortedData, setSortedData] = useState(() =>
+    sortData(data, { sortBy: "team", reversed: false, search: "" })
+  );
+	const [sortBy, setSortBy] = useState<keyof PitRecord | null>("team");
 	const [reverseSortDirection, setReverseSortDirection] = useState(false);
 
 	const setSorting = (field: keyof PitRecord) => {
