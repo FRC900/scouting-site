@@ -298,7 +298,7 @@ function verifyBlueAgainstTBA(
     match.score_breakdown.blue.foulCount;
   if (minorfouls != 0) {
     errors.push({
-      type: "Minor Fouls",
+      type: "fouls",
       magnitude: minorfouls,
     });
   }
@@ -310,7 +310,7 @@ function verifyBlueAgainstTBA(
     match.score_breakdown.blue.techFoulCount;
   if (majorfouls != 0) {
     errors.push({
-      type: "Major Fouls",
+      type: "techfouls",
       magnitude: majorfouls,
     });
   }
