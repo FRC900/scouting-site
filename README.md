@@ -8,26 +8,32 @@ ZebraScouting is a powerful new scouting site application for recording and proc
 
 * epa page w/ figures
 * combinations / simulation
-* compare page will compare two teams.
+  * compare page will compare multiple teams.
 
-* remove preloaded, add dealgae
+* remove preloaded from database
 
-* qualitative form submits notes
-* qualitative notes are displayed on team data
-
-### Lesser Priority:
-
-* Tell you which team you are scouting apon inputing match+slot
 * Matches
   * Qual Matches
   * Alliances
   * Elim Matches
-* Automatically delete and replace pit form when duplicate is created
+
+* qualitative form submits notes
+* qualitative notes are displayed on team data
+
+* improve authentication capability (difficulty hard lmao)
+* admin dashboard for updating event key, viewing/editting users.
+* change password and delete account function?
+
+* comment everything
+* try to make it easier to update for a new game (ideal: just a json file!!)
+
+### Lesser Priority:
+
+* identify/fix buggy-ness with telling you which team you are scouting apon match+slot
+* Tell you when you are pit scouting a duplicate (and provide link to edit)
 * 404 notice
-* mobile could prob be better?
-
-### Not until competition:
-
+* improve mobile view (statbotics/tba as inspiration)
+* add dealgae
 * Ability to factor in the influence of previous competitions
 
 ### Bugs

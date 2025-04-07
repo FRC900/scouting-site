@@ -61,12 +61,12 @@ const links = [
         icon: <IconFileFilled style={{ width: rem(16), height: rem(16) }} />,
         perm: "member",
       },
-      {
-        link: "/records/users",
-        label: "Users",
-        icon: <IconUserFilled style={{ width: rem(16), height: rem(16) }} />,
-        perm: "admin",
-      },
+      // {
+      //   link: "/records/users",
+      //   label: "Users",
+      //   icon: <IconUserFilled style={{ width: rem(16), height: rem(16) }} />,
+      //   perm: "admin",
+      // },
       {
         link: "/records/verify",
         label: "Verify",
